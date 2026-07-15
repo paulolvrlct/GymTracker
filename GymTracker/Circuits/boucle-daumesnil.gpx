@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="GymTracker" xmlns="http://www.topografix.com/GPX/1/1">
+  <trk>
+    <name>Boucle Lac Daumesnil · 5 km</name>
+    <trkseg>
+      <trkpt lat="48.838367" lon="2.412000"></trkpt>
+      <trkpt lat="48.838444" lon="2.413945"></trkpt>
+      <trkpt lat="48.838306" lon="2.415912"></trkpt>
+      <trkpt lat="48.837927" lon="2.417762"></trkpt>
+      <trkpt lat="48.837325" lon="2.419352"></trkpt>
+      <trkpt lat="48.836554" lon="2.420578"></trkpt>
+      <trkpt lat="48.835684" lon="2.421415"></trkpt>
+      <trkpt lat="48.834781" lon="2.421910"></trkpt>
+      <trkpt lat="48.833884" lon="2.422151"></trkpt>
+      <trkpt lat="48.833000" lon="2.422220"></trkpt>
+      <trkpt lat="48.832116" lon="2.422151"></trkpt>
+      <trkpt lat="48.831219" lon="2.421910"></trkpt>
+      <trkpt lat="48.830316" lon="2.421415"></trkpt>
+      <trkpt lat="48.829446" lon="2.420578"></trkpt>
+      <trkpt lat="48.828675" lon="2.419352"></trkpt>
+      <trkpt lat="48.828073" lon="2.417762"></trkpt>
+      <trkpt lat="48.827694" lon="2.415912"></trkpt>
+      <trkpt lat="48.827556" lon="2.413945"></trkpt>
+      <trkpt lat="48.827633" lon="2.412000"></trkpt>
+      <trkpt lat="48.827873" lon="2.410169"></trkpt>
+      <trkpt lat="48.828218" lon="2.408475"></trkpt>
+      <trkpt lat="48.828631" lon="2.406890"></trkpt>
+      <trkpt lat="48.829102" lon="2.405375"></trkpt>
+      <trkpt lat="48.829653" lon="2.403921"></trkpt>
+      <trkpt lat="48.830316" lon="2.402585"></trkpt>
+      <trkpt lat="48.831109" lon="2.401477"></trkpt>
+      <trkpt lat="48.832020" lon="2.400737"></trkpt>
+      <trkpt lat="48.833000" lon="2.400476"></trkpt>
+      <trkpt lat="48.833980" lon="2.400737"></trkpt>
+      <trkpt lat="48.834891" lon="2.401477"></trkpt>
+      <trkpt lat="48.835684" lon="2.402585"></trkpt>
+      <trkpt lat="48.836347" lon="2.403921"></trkpt>
+      <trkpt lat="48.836898" lon="2.405375"></trkpt>
+      <trkpt lat="48.837369" lon="2.406890"></trkpt>
+      <trkpt lat="48.837782" lon="2.408475"></trkpt>
+      <trkpt lat="48.838127" lon="2.410169"></trkpt>
+      <trkpt lat="48.838367" lon="2.412000"></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

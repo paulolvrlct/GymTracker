@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="GymTracker" xmlns="http://www.topografix.com/GPX/1/1">
+  <trk>
+    <name>Tour de parc · 3 km</name>
+    <trkseg>
+      <trkpt lat="48.850220" lon="2.440000"></trkpt>
+      <trkpt lat="48.850267" lon="2.441167"></trkpt>
+      <trkpt lat="48.850183" lon="2.442348"></trkpt>
+      <trkpt lat="48.849956" lon="2.443458"></trkpt>
+      <trkpt lat="48.849595" lon="2.444412"></trkpt>
+      <trkpt lat="48.849132" lon="2.445148"></trkpt>
+      <trkpt lat="48.848610" lon="2.445651"></trkpt>
+      <trkpt lat="48.848068" lon="2.445948"></trkpt>
+      <trkpt lat="48.847530" lon="2.446092"></trkpt>
+      <trkpt lat="48.847000" lon="2.446134"></trkpt>
+      <trkpt lat="48.846470" lon="2.446092"></trkpt>
+      <trkpt lat="48.845932" lon="2.445948"></trkpt>
+      <trkpt lat="48.845390" lon="2.445651"></trkpt>
+      <trkpt lat="48.844868" lon="2.445148"></trkpt>
+      <trkpt lat="48.844405" lon="2.444412"></trkpt>
+      <trkpt lat="48.844044" lon="2.443458"></trkpt>
+      <trkpt lat="48.843817" lon="2.442348"></trkpt>
+      <trkpt lat="48.843733" lon="2.441167"></trkpt>
+      <trkpt lat="48.843780" lon="2.440000"></trkpt>
+      <trkpt lat="48.843924" lon="2.438901"></trkpt>
+      <trkpt lat="48.844131" lon="2.437884"></trkpt>
+      <trkpt lat="48.844378" lon="2.436933"></trkpt>
+      <trkpt lat="48.844661" lon="2.436024"></trkpt>
+      <trkpt lat="48.844992" lon="2.435151"></trkpt>
+      <trkpt lat="48.845390" lon="2.434349"></trkpt>
+      <trkpt lat="48.845865" lon="2.433685"></trkpt>
+      <trkpt lat="48.846412" lon="2.433240"></trkpt>
+      <trkpt lat="48.847000" lon="2.433083"></trkpt>
+      <trkpt lat="48.847588" lon="2.433240"></trkpt>
+      <trkpt lat="48.848135" lon="2.433685"></trkpt>
+      <trkpt lat="48.848610" lon="2.434349"></trkpt>
+      <trkpt lat="48.849008" lon="2.435151"></trkpt>
+      <trkpt lat="48.849339" lon="2.436024"></trkpt>
+      <trkpt lat="48.849622" lon="2.436933"></trkpt>
+      <trkpt lat="48.849869" lon="2.437884"></trkpt>
+      <trkpt lat="48.850076" lon="2.438901"></trkpt>
+      <trkpt lat="48.850220" lon="2.440000"></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
