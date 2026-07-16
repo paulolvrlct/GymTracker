@@ -83,7 +83,11 @@ enum GPXExporter {
 final class GPXParser: NSObject, XMLParserDelegate {
     private var coordinates: [CLLocationCoordinate2D] = []
     private var name: String?
-    private var currentElement = ""
+    // foundCharacters peut livrer un même nœud texte en PLUSIEURS morceaux
+    // (notamment autour des caractères accentués) : on accumule puis on
+    // finalise au didEndElement.
+    private var nameBuffer = ""
+    private var isReadingName = false
 
     static func parse(url: URL) -> RunCircuit? {
         guard let parser = XMLParser(contentsOf: url) else { return nil }
@@ -100,7 +104,10 @@ final class GPXParser: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String,
                 namespaceURI: String?, qualifiedName: String?,
                 attributes attributeDict: [String: String] = [:]) {
-        currentElement = elementName
+        if elementName == "name", name == nil {
+            isReadingName = true
+            nameBuffer = ""
+        }
         if elementName == "trkpt" || elementName == "rtept",
            let lat = attributeDict["lat"].flatMap(Double.init),
            let lon = attributeDict["lon"].flatMap(Double.init) {
@@ -109,13 +116,15 @@ final class GPXParser: NSObject, XMLParserDelegate {
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        guard currentElement == "name", name == nil else { return }
-        let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmed.isEmpty { name = trimmed }
+        if isReadingName { nameBuffer += string }
     }
 
     func parser(_ parser: XMLParser, didEndElement elementName: String,
                 namespaceURI: String?, qualifiedName: String?) {
-        currentElement = ""
+        if elementName == "name", isReadingName {
+            isReadingName = false
+            let trimmed = nameBuffer.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !trimmed.isEmpty, name == nil { name = trimmed }
+        }
     }
 }

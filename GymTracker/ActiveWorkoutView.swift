@@ -22,6 +22,7 @@ struct ActiveWorkoutView: View {
     @State private var loggedSets: [DraftSet] = []
     @State private var startDate = Date.now
     @State private var showCancelAlert = false
+    @State private var showCelebration = false
     @StateObject private var restTimer = RestTimerModel()
 
     var body: some View {
@@ -40,6 +41,8 @@ struct ActiveWorkoutView: View {
                 }
                 .padding()
                 .padding(.bottom, restTimer.isRunning ? 120 : 20)
+                // Rebond des pastilles de séries et des coches à chaque validation
+                .animation(.spring(response: 0.35, dampingFraction: 0.6), value: loggedSets.count)
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle(template.name)
@@ -63,6 +66,19 @@ struct ActiveWorkoutView: View {
                 }
             }
             .animation(.spring(duration: 0.35), value: restTimer.isRunning)
+            // Célébration de fin de séance (confettis + stats)
+            .overlay {
+                if showCelebration {
+                    WorkoutCelebrationView(
+                        setCount: loggedSets.count,
+                        volume: loggedSets.reduce(0) { $0 + Double($1.reps) * $1.weight },
+                        durationSeconds: Int(Date.now.timeIntervalSince(startDate))
+                    ) {
+                        dismiss()
+                    }
+                    .transition(.opacity)
+                }
+            }
             .alert("Abandonner la séance ?", isPresented: $showCancelAlert) {
                 Button("Continuer la séance", role: .cancel) {}
                 Button("Abandonner", role: .destructive) { dismiss() }
@@ -93,7 +109,7 @@ struct ActiveWorkoutView: View {
             context.insert(record)
         }
         try? context.save()
-        dismiss()
+        withAnimation(.easeOut(duration: 0.3)) { showCelebration = true }
     }
 }
 
@@ -127,6 +143,7 @@ private struct ExerciseLogCard: View {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(.green)
                         .font(.title3)
+                        .transition(.scale(scale: 0.2).combined(with: .opacity))
                 }
                 if catalogEx != nil {
                     Button {
