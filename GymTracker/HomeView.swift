@@ -117,17 +117,29 @@ struct HomeView: View {
 
     // MARK: Grille de stats
 
+    @State private var statsAppeared = false
+
     private var statsGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
             GlassStatCard(icon: "flame.fill", tint: .orange,
-                          value: "\(sessionsThisWeek)", label: "séances cette semaine")
+                          value: "\(sessionsThisWeek)", label: "séances cette semaine",
+                          pulse: sessionsThisWeek > 0)
+                .statEntrance(statsAppeared, index: 0)
             GlassStatCard(icon: "bolt.fill", tint: .indigo,
-                          value: "\(streak)", label: "jours de streak")
+                          value: "\(streak)", label: "jours de streak",
+                          pulse: streak > 0)
+                .statEntrance(statsAppeared, index: 1)
             GlassStatCard(icon: "scalemass.fill", tint: .purple,
                           value: volumeThisMonth >= 1000 ? String(format: "%.1ft", Double(volumeThisMonth) / 1000) : "\(volumeThisMonth)",
                           label: "volume ce mois (kg)")
+                .statEntrance(statsAppeared, index: 2)
             GlassStatCard(icon: "figure.run", tint: .green,
                           value: String(format: "%.1f", kmThisMonth), label: "km ce mois")
+                .statEntrance(statsAppeared, index: 3)
+        }
+        .onAppear {
+            guard !statsAppeared else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { statsAppeared = true }
         }
     }
 
@@ -201,14 +213,17 @@ private struct GlassStatCard: View {
     let tint: Color
     let value: String
     let label: String
+    var pulse: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Image(systemName: icon)
                 .font(.title3)
                 .foregroundStyle(tint)
+                .symbolEffect(.pulse, options: .repeating, isActive: pulse)
             Text(value)
                 .font(.system(size: 28, weight: .bold, design: .rounded).monospacedDigit())
+                .contentTransition(.numericText())
             Text(label)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -217,6 +232,17 @@ private struct GlassStatCard: View {
         .frame(maxWidth: .infinity, minHeight: 110, alignment: .leading)
         .padding(16)
         .glassCard()
+    }
+}
+
+// Entrée en cascade des cartes de stats (scale + fondu décalés)
+private extension View {
+    func statEntrance(_ appeared: Bool, index: Int) -> some View {
+        self
+            .scaleEffect(appeared ? 1 : 0.8)
+            .opacity(appeared ? 1 : 0)
+            .animation(.spring(response: 0.45, dampingFraction: 0.6)
+                .delay(Double(index) * 0.08), value: appeared)
     }
 }
 

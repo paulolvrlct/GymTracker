@@ -45,7 +45,131 @@ struct ConfettiView: View {
         }
         .allowsHitTesting(false)
         .ignoresSafeArea()
-        .onAppear { falling = true }
+        .onAppear {
+            // Déclenché APRÈS le premier rendu : un changement d'état dans la même
+            // transaction que l'insertion de la vue serait rendu sans animation
+            // (confettis directement en bas de l'écran, donc invisibles).
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                falling = true
+            }
+        }
+    }
+}
+
+// MARK: - Tracé GPS stylisé (projection lat/lon → Path, dessin progressif via .trim)
+
+struct RoutePathShape: Shape {
+    let points: [(lat: Double, lon: Double)]
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        guard points.count > 1 else { return path }
+        let lats = points.map(\.lat), lons = points.map(\.lon)
+        guard let minLat = lats.min(), let maxLat = lats.max(),
+              let minLon = lons.min(), let maxLon = lons.max() else { return path }
+
+        // correction cos(latitude) pour conserver les proportions du tracé
+        let cosLat = cos((minLat + maxLat) / 2 * .pi / 180)
+        let spanX = max((maxLon - minLon) * cosLat, 1e-6)
+        let spanY = max(maxLat - minLat, 1e-6)
+        let scale = min(rect.width / spanX, rect.height / spanY)
+        let offsetX = (rect.width - spanX * scale) / 2
+        let offsetY = (rect.height - spanY * scale) / 2
+
+        func project(_ p: (lat: Double, lon: Double)) -> CGPoint {
+            CGPoint(x: rect.minX + offsetX + (p.lon - minLon) * cosLat * scale,
+                    y: rect.minY + offsetY + (maxLat - p.lat) * scale)
+        }
+
+        path.move(to: project(points[0]))
+        for point in points.dropFirst() {
+            path.addLine(to: project(point))
+        }
+        return path
+    }
+}
+
+// MARK: - Écran de fin de course (tracé qui se dessine + confettis)
+
+struct RunCelebrationView: View {
+    let run: RunSession
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var appeared = false
+    @State private var drawProgress: CGFloat = 0
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [Color(.systemBackground), .green.opacity(0.18), Color(.systemBackground)],
+                           startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            ConfettiView()
+
+            VStack(spacing: 20) {
+                Text("Course terminée ! 🏃")
+                    .font(.title.bold())
+                Text("Ton tracé du jour :")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+                Group {
+                    if run.routePoints.count > 1 {
+                        RoutePathShape(points: run.routePoints)
+                            .trim(from: 0, to: drawProgress)
+                            .stroke(
+                                LinearGradient(colors: [.green, .teal],
+                                               startPoint: .leading, endPoint: .trailing),
+                                style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
+                            )
+                    } else {
+                        Image(systemName: "figure.run")
+                            .font(.system(size: 60))
+                            .foregroundStyle(.green)
+                    }
+                }
+                .frame(height: 220)
+                .frame(maxWidth: .infinity)
+                .padding(18)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+
+                HStack(spacing: 12) {
+                    runTile(String(format: "%.2f km", run.distanceKm), "distance")
+                    runTile(PaceFormatter.duration(run.durationSeconds), "durée")
+                    runTile(PaceFormatter.string(secPerKm: run.averagePaceSecPerKm), "allure")
+                }
+
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Continuer")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+            }
+            .padding(24)
+            .scaleEffect(appeared ? 1 : 0.85)
+            .opacity(appeared ? 1 : 0)
+        }
+        .onAppear {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { appeared = true }
+                withAnimation(.easeInOut(duration: 2.2).delay(0.35)) { drawProgress = 1 }
+            }
+        }
+    }
+
+    private func runTile(_ value: String, _ label: String) -> some View {
+        VStack(spacing: 4) {
+            Text(value).font(.headline.monospacedDigit())
+            Text(label).font(.caption2).foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12)
+        .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 

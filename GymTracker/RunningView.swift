@@ -12,6 +12,7 @@ struct RunningView: View {
     @State private var showPaywall = false
     @State private var selectedCircuit: RunCircuit?
     @State private var previewedCircuit: RunCircuit?
+    @State private var celebratedRun: RunSession?
 
     var body: some View {
         NavigationStack {
@@ -40,8 +41,15 @@ struct RunningView: View {
                                              routeEncoded: result.route)
                         context.insert(run)
                         try? context.save()
+                        // laisse la vue de course se refermer avant la célébration
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                            celebratedRun = run
+                        }
                     }
                 }
+            }
+            .fullScreenCover(item: $celebratedRun) { run in
+                RunCelebrationView(run: run)
             }
             .onAppear { tracker.requestAuthorization() }
         }
