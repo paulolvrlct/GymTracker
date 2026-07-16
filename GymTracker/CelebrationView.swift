@@ -2,57 +2,63 @@ import SwiftUI
 
 // MARK: - Pluie de confettis (célébration façon Duolingo)
 
+// Rendu Canvas piloté par l'horloge (TimelineView) : chaque frame est dessinée
+// en fonction du temps écoulé — insensible aux transactions/animations SwiftUI,
+// contrairement à la version déclarative qui pouvait être rendue directement
+// dans son état final (confettis invisibles).
 struct ConfettiView: View {
-    private struct Particle: Identifiable {
-        let id = UUID()
+    private struct Particle {
         let x: CGFloat            // position horizontale relative (0...1)
         let delay: Double
         let duration: Double
         let color: Color
         let size: CGFloat
         let spin: Double
+        let wobble: Double        // amplitude du zigzag horizontal
     }
 
-    @State private var falling = false
+    @State private var startDate = Date.now
 
     private let particles: [Particle] = {
         let palette: [Color] = [.indigo, .purple, .green, .orange, .teal, .pink, .yellow]
         return (0..<70).map { _ in
             Particle(
                 x: .random(in: 0.02...0.98),
-                delay: .random(in: 0...0.7),
-                duration: .random(in: 1.8...3.2),
+                delay: .random(in: 0...0.8),
+                duration: .random(in: 2.0...3.4),
                 color: palette.randomElement()!,
                 size: .random(in: 7...13),
-                spin: .random(in: 360...1080) * (Bool.random() ? 1 : -1)
+                spin: .random(in: 360...1080) * (Bool.random() ? 1 : -1),
+                wobble: .random(in: 8...26)
             )
         }
     }()
 
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                ForEach(particles) { p in
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(p.color)
-                        .frame(width: p.size, height: p.size * 0.55)
-                        .rotationEffect(.degrees(falling ? p.spin : 0))
-                        .position(x: p.x * geo.size.width,
-                                  y: falling ? geo.size.height + 30 : -30)
-                        .animation(.easeIn(duration: p.duration).delay(p.delay), value: falling)
+        TimelineView(.animation) { timeline in
+            Canvas { context, size in
+                let elapsed = timeline.date.timeIntervalSince(startDate)
+                for p in particles {
+                    let progress = (elapsed - p.delay) / p.duration
+                    guard progress > 0, progress < 1 else { continue }
+                    let eased = progress * progress            // chute accélérée
+                    let y = -30 + eased * (size.height + 60)
+                    let x = p.x * size.width + sin(progress * .pi * 3) * p.wobble
+                    context.drawLayer { layer in
+                        layer.translateBy(x: x, y: y)
+                        layer.rotate(by: .degrees(p.spin * progress))
+                        layer.fill(
+                            Path(roundedRect: CGRect(x: -p.size / 2, y: -p.size * 0.28,
+                                                     width: p.size, height: p.size * 0.55),
+                                 cornerRadius: 2),
+                            with: .color(p.color)
+                        )
+                    }
                 }
             }
         }
         .allowsHitTesting(false)
         .ignoresSafeArea()
-        .onAppear {
-            // Déclenché APRÈS le premier rendu : un changement d'état dans la même
-            // transaction que l'insertion de la vue serait rendu sans animation
-            // (confettis directement en bas de l'écran, donc invisibles).
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                falling = true
-            }
-        }
     }
 }
 

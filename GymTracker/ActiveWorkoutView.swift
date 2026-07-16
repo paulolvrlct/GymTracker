@@ -81,7 +81,10 @@ struct ActiveWorkoutView: View {
             }
             .alert("Abandonner la séance ?", isPresented: $showCancelAlert) {
                 Button("Continuer la séance", role: .cancel) {}
-                Button("Abandonner", role: .destructive) { dismiss() }
+                Button("Abandonner", role: .destructive) {
+                    restTimer.stop()   // coupe chrono, Live Activity et notification
+                    dismiss()
+                }
             } message: {
                 Text("Les séries saisies ne seront pas enregistrées.")
             }
@@ -109,6 +112,7 @@ struct ActiveWorkoutView: View {
             context.insert(record)
         }
         try? context.save()
+        restTimer.stop()   // coupe chrono de repos, Live Activity et notification
         withAnimation(.easeOut(duration: 0.3)) { showCelebration = true }
     }
 }
