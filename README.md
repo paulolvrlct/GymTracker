@@ -25,7 +25,7 @@
 ### 🏃 Course GPS (style Strava)
 - Carte MapKit avec tracé en temps réel, allure instantanée lissée sur 200 m
 - Fonctionne **écran verrouillé** (background location), pause/reprise
-- **Circuits préenregistrés** : dépose un fichier `.gpx` dans `GymTracker/Circuits/` et le parcours s'affiche en pointillés sur la carte pendant ta course
+- **Circuits préenregistrés** : 4 parcours réels inclus (bords de l'Erdre et île de Nantes à Nantes, tour de ville et boucle du centre à Challans — tracés générés par routage piéton OpenStreetMap). Dépose n'importe quel `.gpx` dans `GymTracker/Circuits/` pour en ajouter ; le parcours choisi s'affiche en pointillés sur la carte pendant ta course
 - **Export GPX** de chaque course enregistrée (bouton partager sur le détail du parcours)
 
 ### 🏝️ Dynamic Island & écran verrouillé (Live Activities)
@@ -43,6 +43,10 @@
 - Muscu : courbe de charge max par exercice, record / dernière / évolution
 - Course : courbes d'**allure**, de **distance** et de **durée** par sortie, records et total couru
 - Calendrier mensuel unifié : pastilles séances (indigo) et courses (vert)
+
+### 👤 Profil & onboarding
+- Au premier lancement, l'app demande prénom, sexe, taille et poids (modifiables via l'icône profil de l'accueil, IMC calculé)
+- L'accueil salue l'utilisateur par son prénom — tout reste en local, aucun compte
 
 ### 👑 Premium (infrastructure prête)
 - StoreKit 2 intégré : produit lifetime, paywall, restauration d'achats

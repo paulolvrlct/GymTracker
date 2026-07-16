@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootTabView: View {
     @State private var selection = 0
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some View {
         TabView(selection: $selection) {
@@ -26,6 +27,13 @@ struct RootTabView: View {
                 .tag(4)
         }
         .tint(.indigo)
+        // Premier lancement : demande prénom / taille / poids / sexe
+        .fullScreenCover(isPresented: Binding(
+            get: { !hasCompletedOnboarding },
+            set: { shown in if !shown { hasCompletedOnboarding = true } }
+        )) {
+            OnboardingView()
+        }
         .onAppear {
             NotificationManager.shared.requestAuthorization()
         }

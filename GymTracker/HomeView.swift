@@ -8,6 +8,8 @@ struct HomeView: View {
 
     @State private var activeTemplate: WorkoutTemplate?
     @State private var showLibrary = false
+    @State private var showProfile = false
+    @AppStorage("profileName") private var profileName = ""
 
     private var calendar: Calendar { Calendar.current }
 
@@ -61,6 +63,13 @@ struct HomeView: View {
             .navigationTitle("Accueil")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showProfile = true
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showLibrary = true
@@ -71,6 +80,9 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()
+            }
+            .sheet(isPresented: $showProfile) {
+                ProfileView()
             }
             .fullScreenCover(item: $activeTemplate) { template in
                 ActiveWorkoutView(template: template)
@@ -92,7 +104,7 @@ struct HomeView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(greeting + ", Paul 👋")
+            Text(profileName.isEmpty ? greeting + " 👋" : "\(greeting), \(profileName) 👋")
                 .font(.largeTitle.weight(.bold))
             Text(streak > 0
                  ? "\(streak) jour\(streak > 1 ? "s" : "") d'affilée — continue comme ça 🔥"
