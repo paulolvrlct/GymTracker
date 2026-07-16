@@ -65,7 +65,7 @@ private struct RestLockScreenView: View {
                             in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
             VStack(alignment: .leading, spacing: 3) {
-                Text("Repos — \(context.attributes.workoutName)")
+                Text("Repos · \(context.attributes.workoutName)")
                     .font(.caption).foregroundStyle(.white.opacity(0.7))
                 Text(context.state.exerciseName)
                     .font(.headline).foregroundStyle(.white)

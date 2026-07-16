@@ -27,7 +27,7 @@ struct RunActivityAttributes: ActivityAttributes {
             String(format: "%.2f", distanceMeters / 1000)
         }
         var paceText: String {
-            guard paceSecPerKm > 0, paceSecPerKm.isFinite else { return "—'--\"" }
+            guard paceSecPerKm > 0, paceSecPerKm.isFinite else { return "-'--\"" }
             let m = Int(paceSecPerKm) / 60, s = Int(paceSecPerKm) % 60
             return String(format: "%d'%02d\"", m, s)
         }

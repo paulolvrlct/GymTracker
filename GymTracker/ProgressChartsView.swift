@@ -106,7 +106,7 @@ struct ProgressChartsView: View {
 
     private var chartCard: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Charge max — \(selectedExercise)")
+            Text("Charge max · \(selectedExercise)")
                 .font(.headline)
 
             if dataPoints.isEmpty {
@@ -155,13 +155,13 @@ struct ProgressChartsView: View {
     private var statsCard: some View {
         HStack(spacing: 12) {
             statTile(title: "Record",
-                     value: dataPoints.map(\.maxWeight).max().map { "\($0.clean) kg" } ?? "—",
+                     value: dataPoints.map(\.maxWeight).max().map { "\($0.clean) kg" } ?? "-",
                      icon: "trophy.fill", color: .orange)
             statTile(title: "Dernière",
-                     value: dataPoints.last.map { "\($0.maxWeight.clean) kg" } ?? "—",
+                     value: dataPoints.last.map { "\($0.maxWeight.clean) kg" } ?? "-",
                      icon: "clock.fill", color: .indigo)
             statTile(title: "Évolution",
-                     value: progression.map { String(format: "%+.0f %%", $0) } ?? "—",
+                     value: progression.map { String(format: "%+.0f %%", $0) } ?? "-",
                      icon: "arrow.up.right", color: .green)
         }
     }

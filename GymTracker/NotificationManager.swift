@@ -23,7 +23,7 @@ final class NotificationManager {
 
         let content = UNMutableNotificationContent()
         content.title = "Repos terminé 💪"
-        content.body = "C'est reparti — \(exerciseName), série suivante."
+        content.body = "C'est reparti ! \(exerciseName), série suivante."
         content.sound = .default
         content.interruptionLevel = .timeSensitive
 

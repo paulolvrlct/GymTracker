@@ -53,7 +53,7 @@ enum GPXExporter {
         <gpx version="1.1" creator="GymTracker" xmlns="http://www.topografix.com/GPX/1/1">
           <metadata><time>\(iso)</time></metadata>
           <trk>
-            <name>Course GymTracker — \(String(format: "%.2f", run.distanceKm)) km</name>
+            <name>Course GymTracker · \(String(format: "%.2f", run.distanceKm)) km</name>
             <trkseg>
         \(points)
             </trkseg>

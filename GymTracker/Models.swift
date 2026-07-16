@@ -152,7 +152,7 @@ enum SharedStore {
 enum PaceFormatter {
     /// 372 s/km -> "6'12\"/km"
     static func string(secPerKm: Double) -> String {
-        guard secPerKm > 0, secPerKm.isFinite else { return "—" }
+        guard secPerKm > 0, secPerKm.isFinite else { return "-" }
         let m = Int(secPerKm) / 60
         let s = Int(secPerKm) % 60
         return String(format: "%d'%02d\"/km", m, s)

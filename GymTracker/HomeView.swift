@@ -107,7 +107,7 @@ struct HomeView: View {
             Text(profileName.isEmpty ? greeting + " 👋" : "\(greeting), \(profileName) 👋")
                 .font(.largeTitle.weight(.bold))
             Text(streak > 0
-                 ? "\(streak) jour\(streak > 1 ? "s" : "") d'affilée — continue comme ça 🔥"
+                 ? "\(streak) jour\(streak > 1 ? "s" : "") d'affilée, continue comme ça 🔥"
                  : "Prêt à t'y remettre aujourd'hui ?")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)

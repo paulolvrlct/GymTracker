@@ -15,7 +15,7 @@ struct CreditsView: View {
     var body: some View {
         List {
             Section("Catalogue d'exercices") {
-                Text("Structure et instructions issues du dataset « exercises-dataset » © 2026 Hasan Emir Yıldırım — licence MIT. Les médias d'origine (© Gym visual) ne sont pas utilisés dans cette app.")
+                Text("Structure et instructions issues du dataset « exercises-dataset » © 2026 Hasan Emir Yıldırım, sous licence MIT. Les médias d'origine (© Gym visual) ne sont pas utilisés dans cette app.")
                     .font(.footnote)
                 Link("github.com/hasaneyldrm/exercises-dataset",
                      destination: URL(string: "https://github.com/hasaneyldrm/exercises-dataset")!)
@@ -23,7 +23,7 @@ struct CreditsView: View {
             }
 
             Section("Photos d'exercices") {
-                Text("Free Exercise DB — domaine public (Unlicense).")
+                Text("Free Exercise DB, domaine public (Unlicense).")
                     .font(.footnote)
                 Link("github.com/yuhonas/free-exercise-db",
                      destination: URL(string: "https://github.com/yuhonas/free-exercise-db")!)
@@ -156,7 +156,7 @@ struct ProfileView: View {
                 }
 
                 Section {
-                    Text("Ces informations restent sur ton appareil — aucune n'est envoyée nulle part.")
+                    Text("Ces informations restent sur ton appareil : aucune n'est envoyée nulle part.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

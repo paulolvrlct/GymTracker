@@ -103,7 +103,7 @@ struct PaywallView: View {
                     feature("map.fill", "Circuits de course",
                             "Parcours préenregistrés affichés sur la carte pendant ta course.")
                     feature("heart.fill", "Achat unique, pas d'abonnement",
-                            "Tu débloques tout, pour toujours — et tu soutiens le développement.")
+                            "Tu débloques tout, pour toujours, et tu soutiens le développement.")
                 }
                 .padding(20)
                 .background(Color(.secondarySystemGroupedBackground),
@@ -120,7 +120,7 @@ struct PaywallView: View {
                             if store.isPremium { dismiss() }
                         }
                     } label: {
-                        Text(isPurchasing ? "Achat en cours…" : "Débloquer — \(product.displayPrice)")
+                        Text(isPurchasing ? "Achat en cours…" : "Débloquer · \(product.displayPrice)")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)

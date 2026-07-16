@@ -204,7 +204,7 @@ struct WorkoutCelebrationView: View {
                 Text("Séance terminée !")
                     .font(.title.bold())
 
-                Text("Belle séance — continue comme ça 🔥")
+                Text("Belle séance, continue comme ça 🔥")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 

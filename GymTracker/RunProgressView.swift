@@ -158,11 +158,11 @@ struct RunProgressSection: View {
         HStack(spacing: 12) {
             statTile(title: "Meilleure allure",
                      value: validRuns.map(\.averagePaceSecPerKm).min()
-                        .map { PaceFormatter.string(secPerKm: $0).replacingOccurrences(of: "/km", with: "") } ?? "—",
+                        .map { PaceFormatter.string(secPerKm: $0).replacingOccurrences(of: "/km", with: "") } ?? "-",
                      icon: "trophy.fill", color: .orange)
             statTile(title: "Plus longue",
                      value: validRuns.map(\.distanceKm).max()
-                        .map { String(format: "%.2f km", $0) } ?? "—",
+                        .map { String(format: "%.2f km", $0) } ?? "-",
                      icon: "point.topleft.down.to.point.bottomright.curvepath", color: .teal)
             statTile(title: "Total couru",
                      value: String(format: "%.1f km", validRuns.map(\.distanceKm).reduce(0, +)),

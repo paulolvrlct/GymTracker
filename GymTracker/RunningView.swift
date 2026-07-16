@@ -67,13 +67,13 @@ struct RunningView: View {
 
             Text("Prêt à courir ?")
                 .font(.title3.weight(.semibold))
-            Text("Suivi GPS de ton allure, ta distance et ton tracé — visible sur l'écran verrouillé.")
+            Text("Suivi GPS de ton allure, ta distance et ton tracé, visible sur l'écran verrouillé.")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
             if tracker.authorizationDenied {
-                Label("Localisation refusée — active-la dans Réglages pour le suivi GPS.",
+                Label("Localisation refusée : active-la dans Réglages pour le suivi GPS.",
                       systemImage: "location.slash")
                     .font(.caption)
                     .foregroundStyle(.orange)
