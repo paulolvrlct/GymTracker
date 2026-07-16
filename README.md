@@ -67,6 +67,10 @@
 |:---:|:---:|
 | <img src="docs/screenshots/calendrier.png" alt="Calendrier des activités" width="300" /> | <img src="docs/screenshots/progression.jpeg" alt="Progression — muscu et course" width="300" /> |
 
+| Widgets d'écran d'accueil |
+|:---:|
+| <img src="docs/screenshots/widgets.jpeg" alt="Widgets : raccourci course, jauge de streak et volume hebdomadaire" width="420" /> |
+
 ## 🧱 Architecture
 
 ```
