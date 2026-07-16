@@ -164,6 +164,7 @@ struct ProfileView: View {
                 Section("À propos") {
                     LabeledContent("Version",
                                    value: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
+                    LabeledContent("Développeur", value: "DevShield")
                     NavigationLink("Licences et crédits") { CreditsView() }
                 }
             }

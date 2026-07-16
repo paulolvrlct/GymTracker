@@ -56,6 +56,7 @@ struct HomeView: View {
                     statsGrid
                     quickStartSection
                     if let last = sessions.first { recentActivity(last) }
+                    footerSignature
                 }
                 .padding()
             }
@@ -88,6 +89,21 @@ struct HomeView: View {
                 ActiveWorkoutView(template: template)
             }
         }
+    }
+
+    // MARK: Signature
+
+    private var footerSignature: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "shield.lefthalf.filled")
+                .font(.caption)
+            Text("Une app DevShield")
+                .font(.caption.weight(.medium))
+        }
+        .foregroundStyle(.tertiary)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 6)
+        .padding(.bottom, 2)
     }
 
     // MARK: Fond dégradé (base du rendu "liquid glass")
