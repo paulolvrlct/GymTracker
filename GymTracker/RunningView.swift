@@ -11,6 +11,7 @@ struct RunningView: View {
     @State private var showActiveRun = false
     @State private var showPaywall = false
     @State private var selectedCircuit: RunCircuit?
+    @State private var previewedCircuit: RunCircuit?
 
     var body: some View {
         NavigationStack {
@@ -25,6 +26,12 @@ struct RunningView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Course")
             .sheet(isPresented: $showPaywall) { PaywallView() }
+            .sheet(item: $previewedCircuit) { circuit in
+                CircuitPreviewView(circuit: circuit,
+                                   isSelected: selectedCircuit == circuit) {
+                    toggleSelection(circuit)
+                }
+            }
             .fullScreenCover(isPresented: $showActiveRun) {
                 ActiveRunView(tracker: tracker, circuit: selectedCircuit) { result in
                     if let result {
@@ -105,41 +112,46 @@ struct RunningView: View {
             .padding(.leading, 4)
 
             ForEach(CircuitLibrary.all) { circuit in
-                Button {
-                    guard premium.isPremium else {
-                        showPaywall = true
-                        return
-                    }
-                    selectedCircuit = selectedCircuit == circuit ? nil : circuit
-                } label: {
-                    HStack(spacing: 14) {
-                        Image(systemName: "map.fill")
-                            .font(.title3)
-                            .foregroundStyle(.teal)
-                            .frame(width: 44, height: 44)
-                            .background(Color.teal.opacity(0.12), in: Circle())
+                HStack(spacing: 14) {
+                    // Zone aperçu : ouvre la carte du tracé
+                    Button {
+                        previewedCircuit = circuit
+                    } label: {
+                        HStack(spacing: 14) {
+                            Image(systemName: "map.fill")
+                                .font(.title3)
+                                .foregroundStyle(.teal)
+                                .frame(width: 44, height: 44)
+                                .background(Color.teal.opacity(0.12), in: Circle())
 
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(circuit.name)
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(.primary)
-                            Text(String(format: "%.1f km", circuit.distanceKm))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(circuit.name)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(.primary)
+                                Text(String(format: "%.1f km · toucher pour l'aperçu", circuit.distanceKm))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Spacer()
                         }
+                    }
+                    .buttonStyle(.plain)
 
-                        Spacer()
-
+                    // Sélection directe
+                    Button {
+                        toggleSelection(circuit)
+                    } label: {
                         Image(systemName: !premium.isPremium ? "lock.fill"
                               : selectedCircuit == circuit ? "checkmark.circle.fill" : "circle")
                             .foregroundStyle(selectedCircuit == circuit ? .teal : .secondary)
                             .font(.title3)
                     }
-                    .padding(14)
-                    .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .shadow(color: .black.opacity(0.05), radius: 6, y: 2)
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+                .padding(14)
+                .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .shadow(color: .black.opacity(0.05), radius: 6, y: 2)
             }
 
             Text("Le circuit choisi s'affiche en pointillés sur la carte pendant ta course.")
@@ -147,6 +159,15 @@ struct RunningView: View {
                 .foregroundStyle(.secondary)
                 .padding(.leading, 4)
         }
+    }
+
+    private func toggleSelection(_ circuit: RunCircuit) {
+        guard premium.isPremium else {
+            // léger délai : laisse la sheet d'aperçu se fermer avant d'ouvrir le paywall
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { showPaywall = true }
+            return
+        }
+        selectedCircuit = selectedCircuit == circuit ? nil : circuit
     }
 
     private var historySection: some View {
@@ -268,6 +289,72 @@ struct ActiveRunView: View {
             Text(unit).font(.caption).foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+// MARK: - Aperçu d'un circuit
+
+struct CircuitPreviewView: View {
+    let circuit: RunCircuit
+    let isSelected: Bool
+    var onToggleSelect: () -> Void
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                Map(initialPosition: .automatic) {
+                    MapPolyline(coordinates: circuit.coordinates)
+                        .stroke(.teal, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    if let start = circuit.coordinates.first {
+                        Marker("Départ / arrivée", systemImage: "flag.fill", coordinate: start)
+                            .tint(.green)
+                    }
+                }
+                .mapStyle(.standard(elevation: .flat))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+
+                HStack(spacing: 12) {
+                    infoTile("Distance", String(format: "%.1f km", circuit.distanceKm),
+                             "point.topleft.down.to.point.bottomright.curvepath")
+                    infoTile("Type", "Boucle", "arrow.triangle.2.circlepath")
+                    infoTile("Points GPS", "\(circuit.coordinates.count)", "mappin.and.ellipse")
+                }
+
+                Button {
+                    onToggleSelect()
+                    dismiss()
+                } label: {
+                    Label(isSelected ? "Retirer ce circuit" : "Courir ce circuit",
+                          systemImage: isSelected ? "xmark.circle" : "figure.run")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(isSelected ? .orange : .teal)
+            }
+            .padding()
+            .background(Color(.systemGroupedBackground))
+            .navigationTitle(circuit.name)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Fermer") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private func infoTile(_ title: String, _ value: String, _ icon: String) -> some View {
+        VStack(spacing: 6) {
+            Image(systemName: icon).font(.subheadline).foregroundStyle(.teal)
+            Text(value).font(.subheadline.weight(.semibold).monospacedDigit())
+            Text(title).font(.caption2).foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 
