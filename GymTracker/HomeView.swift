@@ -54,6 +54,12 @@ struct HomeView: View {
                 VStack(spacing: 18) {
                     header
                     statsGrid
+                    NavigationLink {
+                        NutritionView()
+                    } label: {
+                        NutritionHomeCard()
+                    }
+                    .buttonStyle(.plain)
                     quickStartSection
                     if let last = sessions.first { recentActivity(last) }
                     footerSignature

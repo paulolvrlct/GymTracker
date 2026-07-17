@@ -1,6 +1,6 @@
 # Politique de confidentialité : LiftRun
 
-*Dernière mise à jour : 15 juillet 2026*
+*Dernière mise à jour : 17 juillet 2026*
 
 ## En résumé
 
@@ -12,7 +12,8 @@
 |---|---|---|
 | Séances, séries, poids soulevés | Historique et courbes de progression | Sur l'appareil (base locale) |
 | Courses : distance, durée, tracé GPS | Historique, carte du parcours, allure | Sur l'appareil (base locale) |
-| Profil : prénom, taille, poids, sexe | Personnalisation de l'accueil et des statistiques | Sur l'appareil (préférences locales) |
+| Profil : prénom, âge, taille, poids, sexe | Personnalisation, calcul des besoins caloriques | Sur l'appareil (préférences locales) |
+| Journal alimentaire et objectif nutritionnel | Suivi calories et macros (fonction Premium) | Sur l'appareil (base locale) |
 
 Ces données ne quittent jamais ton appareil, sauf si **toi-même** tu exportes une course au format GPX et la partages.
 

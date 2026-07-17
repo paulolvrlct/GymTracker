@@ -104,6 +104,12 @@ struct RunCelebrationView: View {
     @State private var appeared = false
     @State private var drawProgress: CGFloat = 0
 
+    private var runBurnedKcal: Int {
+        let stored = UserDefaults.standard.double(forKey: "profileWeightKg")
+        return CalorieEstimator.runKcal(distanceKm: run.distanceKm,
+                                        weightKg: stored > 0 ? stored : 70)
+    }
+
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color(.systemBackground), .green.opacity(0.18), Color(.systemBackground)],
@@ -142,6 +148,7 @@ struct RunCelebrationView: View {
                     runTile(String(format: "%.2f km", run.distanceKm), "distance")
                     runTile(PaceFormatter.duration(run.durationSeconds), "durée")
                     runTile(PaceFormatter.string(secPerKm: run.averagePaceSecPerKm), "allure")
+                    runTile("\(runBurnedKcal)", "kcal")
                 }
 
                 Button {
@@ -189,6 +196,12 @@ struct WorkoutCelebrationView: View {
 
     @State private var appeared = false
 
+    private var burnedKcal: Int {
+        let stored = UserDefaults.standard.double(forKey: "profileWeightKg")
+        return CalorieEstimator.workoutKcal(durationSeconds: durationSeconds,
+                                            weightKg: stored > 0 ? stored : 70)
+    }
+
     var body: some View {
         ZStack {
             Color.black.opacity(0.55).ignoresSafeArea()
@@ -213,6 +226,7 @@ struct WorkoutCelebrationView: View {
                     celebrationTile(volume >= 1000 ? String(format: "%.1f t", volume / 1000)
                                                    : "\(Int(volume)) kg", "volume")
                     celebrationTile(PaceFormatter.duration(durationSeconds), "durée")
+                    celebrationTile("\(burnedKcal)", "kcal")
                 }
 
                 Button {

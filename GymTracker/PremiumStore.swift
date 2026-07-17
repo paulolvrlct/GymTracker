@@ -102,6 +102,8 @@ struct PaywallView: View {
                             "L'offre gratuite est limitée à \(PremiumStore.FreeTier.maxTemplates) séances.")
                     feature("map.fill", "Circuits de course",
                             "Parcours préenregistrés affichés sur la carte pendant ta course.")
+                    feature("flame.fill", "Coach nutrition",
+                            "Calories et macros selon ton objectif : sèche, maintien ou prise de masse, avec journal alimentaire.")
                     feature("heart.fill", "Achat unique, pas d'abonnement",
                             "Tu débloques tout, pour toujours, et tu soutiens le développement.")
                 }

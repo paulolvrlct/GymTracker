@@ -107,6 +107,39 @@ final class RunSession {
     }
 }
 
+// MARK: - Entrée du journal alimentaire (Premium)
+
+@Model
+final class FoodEntry {
+    var date: Date
+    var name: String
+    var grams: Double
+    // Valeurs pour 100 g figées à la saisie (le catalogue peut évoluer)
+    var kcalPer100: Double
+    var proteinPer100: Double
+    var carbsPer100: Double
+    var fatPer100: Double
+    var meal: String
+
+    init(date: Date = .now, name: String, grams: Double,
+         kcalPer100: Double, proteinPer100: Double,
+         carbsPer100: Double, fatPer100: Double, meal: String) {
+        self.date = date
+        self.name = name
+        self.grams = grams
+        self.kcalPer100 = kcalPer100
+        self.proteinPer100 = proteinPer100
+        self.carbsPer100 = carbsPer100
+        self.fatPer100 = fatPer100
+        self.meal = meal
+    }
+
+    var kcal: Double { kcalPer100 * grams / 100 }
+    var protein: Double { proteinPer100 * grams / 100 }
+    var carbs: Double { carbsPer100 * grams / 100 }
+    var fat: Double { fatPer100 * grams / 100 }
+}
+
 // MARK: - Conteneur SwiftData partagé (App Group)
 // Ce fichier appartient aux DEUX cibles : l'app et la widget extension lisent
 // la même base via le conteneur du groupe `group.fr.devshield.gymtracker`.
@@ -116,7 +149,8 @@ enum SharedStore {
 
     static var schema: Schema {
         Schema([WorkoutTemplate.self, ExerciseTemplate.self,
-                WorkoutSession.self, SetRecord.self, RunSession.self])
+                WorkoutSession.self, SetRecord.self, RunSession.self,
+                FoodEntry.self])
     }
 
     static func makeContainer() throws -> ModelContainer {

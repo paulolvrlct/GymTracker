@@ -52,6 +52,12 @@
 - Au premier lancement, l'app demande prénom, sexe, taille et poids (modifiables via l'icône profil de l'accueil, IMC calculé)
 - L'accueil salue l'utilisateur par son prénom — tout reste en local, aucun compte
 
+### 🍽️ Coach nutrition (Premium)
+- Objectif calories et macros calculé par la formule Mifflin-St Jeor, avec un facteur d'activité **calibré sur les séances et courses réellement enregistrées**
+- Trois régimes : **sèche** (déficit ~17 %), **maintien**, **prise de masse** (surplus ~12 %) — jamais sous le métabolisme de base
+- **Journal alimentaire** : 2 298 aliments de la table CIQUAL 2020 (ANSES, licence ouverte), recherche, quantités, repas, anneau de progression et barres de macros
+- Calories brûlées estimées (MET) par séance et par course, affichées dans les célébrations
+
 ### 👑 Premium (infrastructure prête)
 - StoreKit 2 intégré : produit lifetime, paywall, restauration d'achats
 - **Config StoreKit locale** (`Products.storekit` branchée au scheme) : l'achat se teste dans Xcode sans App Store Connect
@@ -131,6 +137,7 @@ Tout est **local** : SwiftData sur l'appareil, aucun compte, aucun serveur, aucu
 - **Code** : © DevShield — tous droits réservés (licence à définir avant réutilisation).
 - **Catalogue d'exercices** : structure textuelle (noms, muscles, instructions) issue de [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset). Les médias propriétaires (images/GIFs) ont été **retirés** de ce dépôt. ⚠️ Vérifie la licence du dataset source avant tout usage commercial ou soumission App Store.
 - **Photos d'exercices** : [Free Exercise DB](https://github.com/yuhonas/free-exercise-db) — domaine public ([Unlicense](https://unlicense.org)), chargées à la demande.
+- **Valeurs nutritionnelles** : [table CIQUAL 2020](https://ciqual.anses.fr) © ANSES, licence ouverte Etalab.
 
 ## 🗺️ Roadmap
 

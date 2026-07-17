@@ -30,6 +30,14 @@ struct CreditsView: View {
                     .font(.footnote)
             }
 
+            Section("Base alimentaire") {
+                Text("Valeurs nutritionnelles issues de la table CIQUAL 2020 © ANSES, licence ouverte Etalab.")
+                    .font(.footnote)
+                Link("ciqual.anses.fr",
+                     destination: URL(string: "https://ciqual.anses.fr")!)
+                    .font(.footnote)
+            }
+
             Section("Circuits de course") {
                 Text("Tracés générés à partir des données © les contributeurs OpenStreetMap, disponibles sous licence ODbL.")
                     .font(.footnote)
@@ -53,6 +61,7 @@ struct CreditsView: View {
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @AppStorage("profileName") private var name = ""
+    @AppStorage("profileAge") private var age = 25
     @AppStorage("profileHeightCm") private var heightCm = 175
     @AppStorage("profileWeightKg") private var weightKg = 70.0
     @AppStorage("profileSex") private var sexRaw = UserSex.unspecified.rawValue
@@ -93,6 +102,7 @@ struct OnboardingView: View {
                             Text(sex.rawValue).tag(sex.rawValue)
                         }
                     }
+                    Stepper("Âge : \(age) ans", value: $age, in: 13...100)
                     Stepper("Taille : \(heightCm) cm", value: $heightCm, in: 120...230)
                     Stepper(String(format: "Poids : %.1f kg", weightKg),
                             value: $weightKg, in: 30...250, step: 0.5)
@@ -124,6 +134,7 @@ struct OnboardingView: View {
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("profileName") private var name = ""
+    @AppStorage("profileAge") private var age = 25
     @AppStorage("profileHeightCm") private var heightCm = 175
     @AppStorage("profileWeightKg") private var weightKg = 70.0
     @AppStorage("profileSex") private var sexRaw = UserSex.unspecified.rawValue
@@ -147,6 +158,7 @@ struct ProfileView: View {
                 }
 
                 Section("Mensurations") {
+                    Stepper("Âge : \(age) ans", value: $age, in: 13...100)
                     Stepper("Taille : \(heightCm) cm", value: $heightCm, in: 120...230)
                     Stepper(String(format: "Poids : %.1f kg", weightKg),
                             value: $weightKg, in: 30...250, step: 0.5)
