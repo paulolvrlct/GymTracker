@@ -178,9 +178,10 @@
 			};
 			buildConfigurationList = GT00000000000000000000AB /* Build configuration list for PBXProject "GymTracker" */;
 			compatibilityVersion = "Xcode 15.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				fr,
 				en,
 				Base,
 			);

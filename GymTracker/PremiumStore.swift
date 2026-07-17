@@ -25,7 +25,7 @@ final class PremiumStore: ObservableObject {
 
     /// `true` = tout déverrouillé (debug) · `false` = paywall actif.
     /// ⚠️ Doit impérativement rester à `false` pour toute release App Store.
-    private let debugUnlockAll = false
+    private let debugUnlockAll = true
 
     var isPremium: Bool { hasPurchased || debugUnlockAll }
 

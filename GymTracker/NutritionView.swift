@@ -51,9 +51,7 @@ struct NutritionView: View {
             VStack(spacing: 16) {
                 if premium.isPremium {
                     dayPicker
-                    ringCard
-                    goalCard
-                    macrosCard
+                    summaryCard
                     mealsSection
                     disclaimer
                 } else {
@@ -121,7 +119,8 @@ struct NutritionView: View {
             Button { shiftDay(-1) } label: { Image(systemName: "chevron.left") }
             Spacer()
             Text(calendar.isDateInToday(day) ? "Aujourd'hui"
-                 : day.formatted(date: .complete, time: .omitted))
+                 : calendar.isDateInYesterday(day) ? "Hier"
+                 : day.formatted(.dateTime.weekday(.wide).day().month(.wide)))
                 .font(.headline)
             Spacer()
             Button { shiftDay(1) } label: { Image(systemName: "chevron.right") }
@@ -136,22 +135,58 @@ struct NutritionView: View {
         }
     }
 
-    // MARK: Anneau calories
+    // MARK: Carte résumé (anneau + objectif + macros + détails)
 
-    private var ringCard: some View {
-        VStack(spacing: 14) {
+    private var summaryCard: some View {
+        VStack(spacing: 16) {
             CalorieRing(consumed: consumedKcal, target: plan.targetKcal)
-                .frame(width: 170, height: 170)
+                .frame(width: 150, height: 150)
 
-            HStack(spacing: 12) {
-                nutritionTile("\(Int(plan.bmr))", "BMR (kcal)")
-                nutritionTile("\(Int(plan.tdee))", "dépense (kcal)")
-                nutritionTile("\(burnedKcal)", "brûlées (sport)")
+            // objectif : un menu compact plutôt qu'un gros sélecteur
+            Menu {
+                ForEach(NutritionGoal.allCases) { g in
+                    Button {
+                        goalRaw = g.rawValue
+                    } label: {
+                        Label(g.rawValue, systemImage: g.icon)
+                    }
+                }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: goal.icon)
+                    Text("Objectif : \(goal.rawValue)")
+                        .font(.subheadline.weight(.medium))
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption2)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(Color.indigo.opacity(0.12), in: Capsule())
+                .foregroundStyle(.indigo)
             }
 
-            Text("Dépense calibrée sur ton activité réelle enregistrée dans l'app.")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            VStack(spacing: 10) {
+                macroBar("Protéines", consumed: dayEntries.reduce(0) { $0 + $1.protein },
+                         target: plan.proteinG, color: .red)
+                macroBar("Glucides", consumed: dayEntries.reduce(0) { $0 + $1.carbs },
+                         target: plan.carbsG, color: .orange)
+                macroBar("Lipides", consumed: dayEntries.reduce(0) { $0 + $1.fat },
+                         target: plan.fatG, color: .yellow)
+            }
+
+            DisclosureGroup {
+                VStack(spacing: 6) {
+                    detailRow("Métabolisme de base", "\(Int(plan.bmr)) kcal")
+                    detailRow("Dépense estimée (activité mesurée)", "\(Int(plan.tdee)) kcal")
+                    detailRow("Brûlées par le sport ce jour", "\(burnedKcal) kcal")
+                    detailRow(goal.rawValue, goal.blurb)
+                }
+                .padding(.top, 6)
+            } label: {
+                Text("Détails du calcul")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(16)
         .frame(maxWidth: .infinity)
@@ -159,52 +194,23 @@ struct NutritionView: View {
         .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
     }
 
-    // MARK: Objectif
-
-    private var goalCard: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Mon objectif")
-                .font(.headline)
-            Picker("Objectif", selection: $goalRaw) {
-                ForEach(NutritionGoal.allCases) { g in
-                    Text(g.rawValue).tag(g.rawValue)
-                }
-            }
-            .pickerStyle(.segmented)
-            Label(goal.blurb, systemImage: goal.icon)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+    private func detailRow(_ label: String, _ value: String) -> some View {
+        HStack(alignment: .top) {
+            Text(label).font(.caption).foregroundStyle(.secondary)
+            Spacer()
+            Text(value)
+                .font(.caption.weight(.medium))
+                .multilineTextAlignment(.trailing)
         }
-        .padding(16)
-        .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
-    }
-
-    // MARK: Macros
-
-    private var macrosCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Macros du jour")
-                .font(.headline)
-            macroBar("Protéines", consumed: dayEntries.reduce(0) { $0 + $1.protein },
-                     target: plan.proteinG, color: .red)
-            macroBar("Glucides", consumed: dayEntries.reduce(0) { $0 + $1.carbs },
-                     target: plan.carbsG, color: .orange)
-            macroBar("Lipides", consumed: dayEntries.reduce(0) { $0 + $1.fat },
-                     target: plan.fatG, color: .yellow)
-        }
-        .padding(16)
-        .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
     }
 
     private func macroBar(_ label: String, consumed: Double, target: Double, color: Color) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 3) {
             HStack {
-                Text(label).font(.subheadline)
+                Text(label).font(.caption)
                 Spacer()
                 Text("\(Int(consumed)) / \(Int(target)) g")
-                    .font(.caption.monospacedDigit())
+                    .font(.caption2.monospacedDigit())
                     .foregroundStyle(.secondary)
             }
             ProgressView(value: min(consumed, target), total: max(target, 1))
@@ -212,28 +218,21 @@ struct NutritionView: View {
         }
     }
 
-    // MARK: Repas
+    // MARK: Journal
 
     private var mealsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("Journal")
-                    .font(.headline)
-                Spacer()
+            if dayEntries.isEmpty {
                 Button {
                     showAddFood = true
                 } label: {
-                    Label("Ajouter", systemImage: "plus.circle.fill")
-                        .font(.subheadline.weight(.medium))
+                    Label("Ajouter mon premier aliment", systemImage: "plus.circle.fill")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
                 }
-            }
-            .padding(.horizontal, 4)
-
-            if dayEntries.isEmpty {
-                ContentUnavailableView("Rien au journal", systemImage: "fork.knife",
-                                       description: Text("Ajoute ton premier aliment avec le bouton +"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
+                .buttonStyle(.bordered)
+                .tint(.indigo)
             } else {
                 ForEach(MealKind.allCases) { meal in
                     let entries = dayEntries.filter { $0.meal == meal.rawValue }
@@ -241,6 +240,16 @@ struct NutritionView: View {
                         mealCard(meal, entries: entries)
                     }
                 }
+                Button {
+                    showAddFood = true
+                } label: {
+                    Label("Ajouter un aliment", systemImage: "plus.circle.fill")
+                        .font(.subheadline.weight(.medium))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                }
+                .buttonStyle(.bordered)
+                .tint(.indigo)
             }
         }
     }
@@ -256,7 +265,8 @@ struct NutritionView: View {
                     .foregroundStyle(.secondary)
             }
             ForEach(entries) { entry in
-                HStack {
+                HStack(spacing: 8) {
+                    Text((FoodCategory(rawValue: entry.category) ?? .misc).emoji)
                     VStack(alignment: .leading, spacing: 1) {
                         Text(entry.name)
                             .font(.footnote)
@@ -290,16 +300,6 @@ struct NutritionView: View {
             .foregroundStyle(.secondary)
             .padding(.horizontal, 4)
     }
-
-    private func nutritionTile(_ value: String, _ label: String) -> some View {
-        VStack(spacing: 4) {
-            Text(value).font(.subheadline.weight(.semibold).monospacedDigit())
-            Text(label).font(.caption2).foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 10)
-        .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-    }
 }
 
 // MARK: - Anneau calories
@@ -330,7 +330,7 @@ struct CalorieRing: View {
             if showText {
                 VStack(spacing: 2) {
                     Text("\(Int(consumed))")
-                        .font(.system(size: 34, weight: .bold, design: .rounded).monospacedDigit())
+                        .font(.system(size: 32, weight: .bold, design: .rounded).monospacedDigit())
                     Text("/ \(Int(target)) kcal")
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -345,7 +345,7 @@ struct CalorieRing: View {
     }
 }
 
-// MARK: - Ajout d'un aliment (recherche CIQUAL)
+// MARK: - Ajout d'un aliment (recherche CIQUAL par catégorie)
 
 struct AddFoodView: View {
     let day: Date
@@ -353,32 +353,66 @@ struct AddFoodView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var query = ""
+    @State private var selectedCategory: FoodCategory?
     @State private var selected: CiqualFood?
 
     var body: some View {
         NavigationStack {
-            List(FoodCatalog.search(query)) { food in
-                Button {
-                    selected = food
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(food.name)
-                                .font(.subheadline)
-                                .foregroundStyle(.primary)
-                                .lineLimit(2)
-                            Text("P \(Int(food.p)) · G \(Int(food.c)) · L \(Int(food.f))  (pour 100 g)")
-                                .font(.caption2)
+            VStack(spacing: 0) {
+                // puces de catégories avec logos
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(FoodCategory.allCases) { category in
+                            let isOn = selectedCategory == category
+                            Button {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    selectedCategory = isOn ? nil : category
+                                }
+                            } label: {
+                                HStack(spacing: 5) {
+                                    Text(category.emoji)
+                                    Text(category.name)
+                                        .font(.footnote.weight(.medium))
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 7)
+                                .background(isOn ? Color.indigo : Color(.tertiarySystemFill),
+                                            in: Capsule())
+                                .foregroundStyle(isOn ? .white : .primary)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                }
+
+                List(FoodCatalog.search(query, category: selectedCategory)) { food in
+                    Button {
+                        selected = food
+                    } label: {
+                        HStack(spacing: 10) {
+                            Text(food.category.emoji)
+                                .font(.title3)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(food.name)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(2)
+                                Text("P \(Int(food.p)) · G \(Int(food.c)) · L \(Int(food.f)) pour 100 g")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Text("\(Int(food.k)) kcal")
+                                .font(.caption.monospacedDigit())
                                 .foregroundStyle(.secondary)
                         }
-                        Spacer()
-                        Text("\(Int(food.k)) kcal")
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
                     }
                 }
+                .listStyle(.plain)
             }
-            .searchable(text: $query, prompt: "Rechercher un aliment (base CIQUAL)")
+            .searchable(text: $query, prompt: "Rechercher un aliment")
             .navigationTitle("Ajouter un aliment")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -415,8 +449,11 @@ struct FoodQuantityView: View {
         NavigationStack {
             Form {
                 Section {
-                    Text(food.name)
-                        .font(.subheadline.weight(.semibold))
+                    Label {
+                        Text(food.name).font(.subheadline.weight(.semibold))
+                    } icon: {
+                        Text(food.category.emoji)
+                    }
                 }
                 Section("Quantité") {
                     Stepper("\(Int(grams)) g", value: $grams, in: 5...1500, step: 5)
@@ -462,7 +499,8 @@ struct FoodQuantityView: View {
             : Calendar.current.date(byAdding: .hour, value: 12, to: day) ?? day
         let entry = FoodEntry(date: date, name: food.name, grams: grams,
                               kcalPer100: food.k, proteinPer100: food.p,
-                              carbsPer100: food.c, fatPer100: food.f, meal: mealRaw)
+                              carbsPer100: food.c, fatPer100: food.f,
+                              meal: mealRaw, category: food.g)
         context.insert(entry)
         try? context.save()
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()

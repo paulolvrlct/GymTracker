@@ -116,6 +116,7 @@ enum CalorieEstimator {
 
 struct CiqualFood: Codable, Identifiable, Hashable {
     let n: String              // nom
+    let g: Int                 // catégorie (FoodCategory)
     let k: Double              // kcal / 100 g
     let p: Double              // protéines g / 100 g
     let c: Double              // glucides g / 100 g
@@ -123,6 +124,51 @@ struct CiqualFood: Codable, Identifiable, Hashable {
 
     var id: String { n }
     var name: String { n }
+    var category: FoodCategory { FoodCategory(rawValue: g) ?? .misc }
+}
+
+// MARK: - Catégories d'aliments (groupes CIQUAL regroupés)
+
+enum FoodCategory: Int, CaseIterable, Identifiable {
+    case dishes = 0        // entrées et plats composés
+    case fruitsVeg = 1     // fruits, légumes, légumineuses
+    case cereals = 2       // produits céréaliers
+    case meatFish = 3      // viandes, œufs, poissons
+    case dairy = 4         // produits laitiers
+    case drinks = 5        // boissons
+    case sweets = 6        // produits sucrés + glaces
+    case fats = 7          // matières grasses
+    case misc = 8          // divers
+
+    var id: Int { rawValue }
+
+    var name: String {
+        switch self {
+        case .dishes: "Plats"
+        case .fruitsVeg: "Fruits & légumes"
+        case .cereals: "Féculents"
+        case .meatFish: "Viandes & poissons"
+        case .dairy: "Laitages"
+        case .drinks: "Boissons"
+        case .sweets: "Sucré"
+        case .fats: "Mat. grasses"
+        case .misc: "Divers"
+        }
+    }
+
+    var emoji: String {
+        switch self {
+        case .dishes: "🍲"
+        case .fruitsVeg: "🥦"
+        case .cereals: "🌾"
+        case .meatFish: "🍗"
+        case .dairy: "🧀"
+        case .drinks: "🥤"
+        case .sweets: "🍬"
+        case .fats: "🧈"
+        case .misc: "🧂"
+        }
+    }
 }
 
 enum FoodCatalog {
@@ -137,11 +183,19 @@ enum FoodCatalog {
         return items
     }()
 
-    /// Recherche insensible à la casse et aux accents
-    static func search(_ query: String) -> [CiqualFood] {
+    /// Recherche insensible à la casse et aux accents, filtrable par catégorie
+    static func search(_ query: String, category: FoodCategory? = nil) -> [CiqualFood] {
         let trimmed = query.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return Array(all.prefix(60)) }
-        return all.filter { $0.n.localizedStandardContains(trimmed) }
+        var results = all
+        if let category {
+            results = results.filter { $0.g == category.rawValue }
+        }
+        if !trimmed.isEmpty {
+            results = results.filter { $0.n.localizedStandardContains(trimmed) }
+        } else if category == nil {
+            results = Array(results.prefix(80))
+        }
+        return results
     }
 }
 

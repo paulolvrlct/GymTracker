@@ -120,10 +120,11 @@ final class FoodEntry {
     var carbsPer100: Double
     var fatPer100: Double
     var meal: String
+    var category: Int = 8      // FoodCategory (défaut : divers, pour la migration)
 
     init(date: Date = .now, name: String, grams: Double,
          kcalPer100: Double, proteinPer100: Double,
-         carbsPer100: Double, fatPer100: Double, meal: String) {
+         carbsPer100: Double, fatPer100: Double, meal: String, category: Int = 8) {
         self.date = date
         self.name = name
         self.grams = grams
@@ -132,6 +133,7 @@ final class FoodEntry {
         self.carbsPer100 = carbsPer100
         self.fatPer100 = fatPer100
         self.meal = meal
+        self.category = category
     }
 
     var kcal: Double { kcalPer100 * grams / 100 }
