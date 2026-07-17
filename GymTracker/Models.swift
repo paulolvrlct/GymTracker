@@ -149,6 +149,11 @@ final class FoodEntry {
 enum SharedStore {
     static let appGroupID = "group.fr.devshield.gymtracker"
 
+    /// Préférences partagées app ↔ widgets
+    static var groupDefaults: UserDefaults? { UserDefaults(suiteName: appGroupID) }
+    /// Objectif kcal du jour, publié par l'app pour le widget calories
+    static let nutritionTargetKey = "widget.nutritionTargetKcal"
+
     static var schema: Schema {
         Schema([WorkoutTemplate.self, ExerciseTemplate.self,
                 WorkoutSession.self, SetRecord.self, RunSession.self,

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RootTabView: View {
+    @Environment(\.modelContext) private var context
     @State private var selection = 0
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
@@ -36,6 +37,7 @@ struct RootTabView: View {
         }
         .onAppear {
             NotificationManager.shared.requestAuthorization()
+            NutritionPlanner.publishForWidget(context: context)
         }
         // Lien profond depuis le widget raccourci (gymtracker://run)
         .onOpenURL { url in

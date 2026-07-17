@@ -10,6 +10,7 @@ struct GymTrackerWidgetsBundle: WidgetBundle {
         RunLiveActivity()
         StreakWidget()
         VolumeChartWidget()
+        CalorieWidget()
         RunShortcutWidget()
     }
 }

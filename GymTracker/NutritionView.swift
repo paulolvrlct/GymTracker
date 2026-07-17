@@ -80,6 +80,8 @@ struct NutritionView: View {
         .sheet(isPresented: $showPaywall) {
             PaywallView()
         }
+        .onAppear { NutritionPlanner.publishForWidget(context: context) }
+        .onChange(of: goalRaw) { NutritionPlanner.publishForWidget(context: context) }
     }
 
     // MARK: Verrou Premium
@@ -283,6 +285,7 @@ struct NutritionView: View {
                     Button(role: .destructive) {
                         context.delete(entry)
                         try? context.save()
+                        NutritionPlanner.publishForWidget(context: context)
                     } label: {
                         Label("Supprimer", systemImage: "trash")
                     }
@@ -505,6 +508,7 @@ struct FoodQuantityView: View {
                               meal: mealRaw, category: food.g)
         context.insert(entry)
         try? context.save()
+        NutritionPlanner.publishForWidget(context: context)
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         dismiss()
         onAdded()

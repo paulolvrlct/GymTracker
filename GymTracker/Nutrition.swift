@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import WidgetKit
 
 // MARK: - Objectif nutritionnel (Premium)
 
@@ -93,6 +94,29 @@ enum NutritionPlanner {
 
         return NutritionPlan(bmr: bmr, tdee: tdee, targetKcal: target,
                              proteinG: protein, fatG: fat, carbsG: carbs)
+    }
+}
+
+extension NutritionPlanner {
+    /// Publie l'objectif kcal dans l'App Group (lisible par le widget calories)
+    /// et rafraîchit ses timelines. À appeler au lancement, au changement
+    /// d'objectif/profil et à chaque modification du journal.
+    @MainActor
+    static func publishForWidget(context: ModelContext) {
+        let d = UserDefaults.standard
+        let weight = d.double(forKey: "profileWeightKg")
+        let height = d.integer(forKey: "profileHeightCm")
+        let age = d.integer(forKey: "profileAge")
+        let sex = UserSex(rawValue: d.string(forKey: "profileSex") ?? "") ?? .unspecified
+        let goal = NutritionGoal(rawValue: d.string(forKey: "nutritionGoal") ?? "") ?? .maintain
+        let result = plan(weightKg: weight > 0 ? weight : 70,
+                          heightCm: height > 0 ? height : 175,
+                          age: age > 0 ? age : 25,
+                          sex: sex,
+                          weeklyActivities: weeklyActivities(context: context),
+                          goal: goal)
+        SharedStore.groupDefaults?.set(result.targetKcal, forKey: SharedStore.nutritionTargetKey)
+        WidgetCenter.shared.reloadTimelines(ofKind: "CalorieWidget")
     }
 }
 

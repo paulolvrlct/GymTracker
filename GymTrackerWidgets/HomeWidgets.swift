@@ -191,6 +191,99 @@ struct VolumeChartWidget: Widget {
     }
 }
 
+// MARK: - Widget calories du jour (anneau)
+
+struct CalorieEntry: TimelineEntry {
+    let date: Date
+    let consumed: Double
+    let target: Double
+}
+
+struct CalorieProvider: TimelineProvider {
+    func placeholder(in context: Context) -> CalorieEntry {
+        CalorieEntry(date: .now, consumed: 1450, target: 2400)
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (CalorieEntry) -> Void) {
+        completion(loadEntry())
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<CalorieEntry>) -> Void) {
+        // L'app force un rafraîchissement à chaque ajout au journal ;
+        // le repli de 30 min couvre le passage à minuit et les jours sans app.
+        completion(Timeline(entries: [loadEntry()], policy: .after(.now.addingTimeInterval(1800))))
+    }
+
+    private func loadEntry() -> CalorieEntry {
+        let target = SharedStore.groupDefaults?.double(forKey: SharedStore.nutritionTargetKey) ?? 0
+        guard let container = try? SharedStore.makeContainer() else {
+            return CalorieEntry(date: .now, consumed: 0, target: target > 0 ? target : 2200)
+        }
+        let context = ModelContext(container)
+        let entries = (try? context.fetch(FetchDescriptor<FoodEntry>())) ?? []
+        let consumed = entries
+            .filter { Calendar.current.isDateInToday($0.date) }
+            .reduce(0) { $0 + $1.kcal }
+        return CalorieEntry(date: .now, consumed: consumed, target: target > 0 ? target : 2200)
+    }
+}
+
+struct CalorieWidgetView: View {
+    let entry: CalorieEntry
+    @Environment(\.widgetFamily) private var family
+
+    private var progress: Double { min(entry.consumed / max(entry.target, 1), 1) }
+    private var over: Bool { entry.consumed > entry.target }
+
+    var body: some View {
+        switch family {
+        case .accessoryCircular:
+            Gauge(value: progress) {
+                Image(systemName: "fork.knife")
+            } currentValueLabel: {
+                Text("\(Int(entry.consumed))")
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .gaugeStyle(.accessoryCircular)
+            .containerBackground(.fill.tertiary, for: .widget)
+        default:
+            VStack(spacing: 8) {
+                ZStack {
+                    Circle()
+                        .stroke(Color(.tertiarySystemFill), lineWidth: 10)
+                    Circle()
+                        .trim(from: 0, to: progress)
+                        .stroke(over ? Color.orange : Color.indigo,
+                                style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                        .rotationEffect(.degrees(-90))
+                    VStack(spacing: 0) {
+                        Text("\(Int(entry.consumed))")
+                            .font(.system(size: 22, weight: .bold, design: .rounded).monospacedDigit())
+                        Text("kcal")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Text("objectif \(Int(entry.target)) kcal")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .containerBackground(.fill.tertiary, for: .widget)
+        }
+    }
+}
+
+struct CalorieWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "CalorieWidget", provider: CalorieProvider()) { entry in
+            CalorieWidgetView(entry: entry)
+        }
+        .configurationDisplayName("Calories du jour")
+        .description("Ton anneau calories : consommé vs objectif.")
+        .supportedFamilies([.systemSmall, .accessoryCircular])
+    }
+}
+
 // MARK: - Widget raccourci course
 
 struct RunShortcutEntry: TimelineEntry {
