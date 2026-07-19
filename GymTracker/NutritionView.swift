@@ -455,6 +455,33 @@ struct FoodQuantityView: View {
     /// Boissons affichées en volume (1 mL ≈ 1 g pour les liquides)
     private var unit: String { food.category == .drinks ? "mL" : "g" }
 
+    /// Portions rapides adaptées à l'aliment (un tap au lieu de compter les grammes)
+    private var portions: [(label: String, grams: Double)] {
+        if food.n.localizedCaseInsensitiveContains("whey") {
+            return [("1 dose · 30 g", 30), ("2 doses · 60 g", 60), ("3 doses · 90 g", 90)]
+        }
+        switch food.category {
+        case .drinks:
+            return [("Verre · 250 mL", 250), ("Canette · 330 mL", 330), ("Bouteille · 500 mL", 500)]
+        case .fruitsVeg:
+            return [("1 moyen · 150 g", 150), ("Portion · 200 g", 200)]
+        case .cereals:
+            return [("Portion · 150 g", 150), ("Grosse portion · 250 g", 250)]
+        case .meatFish:
+            return [("Portion · 120 g", 120), ("Grosse portion · 180 g", 180)]
+        case .dairy:
+            return [("Yaourt · 125 g", 125), ("Portion fromage · 30 g", 30)]
+        case .sweets:
+            return [("Portion · 50 g", 50), ("Part · 100 g", 100)]
+        case .fats:
+            return [("Cuillère · 10 g", 10), ("Noix · 15 g", 15)]
+        case .dishes:
+            return [("Petite assiette · 200 g", 200), ("Assiette · 300 g", 300)]
+        case .misc:
+            return [("Cuillère · 10 g", 10), ("Portion · 100 g", 100)]
+        }
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -466,6 +493,30 @@ struct FoodQuantityView: View {
                     }
                 }
                 Section("Quantité") {
+                    // portions en un tap (« 1 verre de coca », « 1 dose de whey »…)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(portions, id: \.grams) { portion in
+                                let isOn = grams == portion.grams
+                                Button {
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                        grams = portion.grams
+                                    }
+                                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                } label: {
+                                    Text(portion.label)
+                                        .font(.footnote.weight(.medium))
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 7)
+                                        .background(isOn ? Color.indigo : Color(.tertiarySystemFill),
+                                                    in: Capsule())
+                                        .foregroundStyle(isOn ? .white : .primary)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                    .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
                     Stepper("\(Int(grams)) \(unit)", value: $grams, in: 5...1500, step: 5)
                     Slider(value: $grams, in: 5...500, step: 5)
                     LabeledContent("Apport", value: "\(kcal) kcal")
