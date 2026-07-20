@@ -196,35 +196,52 @@ enum FoodCategory: Int, CaseIterable, Identifiable {
 }
 
 enum FoodCatalog {
-    static let all: [CiqualFood] = {
-        func load(_ resource: String) -> [CiqualFood] {
-            guard let url = Bundle.main.url(forResource: resource, withExtension: "json"),
-                  let data = try? Data(contentsOf: url),
-                  let items = try? JSONDecoder().decode([CiqualFood].self, from: data)
-            else { return [] }
-            return items
-        }
-        let ciqual = load("foods_ciqual")
-        assert(!ciqual.isEmpty, "foods_ciqual.json introuvable dans le bundle")
-        // foods_custom.json : compléments hors CIQUAL (whey, sodas de marque…),
-        // valeurs issues des étiquettes produits
-        return (ciqual + load("foods_custom"))
+    private static func load(_ resource: String) -> [CiqualFood] {
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let items = try? JSONDecoder().decode([CiqualFood].self, from: data)
+        else { return [] }
+        return items
+    }
+
+    /// Aliments du quotidien, nommés comme on les cherche vraiment
+    /// (« Skyr nature 0% », « Lait de riz », « Blanc de poulet cuit »…).
+    /// C'est cette liste que l'on montre en priorité.
+    static let common: [CiqualFood] = {
+        (load("foods_common") + load("foods_custom"))
             .sorted { $0.n.localizedCaseInsensitiveCompare($1.n) == .orderedAscending }
     }()
 
-    /// Recherche insensible à la casse et aux accents, filtrable par catégorie
-    static func search(_ query: String, category: FoodCategory? = nil) -> [CiqualFood] {
+    /// Table CIQUAL : 2 300 entrées scientifiques, précises mais bruitées.
+    /// Utilisée en repli quand l'aliment n'est pas dans la liste courante.
+    static let scientific: [CiqualFood] = {
+        let ciqual = load("foods_ciqual")
+        assert(!ciqual.isEmpty, "foods_ciqual.json introuvable dans le bundle")
+        return ciqual
+    }()
+
+    static let all: [CiqualFood] = common + scientific
+
+    /// Recherche : aliments courants d'abord, table complète ensuite.
+    /// `deepCatalog = false` limite aux aliments du quotidien.
+    static func search(_ query: String, category: FoodCategory? = nil,
+                       deepCatalog: Bool = true) -> [CiqualFood] {
         let trimmed = query.trimmingCharacters(in: .whitespaces)
-        var results = all
-        if let category {
-            results = results.filter { $0.g == category.rawValue }
+
+        func filter(_ list: [CiqualFood]) -> [CiqualFood] {
+            var out = list
+            if let category { out = out.filter { $0.g == category.rawValue } }
+            if !trimmed.isEmpty { out = out.filter { $0.n.localizedStandardContains(trimmed) } }
+            return out
         }
-        if !trimmed.isEmpty {
-            results = results.filter { $0.n.localizedStandardContains(trimmed) }
-        } else if category == nil {
-            results = Array(results.prefix(80))
-        }
-        return results
+
+        let everyday = filter(common)
+        // sans recherche ni filtre, on ne déverse pas les 2 300 entrées CIQUAL
+        guard deepCatalog, !(trimmed.isEmpty && category == nil) else { return everyday }
+
+        let names = Set(everyday.map { $0.n.lowercased() })
+        let rest = filter(scientific).filter { !names.contains($0.n.lowercased()) }
+        return everyday + rest
     }
 }
 

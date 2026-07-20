@@ -360,13 +360,59 @@ struct AddFoodView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
+    @Query(sort: \FoodEntry.date, order: .reverse) private var history: [FoodEntry]
+
+    enum Source: String, CaseIterable, Identifiable {
+        case recent = "Récents"
+        case common = "Courants"
+        case all = "Tout"
+        var id: String { rawValue }
+    }
+
+    @State private var source: Source = .recent
     @State private var query = ""
     @State private var selectedCategory: FoodCategory?
     @State private var selected: CiqualFood?
 
+    /// Derniers aliments consommés, sans doublon, du plus récent au plus ancien
+    private var recents: [CiqualFood] {
+        var seen = Set<String>()
+        var out: [CiqualFood] = []
+        for entry in history where !seen.contains(entry.name.lowercased()) {
+            seen.insert(entry.name.lowercased())
+            out.append(CiqualFood(n: entry.name, g: entry.category,
+                                  k: entry.kcalPer100, p: entry.proteinPer100,
+                                  c: entry.carbsPer100, f: entry.fatPer100))
+            if out.count >= 40 { break }
+        }
+        return out
+    }
+
+    private var results: [CiqualFood] {
+        switch source {
+        case .recent:
+            let trimmed = query.trimmingCharacters(in: .whitespaces)
+            var out = recents
+            if let selectedCategory { out = out.filter { $0.g == selectedCategory.rawValue } }
+            if !trimmed.isEmpty { out = out.filter { $0.n.localizedStandardContains(trimmed) } }
+            return out
+        case .common:
+            return FoodCatalog.search(query, category: selectedCategory, deepCatalog: false)
+        case .all:
+            return FoodCatalog.search(query, category: selectedCategory)
+        }
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                Picker("Source", selection: $source) {
+                    ForEach(Source.allCases) { Text($0.rawValue).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+                .padding(.top, 8)
+
                 // puces de catégories avec logos
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -395,30 +441,41 @@ struct AddFoodView: View {
                     .padding(.vertical, 8)
                 }
 
-                List(FoodCatalog.search(query, category: selectedCategory)) { food in
-                    Button {
-                        selected = food
-                    } label: {
-                        HStack(spacing: 10) {
-                            Text(food.category.emoji)
-                                .font(.title3)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(food.name)
-                                    .font(.subheadline)
-                                    .foregroundStyle(.primary)
-                                    .lineLimit(2)
-                                Text("P \(Int(food.p)) · G \(Int(food.c)) · L \(Int(food.f)) pour 100 g")
-                                    .font(.caption2)
+                if results.isEmpty {
+                    ContentUnavailableView(
+                        source == .recent ? "Aucun aliment récent" : "Aucun résultat",
+                        systemImage: source == .recent ? "clock.arrow.circlepath" : "magnifyingglass",
+                        description: Text(source == .recent
+                            ? "Tes aliments déjà consommés apparaîtront ici pour un ajout en un tap."
+                            : "Essaie « Tout » pour chercher dans la table complète.")
+                    )
+                    .frame(maxHeight: .infinity)
+                } else {
+                    List(results) { food in
+                        Button {
+                            selected = food
+                        } label: {
+                            HStack(spacing: 10) {
+                                Text(food.category.emoji)
+                                    .font(.title3)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(food.name)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.primary)
+                                        .lineLimit(2)
+                                    Text("P \(Int(food.p)) · G \(Int(food.c)) · L \(Int(food.f)) pour 100 g")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Text("\(Int(food.k)) kcal")
+                                    .font(.caption.monospacedDigit())
                                     .foregroundStyle(.secondary)
                             }
-                            Spacer()
-                            Text("\(Int(food.k)) kcal")
-                                .font(.caption.monospacedDigit())
-                                .foregroundStyle(.secondary)
                         }
                     }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
             }
             .searchable(text: $query, prompt: "Rechercher un aliment")
             .navigationTitle("Ajouter un aliment")
@@ -427,6 +484,10 @@ struct AddFoodView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Fermer") { dismiss() }
                 }
+            }
+            .onAppear {
+                // pas d'historique : on démarre sur les aliments courants
+                if recents.isEmpty { source = .common }
             }
             .sheet(item: $selected) { food in
                 FoodQuantityView(food: food, day: day) {
