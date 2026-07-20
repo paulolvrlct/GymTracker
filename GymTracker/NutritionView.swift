@@ -518,7 +518,27 @@ struct FoodQuantityView: View {
 
     /// Portions rapides adaptées à l'aliment (un tap au lieu de compter les grammes)
     private var portions: [(label: String, grams: Double)] {
-        if food.n.localizedCaseInsensitiveContains("whey") {
+        let name = food.n.lowercased()
+        // compléments : la dose type prime sur la portion de la catégorie
+        if name.contains("créatine") && !name.contains("shaker") {
+            return [("1 dose · 5 g", 5), ("2 doses · 10 g", 10)]
+        }
+        if name.contains("bcaa") || name.contains("glutamine") {
+            return [("1 dose · 10 g", 10), ("2 doses · 20 g", 20)]
+        }
+        if name.contains("pre-workout") {
+            return [("1 dose · 15 g", 15)]
+        }
+        if name.contains("maltodextrine") {
+            return [("1 dose · 30 g", 30), ("2 doses · 60 g", 60)]
+        }
+        if name.contains("gel énergétique") {
+            return [("1 gel · 30 g", 30), ("2 gels · 60 g", 60)]
+        }
+        if name.contains("barre") {
+            return [("1 barre · 40 g", 40), ("1 grosse barre · 60 g", 60)]
+        }
+        if name.contains("whey") || name.contains("protéine végétale") {
             return [("1 dose · 30 g", 30), ("2 doses · 60 g", 60), ("3 doses · 90 g", 90)]
         }
         switch food.category {
