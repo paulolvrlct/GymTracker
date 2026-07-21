@@ -18,6 +18,7 @@ struct HistoryView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     monthHeader
+                    monthSummary
                     calendarGrid
                     activityList
                 }
@@ -26,6 +27,78 @@ struct HistoryView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Calendrier")
         }
+    }
+
+    // MARK: Résumé du mois (série, jours actifs, séances, km)
+
+    private func inMonth(_ d: Date) -> Bool {
+        calendar.isDate(d, equalTo: displayedMonth, toGranularity: .month)
+    }
+
+    /// Nombre de semaines consécutives (jusqu'à aujourd'hui) avec au moins une séance.
+    /// La semaine en cours, si elle n'a pas encore de séance, n'interrompt pas la série.
+    private var weekStreak: Int {
+        var count = 0
+        guard var cursor = calendar.dateInterval(of: .weekOfYear, for: .now)?.start else { return 0 }
+        var isCurrentWeek = true
+        while true {
+            guard let weekEnd = calendar.date(byAdding: .day, value: 7, to: cursor) else { break }
+            let hasSession = sessions.contains { $0.date >= cursor && $0.date < weekEnd }
+            if hasSession {
+                count += 1
+            } else if !isCurrentWeek {
+                break
+            }
+            isCurrentWeek = false
+            guard let prev = calendar.date(byAdding: .day, value: -7, to: cursor) else { break }
+            cursor = prev
+        }
+        return count
+    }
+
+    private var monthSessions: Int { sessions.filter { inMonth($0.date) }.count }
+
+    private var monthKm: Double {
+        runs.filter { inMonth($0.date) }.reduce(0) { $0 + $1.distanceKm }
+    }
+
+    private var monthActiveDays: Int {
+        let days = (sessions.map(\.date) + runs.map(\.date))
+            .filter { inMonth($0) }
+            .map { calendar.startOfDay(for: $0) }
+        return Set(days).count
+    }
+
+    private var monthSummary: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+            summaryTile(icon: "flame.fill", tint: .orange, value: "\(weekStreak)",
+                        label: weekStreak > 1 ? "semaines de suite" : "semaine de suite")
+            summaryTile(icon: "calendar.badge.checkmark", tint: Color.brand, value: "\(monthActiveDays)",
+                        label: "jours actifs")
+            summaryTile(icon: "dumbbell.fill", tint: Color.brand, value: "\(monthSessions)",
+                        label: monthSessions > 1 ? "séances" : "séance")
+            summaryTile(icon: "figure.run", tint: .green,
+                        value: monthKm >= 10 ? String(format: "%.0f", monthKm) : monthKm.clean,
+                        label: "km courus")
+        }
+    }
+
+    private func summaryTile(icon: String, tint: Color, value: String, label: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundStyle(tint)
+                .frame(width: 28)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(value).font(.title3.weight(.semibold).monospacedDigit())
+                Text(label).font(.caption2).foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 12)
+        .background(.background, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 6, y: 2)
     }
 
     // MARK: En-tête mois
@@ -63,19 +136,39 @@ struct HistoryView: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 5) {
                 ForEach(Array(days.enumerated()), id: \.offset) { _, day in
                     if let day {
                         dayCell(day)
                     } else {
-                        Color.clear.frame(height: 38)
+                        Color.clear.frame(height: 40)
                     }
                 }
             }
+            legend
         }
         .padding(14)
         .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
+    }
+
+    private var legend: some View {
+        HStack(spacing: 16) {
+            legendItem(Color.brand, "Muscu")
+            legendItem(.green, "Course")
+            legendItem(.pink, "Compléments")
+        }
+        .font(.caption2)
+        .foregroundStyle(.secondary)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 4)
+    }
+
+    private func legendItem(_ color: Color, _ label: String) -> some View {
+        HStack(spacing: 5) {
+            RoundedRectangle(cornerRadius: 3).fill(color).frame(width: 11, height: 11)
+            Text(label)
+        }
     }
 
     private func dayCell(_ day: Date) -> some View {
@@ -86,37 +179,48 @@ struct HistoryView: View {
         let isToday = calendar.isDateInToday(day)
         let isSelected = selectedDay.map { calendar.isDate($0, inSameDayAs: day) } ?? false
 
+        // couleur pleine : muscu > course > compléments seuls
+        let solid = hasSession || hasRun
+        let fill: Color = hasSession ? Color.brand
+            : hasRun ? .green
+            : hasSupplements ? Color.pink.opacity(0.16)
+            : .clear
+        let fg: Color = solid ? .white : (hasSupplements ? .pink : .primary)
+
+        // anneau : sélection prioritaire, sinon jour du jour
+        let ringColor: Color
+        if isSelected { ringColor = solid ? .white : Color.brand }
+        else if isToday { ringColor = solid ? .white.opacity(0.85) : Color.brand }
+        else { ringColor = .clear }
+        let ringWidth: CGFloat = (isSelected || isToday) ? 2 : 0
+
         return Button {
             selectedDay = isSelected ? nil : day
         } label: {
-            VStack(spacing: 3) {
+            VStack(spacing: 2) {
                 Text("\(calendar.component(.day, from: day))")
                     .font(.callout.monospacedDigit())
-                    .fontWeight(isToday ? .bold : .regular)
-                HStack(spacing: 3) {
-                    if hasSession {
-                        Circle().fill(Color.brand).frame(width: 5, height: 5)
+                    .fontWeight(solid || isToday ? .semibold : .regular)
+                HStack(spacing: 2) {
+                    // séance + course le même jour → deux points ; compléments en plus → point rose
+                    if hasSession && hasRun {
+                        Circle().fill(.white).frame(width: 3.5, height: 3.5)
+                        Circle().fill(.green).frame(width: 3.5, height: 3.5)
                     }
-                    if hasRun {
-                        Circle().fill(Color.green).frame(width: 5, height: 5)
-                    }
-                    if hasSupplements {
-                        Circle().fill(Color.pink).frame(width: 5, height: 5)
-                    }
-                    if !hasSession && !hasRun && !hasSupplements {
-                        Circle().fill(.clear).frame(width: 5, height: 5)
+                    if hasSupplements && solid {
+                        Circle().fill(.pink).frame(width: 3.5, height: 3.5)
                     }
                 }
+                .frame(height: 4)
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 38)
-            .background(
-                isSelected ? Color.brand.opacity(0.18)
-                : isToday ? Color(.tertiarySystemFill)
-                : .clear,
-                in: RoundedRectangle(cornerRadius: 10)
+            .frame(height: 40)
+            .foregroundStyle(fg)
+            .background(fill, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 9, style: .continuous)
+                    .stroke(ringColor, lineWidth: ringWidth)
             )
-            .foregroundStyle(isSelected ? Color.brand : .primary)
         }
         .buttonStyle(.plain)
     }
