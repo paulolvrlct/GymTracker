@@ -262,4 +262,14 @@ enum MealKind: String, CaseIterable, Identifiable {
         case .snack: "carrot.fill"
         }
     }
+
+    /// Repas suggéré selon l'heure courante, pour présélectionner l'ajout d'aliment.
+    static var current: MealKind {
+        switch Calendar.current.component(.hour, from: .now) {
+        case 5...10:  return .breakfast   // matin
+        case 11...14: return .lunch       // midi
+        case 15...17: return .snack       // goûter / collation
+        default:      return .dinner      // soir et nuit
+        }
+    }
 }

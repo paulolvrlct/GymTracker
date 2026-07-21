@@ -510,7 +510,8 @@ struct FoodQuantityView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var grams: Double = 100
-    @State private var mealRaw = MealKind.lunch.rawValue
+    // présélection du repas selon l'heure (petit-déj / déjeuner / goûter / dîner)
+    @State private var mealRaw = MealKind.current.rawValue
 
     private var kcal: Int { Int(food.k * grams / 100) }
     /// Boissons affichées en volume (1 mL ≈ 1 g pour les liquides)
