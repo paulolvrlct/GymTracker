@@ -20,11 +20,22 @@ struct ActiveWorkoutView: View {
 
     let template: WorkoutTemplate
 
+    @Query(sort: \SetRecord.date, order: .reverse) private var history: [SetRecord]
+
     @State private var loggedSets: [DraftSet] = []
     @State private var startDate = Date.now
     @State private var showCancelAlert = false
     @State private var showCelebration = false
     @StateObject private var restTimer = RestTimerModel()
+
+    /// Dernière série enregistrée pour cet exercice (dernière séance, dernière
+    /// série de cette séance), pour pré-régler reps et poids.
+    private func lastValues(for exercise: ExerciseTemplate) -> (reps: Int, weight: Double)? {
+        history
+            .filter { $0.exerciseName == exercise.name }
+            .max { ($0.date, $0.setIndex) < ($1.date, $1.setIndex) }
+            .map { ($0.reps, $0.weight) }
+    }
 
     var body: some View {
         NavigationStack {
@@ -34,6 +45,7 @@ struct ActiveWorkoutView: View {
                         ExerciseLogCard(
                             exercise: exercise,
                             sets: loggedSets.filter { $0.exerciseName == exercise.name },
+                            last: lastValues(for: exercise),
                             onLog: { reps, weight in
                                 logSet(exercise: exercise, reps: reps, weight: weight)
                             }
@@ -134,12 +146,24 @@ struct ActiveWorkoutView: View {
 private struct ExerciseLogCard: View {
     let exercise: ExerciseTemplate
     let sets: [DraftSet]
+    let last: (reps: Int, weight: Double)?
     var onLog: (Int, Double) -> Void
 
-    @State private var reps: Int = 8
-    @State private var weight: Double = 20
+    @State private var reps: Int
+    @State private var weight: Double
     @State private var showNotes = false
     @State private var showAnimation = false
+
+    init(exercise: ExerciseTemplate, sets: [DraftSet],
+         last: (reps: Int, weight: Double)?, onLog: @escaping (Int, Double) -> Void) {
+        self.exercise = exercise
+        self.sets = sets
+        self.last = last
+        self.onLog = onLog
+        // pré-remplit avec la dernière performance, sinon des valeurs par défaut
+        _reps = State(initialValue: last?.reps ?? 8)
+        _weight = State(initialValue: last?.weight ?? 20)
+    }
 
     private var catalogEx: CatalogExercise? { ExerciseCatalog.find(id: exercise.catalogID) }
     private var isDone: Bool { sets.count >= exercise.targetSets }
@@ -153,6 +177,14 @@ private struct ExerciseLogCard: View {
                     Text("Objectif : \(exercise.targetSets) × \(exercise.repRange) · repos \(exercise.restSeconds) s")
                         .font(.caption)
                         .foregroundStyle(.secondary)
+                    if let last {
+                        Label(last.weight > 0
+                              ? "Dernière : \(last.reps) × \(last.weight.clean) kg"
+                              : "Dernière : \(last.reps) reps",
+                              systemImage: "clock.arrow.circlepath")
+                            .font(.caption2)
+                            .foregroundStyle(.indigo)
+                    }
                 }
                 Spacer()
                 if isDone {
