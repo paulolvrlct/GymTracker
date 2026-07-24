@@ -158,6 +158,25 @@ struct ProfileView: View {
     @State private var showPaywall = false
     @State private var importingWeight = false
     @State private var healthImportMessage: String?
+    @State private var healthConnected = false
+    @State private var connectingHealth = false
+
+    /// Rafraîchit l'état affiché de la connexion Apple Santé
+    private func refreshHealthStatus() {
+        Task { @MainActor in
+            healthConnected = HealthKitManager.shared.isSharingAuthorized
+        }
+    }
+
+    /// Demande d'autorisation déclenchée par l'utilisateur depuis cet écran
+    private func connectHealth() {
+        connectingHealth = true
+        Task { @MainActor in
+            await HealthKitManager.shared.connect()
+            connectingHealth = false
+            healthConnected = HealthKitManager.shared.isSharingAuthorized
+        }
+    }
 
     private func importWeightFromHealth() {
         importingWeight = true
@@ -224,21 +243,68 @@ struct ProfileView: View {
                     if let bmi {
                         LabeledContent("IMC", value: String(format: "%.1f", bmi))
                     }
+                }
+
+                // Intégration Apple Santé, identifiée explicitement dans l'interface
+                // (exigé par la règle 2.5.1 de l'App Store).
+                Section {
+                    HStack(spacing: 14) {
+                        Image(systemName: "heart.fill")
+                            .font(.title2)
+                            .foregroundStyle(.white)
+                            .frame(width: 38, height: 38)
+                            .background(
+                                LinearGradient(colors: [.pink, .red],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing),
+                                in: RoundedRectangle(cornerRadius: 9, style: .continuous)
+                            )
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Apple Santé")
+                                .font(.subheadline.weight(.semibold))
+                            Text(healthConnected ? "Connecté" : "Non connecté")
+                                .font(.caption)
+                                .foregroundStyle(healthConnected ? .green : .secondary)
+                        }
+                    }
+                    .padding(.vertical, 4)
+
+                    Text("LiftRun enregistre tes séances de musculation, tes courses et ton journal alimentaire dans l'app Santé d'Apple. Avec ton autorisation, il peut aussi y lire ton poids pour pré-remplir ton profil.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+
+                    Button {
+                        connectHealth()
+                    } label: {
+                        HStack {
+                            Label(healthConnected ? "Gérer l'accès à Apple Santé"
+                                                  : "Connecter Apple Santé",
+                                  systemImage: "heart.text.square")
+                            Spacer()
+                            if connectingHealth { ProgressView() }
+                        }
+                    }
+                    .disabled(connectingHealth)
+
                     Button {
                         importWeightFromHealth()
                     } label: {
                         HStack {
-                            Label("Importer mon poids depuis Santé", systemImage: "heart.text.square")
+                            Label("Importer mon poids depuis Santé", systemImage: "scalemass")
                             Spacer()
                             if importingWeight { ProgressView() }
                         }
                     }
                     .disabled(importingWeight)
+
                     if let healthImportMessage {
                         Text(healthImportMessage)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
+                } header: {
+                    Text("Apple Santé")
+                } footer: {
+                    Text("Tu peux modifier ou révoquer ces autorisations à tout moment dans Réglages › Confidentialité et sécurité › Santé › LiftRun.")
                 }
 
                 Section {
@@ -342,6 +408,7 @@ struct ProfileView: View {
                     NavigationLink("Licences et crédits") { CreditsView() }
                 }
             }
+            .onAppear { refreshHealthStatus() }
             .sheet(isPresented: $showPaywall) { PaywallView() }
             .navigationTitle("Mon profil")
             .navigationBarTitleDisplayMode(.inline)

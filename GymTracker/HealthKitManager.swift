@@ -31,6 +31,25 @@ final class HealthKitManager {
         try? await store.requestAuthorization(toShare: writeTypes, read: [])
     }
 
+    // MARK: Connexion depuis l'interface
+
+    /// Apple Santé est-il disponible sur cet appareil ?
+    var isHealthAvailable: Bool { isAvailable }
+
+    /// Vrai si l'utilisateur a autorisé LiftRun à écrire ses entraînements.
+    var isSharingAuthorized: Bool {
+        guard isAvailable else { return false }
+        return store.authorizationStatus(for: HKObjectType.workoutType()) == .sharingAuthorized
+    }
+
+    /// Demande d'autorisation déclenchée explicitement depuis l'écran Profil,
+    /// pour que l'intégration Apple Santé soit visible et maîtrisée par l'utilisateur.
+    func connect() async {
+        guard isAvailable else { return }
+        try? await store.requestAuthorization(toShare: writeTypes,
+                                              read: [HKQuantityType(.bodyMass)])
+    }
+
     // MARK: Entraînements
 
     /// Séance de musculation terminée
