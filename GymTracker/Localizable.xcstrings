@@ -7,6 +7,22 @@
     "%@ kg": {
       "shouldTranslate": false
     },
+    "%@ km/h": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ km/h"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ km/h"
+          }
+        }
+      }
+    },
     "%@ – %@": {
       "shouldTranslate": false
     },
@@ -111,6 +127,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld ejercicios"
+          }
+        }
+      }
+    },
+    "%lld fractions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld intervals"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld series"
           }
         }
       }
@@ -676,6 +708,22 @@
         }
       }
     },
+    "Allure actuelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current pace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo actual"
+          }
+        }
+      }
+    },
     "Annuler": {
       "localizations": {
         "en": {
@@ -752,6 +800,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Llegada"
+          }
+        }
+      }
+    },
+    "Arrêter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar"
           }
         }
       }
@@ -1930,6 +1994,22 @@
         }
       }
     },
+    "Deux bips : départ de la fraction.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two beeps: interval starts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos pitidos: empieza la serie."
+          }
+        }
+      }
+    },
     "Disques par côté": {
       "localizations": {
         "en": {
@@ -1974,6 +2054,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Distancia: %@ km"
+          }
+        }
+      }
+    },
+    "Distance : %@ m": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance: %@ m"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distancia: %@ m"
           }
         }
       }
@@ -2266,6 +2362,22 @@
         }
       }
     },
+    "Effort": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effort"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esfuerzo"
+          }
+        }
+      }
+    },
     "Enregistrement impossible": {
       "localizations": {
         "en": {
@@ -2506,6 +2618,22 @@
         }
       }
     },
+    "Fraction %lld / %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interval %lld / %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie %lld / %lld"
+          }
+        }
+      }
+    },
     "Free Exercise DB, domaine public (Unlicense).": {
       "localizations": {
         "en": {
@@ -2666,6 +2794,22 @@
         }
       }
     },
+    "J'ai un code": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have a code"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tengo un código"
+          }
+        }
+      }
+    },
     "Jour précédent": {
       "localizations": {
         "en": {
@@ -2758,6 +2902,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "La cámara no está disponible aquí. Puedes introducir el código de barras a mano."
+          }
+        }
+      }
+    },
+    "Lancer la séance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start the session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empezar la sesión"
           }
         }
       }
@@ -4412,6 +4572,22 @@
         }
       }
     },
+    "Récupération": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recovery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuperación"
+          }
+        }
+      }
+    },
     "Réessayer": {
       "localizations": {
         "en": {
@@ -4792,6 +4968,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "¡Entreno de récord! 🏆"
+          }
+        }
+      }
+    },
+    "Séance terminée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session complete"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión terminada"
           }
         }
       }
@@ -5196,6 +5388,22 @@
         }
       }
     },
+    "Trois bips : séance terminée.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three beeps: session over."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tres pitidos: sesión terminada."
+          }
+        }
+      }
+    },
     "Tu as battu %lld record%@ 🔥": {
       "localizations": {
         "en": {
@@ -5246,6 +5454,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turquesa"
+          }
+        }
+      }
+    },
+    "Un bip : récupération.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One beep: recovery."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un pitido: recuperación."
           }
         }
       }
@@ -8353,12 +8577,6 @@
     "run.goal.half": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semi-marathon"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8370,18 +8588,18 @@
             "state": "translated",
             "value": "Media maratón"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semi-marathon"
+          }
         }
       }
     },
     "run.goal.marathon": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marathon"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8393,18 +8611,18 @@
             "state": "translated",
             "value": "Maratón"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marathon"
+          }
         }
       }
     },
     "run.goal.tenK": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "10 km"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8412,6 +8630,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 km"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "10 km"
@@ -8422,12 +8646,6 @@
     "run.phase.base": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Base"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8439,18 +8657,18 @@
             "state": "translated",
             "value": "Base"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Base"
+          }
         }
       }
     },
     "run.phase.base.advice": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Construis le volume et garde l'endurance vraiment facile : c'est ce qui te permettra d'encaisser la suite."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8462,18 +8680,18 @@
             "state": "translated",
             "value": "Construye volumen y mantén los rodajes realmente suaves: es lo que te permitirá asimilar las semanas duras."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Construis le volume et garde l'endurance vraiment facile : c'est ce qui te permettra d'encaisser la suite."
+          }
         }
       }
     },
     "run.phase.development": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Développement"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8485,18 +8703,18 @@
             "state": "translated",
             "value": "Desarrollo"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développement"
+          }
         }
       }
     },
     "run.phase.development.advice": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La partie la plus exigeante : on développe la VMA. Récupère vraiment entre les fractions, quitte à marcher."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8508,18 +8726,18 @@
             "state": "translated",
             "value": "El bloque más exigente: aquí subes tu techo. Recupera de verdad entre series, andando si hace falta."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La partie la plus exigeante : on développe la VMA. Récupère vraiment entre les fractions, quitte à marcher."
+          }
         }
       }
     },
     "run.phase.specific": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spécifique"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8531,18 +8749,18 @@
             "state": "translated",
             "value": "Específico"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spécifique"
+          }
         }
       }
     },
     "run.phase.specific.advice": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On installe l'allure du jour J. Apprends à la reconnaître sans regarder ta montre."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8554,18 +8772,18 @@
             "state": "translated",
             "value": "Ahora asientas el ritmo de carrera. Aprende a reconocerlo sin mirar el reloj."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On installe l'allure du jour J. Apprends à la reconnaître sans regarder ta montre."
+          }
         }
       }
     },
     "run.phase.taper": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Affûtage"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8577,18 +8795,18 @@
             "state": "translated",
             "value": "Puesta a punto"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affûtage"
+          }
         }
       }
     },
     "run.phase.taper.advice": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On réduit le volume en gardant un peu de vitesse. Ne cherche pas à rattraper le travail non fait : c'est trop tard, et ça coûte cher le jour de la course."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8600,18 +8818,18 @@
             "state": "translated",
             "value": "Baja el volumen y se mantiene algo de velocidad. No intentes recuperar el trabajo perdido: ya es tarde y sale caro el día de la carrera."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On réduit le volume en gardant un peu de vitesse. Ne cherche pas à rattraper le travail non fait : c'est trop tard, et ça coûte cher le jour de la course."
+          }
         }
       }
     },
     "run.session.easy": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Endurance"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8623,18 +8841,18 @@
             "state": "translated",
             "value": "Rodaje"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endurance"
+          }
         }
       }
     },
     "run.session.longRun": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sortie longue"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8646,18 +8864,18 @@
             "state": "translated",
             "value": "Tirada larga"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie longue"
+          }
         }
       }
     },
     "run.session.quality": {
       "comment": "Plans d'entrainement",
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Séance qualité"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -8668,6 +8886,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sesión de calidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séance qualité"
           }
         }
       }
@@ -9056,6 +9280,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calienta de 15 a 20 minutos antes, si no el resultado te subestimará."
+          }
+        }
+      }
+    },
+    "Échauffe-toi avant de lancer : le chrono démarre tout de suite.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm up before starting: the clock runs from the first tap."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calienta antes de empezar: el cronómetro arranca de inmediato."
           }
         }
       }

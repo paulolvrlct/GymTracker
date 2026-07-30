@@ -100,6 +100,7 @@ struct PaywallView: View {
     @ObservedObject private var store = PremiumStore.shared
     @Environment(\.dismiss) private var dismiss
     @State private var isPurchasing = false
+    @State private var showRedeem = false
 
     var body: some View {
         NavigationStack {
@@ -146,8 +147,11 @@ struct PaywallView: View {
                     .tint(Color.brand)
                     .disabled(isPurchasing)
 
-                    Button("Restaurer mes achats") {
-                        Task { await store.restore() }
+                    HStack(spacing: 18) {
+                        Button("Restaurer mes achats") {
+                            Task { await store.restore() }
+                        }
+                        Button("J'ai un code") { showRedeem = true }
                     }
                     .font(.footnote)
                 } else {
@@ -158,6 +162,17 @@ struct PaywallView: View {
             }
             .padding()
             .background(Color(.systemGroupedBackground))
+            // Feuille de rédemption d'Apple : évite de sortir vers l'App Store, et
+            // le déverrouillage est visible tout de suite puisqu'on relit les
+            // droits en sortant.
+            .offerCodeRedemption(isPresented: $showRedeem) { result in
+                if case .success = result {
+                    Task {
+                        await store.refreshEntitlements()
+                        if store.isPremium { dismiss() }
+                    }
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Fermer") { dismiss() }

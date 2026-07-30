@@ -34,7 +34,7 @@ struct TrainingPlansView: View {
                 ForEach(TrainingPlans.weeks(for: goal)) { week in
                     Section {
                         ForEach(week.sessions) { session in
-                            sessionRow(session, vma: vma)
+                            sessionCell(session, vma: vma)
                         }
                     } header: {
                         Text("Semaine \(week.number) · \(week.phase.label)")
@@ -69,6 +69,21 @@ struct TrainingPlansView: View {
                                     in goal: TrainingPlans.Goal) -> Bool {
         week.number == 1
             || TrainingPlans.phase(week: week.number - 1, of: goal.weekCount) != week.phase
+    }
+
+    /// Les séances de fractionné mènent au lecteur guidé ; les séances continues
+    /// restent une simple ligne d'information.
+    @ViewBuilder
+    private func sessionCell(_ session: TrainingPlans.Session, vma: Double) -> some View {
+        if session.intervals != nil {
+            NavigationLink {
+                IntervalSessionView(session: session, vma: vma, tracker: tracker)
+            } label: {
+                sessionRow(session, vma: vma)
+            }
+        } else {
+            sessionRow(session, vma: vma)
+        }
     }
 
     private func sessionRow(_ session: TrainingPlans.Session, vma: Double) -> some View {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F7C891493007CB2400679A6B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F7C891483007CB2400679A6B /* AppIcon.icon */; };
+		F7C891493007CB2400679A6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7C891483007CB2400679A6B /* Assets.xcassets */; };
 		GT00000000000000000000D5 /* GymTrackerWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = GT00000000000000000000C2 /* GymTrackerWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F7C891483007CB2400679A6B /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F7C891483007CB2400679A6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		GT00000000000000000000A5 /* GymTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		GT00000000000000000000C2 /* GymTrackerWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GymTrackerWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,7 +95,7 @@
 			children = (
 				GT00000000000000000000A1 /* GymTracker */,
 				GT00000000000000000000C1 /* GymTrackerWidgets */,
-				F7C891483007CB2400679A6B /* AppIcon.icon */,
+				F7C891483007CB2400679A6B /* Assets.xcassets */,
 				GT00000000000000000000A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7C891493007CB2400679A6B /* AppIcon.icon in Resources */,
+				F7C891493007CB2400679A6B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

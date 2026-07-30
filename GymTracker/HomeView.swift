@@ -61,7 +61,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 18) {
+                VStack(spacing: 14) {
                     header
                     NavigationLink {
                         ProgressionDetailView(progression: progression)
@@ -319,8 +319,11 @@ private struct GlassStatCard: View {
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
         }
-        .frame(maxWidth: .infinity, minHeight: 110, alignment: .leading)
-        .padding(16)
+        // 92 au lieu de 110 : gagne une trentaine de points sur la grille 2×2,
+        // ce qui fait remonter la carte Compléments au-dessus de la ligne de
+        // flottaison sans rendre les chiffres moins lisibles.
+        .frame(maxWidth: .infinity, minHeight: 92, alignment: .leading)
+        .padding(13)
         .glassCard()
     }
 }
@@ -363,50 +366,50 @@ extension View {
 
 // MARK: - Carte de niveau (gamification)
 
-/// Niveau, XP et progression vers le palier suivant.
+/// Niveau, XP et progression, en **une seule ligne**.
 ///
-/// La barre s'anime à l'apparition plutôt que d'être dessinée pleine : on veut
-/// que l'utilisateur *voie* sa progression, pas seulement un état.
+/// Volontairement compacte : la version précédente occupait près de 140 points
+/// de hauteur et repoussait la carte Compléments sous la ligne de flottaison.
+/// Le détail complet est à un tap, dans `ProgressionDetailView` — ici on ne garde
+/// que le nécessaire pour donner envie d'y aller.
 private struct LevelCard: View {
     let progression: Progression
     @State private var shownProgress: Double = 0
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("Niveau \(progression.level)")
-                    .font(.title3.weight(.bold))
-                Spacer()
-                Text("\(progression.totalXP) XP")
-                    .font(.subheadline.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(Color.brand)
-                    .contentTransition(.numericText())
-                // affordance : la carte mène au détail du barème
-                Image(systemName: "chevron.right")
-                    .font(.caption2.weight(.semibold))
-                    .foregroundStyle(.tertiary)
-            }
-
-            Text(progression.title)
-                .font(.caption.weight(.medium))
-                .foregroundStyle(.secondary)
-
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Color.brand.opacity(0.15))
-                    Capsule()
-                        .fill(LinearGradient(colors: [Color.brand, .purple],
-                                             startPoint: .leading, endPoint: .trailing))
-                        .frame(width: max(0, geo.size.width * shownProgress))
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(spacing: 6) {
+                    Text("Niveau \(progression.level)")
+                        .font(.subheadline.weight(.bold))
+                    Text(progression.title)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(Color.brand.opacity(0.15))
+                        Capsule()
+                            .fill(LinearGradient(colors: [Color.brand, .purple],
+                                                 startPoint: .leading, endPoint: .trailing))
+                            .frame(width: max(0, geo.size.width * shownProgress))
+                    }
+                }
+                .frame(height: 6)
             }
-            .frame(height: 10)
 
-            Text("\(progression.xpAtCurrentLevel) / \(progression.xpForThisLevel) XP")
-                .font(.caption2.monospacedDigit())
+            Text("\(progression.totalXP) XP")
+                .font(.caption.weight(.semibold).monospacedDigit())
+                .foregroundStyle(Color.brand)
+                .contentTransition(.numericText())
+
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
                 .foregroundStyle(.tertiary)
         }
-        .padding(16)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 11)
         .glassCard()
         .onAppear {
             withAnimation(.spring(response: 0.9, dampingFraction: 0.85).delay(0.25)) {
