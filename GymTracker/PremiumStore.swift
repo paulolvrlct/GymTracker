@@ -48,14 +48,24 @@ final class PremiumStore: ObservableObject {
         product = try? await Product.products(for: [Self.premiumProductID]).first
     }
 
+    /// Relit les droits auprès de StoreKit.
+    ///
+    /// À appeler aussi au **retour au premier plan** : un achat fait sur un autre
+    /// appareil, ou un code promo redéemé dans l'App Store, se produit hors de
+    /// l'app. Sans cette relecture, le Premium n'apparaîtrait qu'au prochain
+    /// lancement à froid — et l'utilisateur croirait que son achat n'a pas pris.
     func refreshEntitlements() async {
+        var owned = false
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
                transaction.productID == Self.premiumProductID,
                transaction.revocationDate == nil {
-                hasPurchased = true
+                owned = true
             }
         }
+        // Écrit la valeur dans les DEUX sens : sans le `false`, un remboursement
+        // ou une révocation ne se refléterait jamais.
+        hasPurchased = owned
     }
 
     func purchase() async {
