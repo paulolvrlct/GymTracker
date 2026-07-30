@@ -10,6 +10,13 @@ struct ProgressChartsView: View {
     enum Scope: String, CaseIterable {
         case strength = "Musculation"
         case running = "Course"
+
+        var localizedName: String {
+            switch self {
+            case .strength: String(localized: "Musculation")
+            case .running: String(localized: "Course")
+            }
+        }
     }
 
     /// Noms d'exercices distincts présents dans l'historique
@@ -39,7 +46,7 @@ struct ProgressChartsView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     Picker("Activité", selection: $scope) {
-                        ForEach(Scope.allCases, id: \.self) { Text($0.rawValue) }
+                        ForEach(Scope.allCases, id: \.self) { Text($0.localizedName) }
                     }
                     .pickerStyle(.segmented)
 

@@ -1,0 +1,98 @@
+{
+  "sourceLanguage": "fr",
+  "strings": {
+    "NSCameraUsageDescription": {
+      "comment": "Affiché à la demande d'accès caméra (scan de code-barres).",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun utilise la caméra pour scanner le code-barres de tes produits et récupérer automatiquement leurs valeurs nutritionnelles."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun uses the camera to scan your products' barcodes and fetch their nutrition values automatically."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun usa la cámara para escanear el código de barras de tus productos y obtener automáticamente sus valores nutricionales."
+          }
+        }
+      }
+    },
+    "NSHealthShareUsageDescription": {
+      "comment": "Affiché à la demande de lecture dans Apple Santé.",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun lit ton poids depuis Apple Santé pour pré-remplir ton profil, uniquement quand tu le demandes."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun reads your weight from Apple Health to prefill your profile, only when you ask it to."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun lee tu peso desde Apple Salud para rellenar tu perfil, solo cuando tú lo pides."
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription": {
+      "comment": "Affiché à la demande d'écriture dans Apple Santé.",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun enregistre tes séances, tes courses et ta nutrition dans Apple Santé."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun saves your workouts, runs and nutrition to Apple Health."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun guarda tus entrenos, tus carreras y tu nutrición en Apple Salud."
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "comment": "Affiché à la demande d'accès GPS pendant une course.",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun suit ta position pour enregistrer ton allure et ton tracé pendant tes courses."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun tracks your location to record your pace and route while you run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun sigue tu ubicación para registrar tu ritmo y tu ruta mientras corres."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -2,11 +2,21 @@ import SwiftUI
 
 // MARK: - Profil utilisateur (UserDefaults via @AppStorage)
 
+/// `rawValue` est la valeur persistée dans les UserDefaults : elle ne doit
+/// jamais être traduite. Tout affichage passe par `localizedName`.
 enum UserSex: String, CaseIterable, Identifiable {
     case male = "Homme"
     case female = "Femme"
     case unspecified = "Non précisé"
     var id: String { rawValue }
+
+    var localizedName: String {
+        switch self {
+        case .male: String(localized: "Homme")
+        case .female: String(localized: "Femme")
+        case .unspecified: String(localized: "Non précisé")
+        }
+    }
 }
 
 // MARK: - Licences et crédits (attributions requises)
@@ -88,7 +98,7 @@ struct OnboardingView: View {
                                                startPoint: .topLeading, endPoint: .bottomTrailing),
                                 in: RoundedRectangle(cornerRadius: 24, style: .continuous)
                             )
-                        Text("Bienvenue dans LiftRun")
+                        Text(InclusiveText.welcomeToApp(UserSex(stored: sexRaw)))
                             .font(.title2.bold())
                         Text("Ces infos personnalisent ton accueil et tes stats. Elles restent 100 % sur ton appareil.")
                             .font(.subheadline)
@@ -107,12 +117,12 @@ struct OnboardingView: View {
                 Section("À propos de toi") {
                     Picker("Sexe", selection: $sexRaw) {
                         ForEach(UserSex.allCases) { sex in
-                            Text(sex.rawValue).tag(sex.rawValue)
+                            Text(sex.localizedName).tag(sex.rawValue)
                         }
                     }
                     Stepper("Âge : \(age) ans", value: $age, in: 13...100)
                     Stepper("Taille : \(heightCm) cm", value: $heightCm, in: 120...230)
-                    Stepper(String(format: "Poids : %.1f kg", weightKg),
+                    Stepper(String(format: String(localized: "Poids : %.1f kg"), weightKg),
                             value: $weightKg, in: 30...250, step: 0.5)
                 }
 
@@ -132,7 +142,7 @@ struct OnboardingView: View {
                     Text("Modifiable à tout moment via l'icône profil de l'accueil.")
                 }
             }
-            .navigationTitle("Bienvenue")
+            .navigationTitle(InclusiveText.welcome(UserSex(stored: sexRaw)))
             .navigationBarTitleDisplayMode(.inline)
         }
         .interactiveDismissDisabled()
@@ -150,6 +160,7 @@ struct ProfileView: View {
 
     // Rappels de séance
     @AppStorage("remindersEnabled") private var remindersEnabled = false
+    @AppStorage("soundsEnabled") private var soundsEnabled = true
     @AppStorage("reminderDays") private var reminderDaysRaw = ""      // ex : "2,4,6"
     @AppStorage("reminderHour") private var reminderHour = 18
     @AppStorage("reminderMinute") private var reminderMinute = 0
@@ -230,7 +241,7 @@ struct ProfileView: View {
                     TextField("Prénom (affiché sur l'accueil)", text: $name)
                     Picker("Sexe", selection: $sexRaw) {
                         ForEach(UserSex.allCases) { sex in
-                            Text(sex.rawValue).tag(sex.rawValue)
+                            Text(sex.localizedName).tag(sex.rawValue)
                         }
                     }
                 }
@@ -238,7 +249,7 @@ struct ProfileView: View {
                 Section("Mensurations") {
                     Stepper("Âge : \(age) ans", value: $age, in: 13...100)
                     Stepper("Taille : \(heightCm) cm", value: $heightCm, in: 120...230)
-                    Stepper(String(format: "Poids : %.1f kg", weightKg),
+                    Stepper(String(format: String(localized: "Poids : %.1f kg"), weightKg),
                             value: $weightKg, in: 30...250, step: 0.5)
                     if let bmi {
                         LabeledContent("IMC", value: String(format: "%.1f", bmi))
@@ -309,6 +320,13 @@ struct ProfileView: View {
 
                 Section {
                     Text("Ces informations restent sur ton appareil : aucune n'est envoyée nulle part.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Section("Sons") {
+                    Toggle("Sons de l'app", isOn: $soundsEnabled)
+                    Text("Fin de repos, série validée, records. Les vibrations restent actives.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -402,8 +420,7 @@ struct ProfileView: View {
                 }
 
                 Section("À propos") {
-                    LabeledContent("Version",
-                                   value: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
+                    LabeledContent("Version", value: Bundle.main.displayVersion)
                     LabeledContent("Développeur", value: "DevShield")
                     NavigationLink("Licences et crédits") { CreditsView() }
                 }
@@ -418,5 +435,18 @@ struct ProfileView: View {
                 }
             }
         }
+    }
+}
+
+
+// MARK: - Version affichée
+
+extension Bundle {
+    /// « 1.1 (9) » : le numéro de build permet de distinguer une installation de
+    /// test (build local) de la version publiée sur l'App Store.
+    var displayVersion: String {
+        let version = infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = infoDictionary?["CFBundleVersion"] as? String ?? "—"
+        return "\(version) (\(build))"
     }
 }

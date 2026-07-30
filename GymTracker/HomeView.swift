@@ -1,17 +1,27 @@
 import SwiftUI
 import SwiftData
+import StoreKit
 
 struct HomeView: View {
     @Query(sort: \WorkoutTemplate.order) private var templates: [WorkoutTemplate]
     @Query(sort: \WorkoutSession.date, order: .reverse) private var sessions: [WorkoutSession]
     @Query(sort: \RunSession.date, order: .reverse) private var runs: [RunSession]
+    @Query private var intakes: [SupplementIntake]
 
     @State private var activeTemplate: WorkoutTemplate?
     @State private var showLibrary = false
     @State private var showProfile = false
     @AppStorage("profileName") private var profileName = ""
+    /// Observé pour que l'accord se mette à jour dès que le genre change au profil.
+    @AppStorage("profileSex") private var profileSexRaw = UserSex.unspecified.rawValue
+    @Environment(\.requestReview) private var requestReview
 
     private var calendar: Calendar { Calendar.current }
+
+    /// Recalculé à chaque rendu : voir `Progression` pour le pourquoi.
+    private var progression: Progression {
+        Progression(workouts: sessions, runs: runs, intakes: intakes)
+    }
 
     private var sessionsThisWeek: Int {
         sessions.filter { calendar.isDate($0.date, equalTo: .now, toGranularity: .weekOfYear) }.count
@@ -42,9 +52,9 @@ struct HomeView: View {
     private var greeting: String {
         let h = calendar.component(.hour, from: .now)
         switch h {
-        case 5..<12: return "Bonjour"
-        case 12..<18: return "Bon aprèm"
-        default: return "Bonsoir"
+        case 5..<12: return String(localized: "Bonjour")
+        case 12..<18: return String(localized: "Bon aprèm")
+        default: return String(localized: "Bonsoir")
         }
     }
 
@@ -53,6 +63,12 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 18) {
                     header
+                    NavigationLink {
+                        ProgressionDetailView(progression: progression)
+                    } label: {
+                        LevelCard(progression: progression)
+                    }
+                    .buttonStyle(.plain)
                     statsGrid
                     NavigationLink {
                         NutritionView()
@@ -99,7 +115,8 @@ struct HomeView: View {
             .sheet(isPresented: $showProfile) {
                 ProfileView()
             }
-            .fullScreenCover(item: $activeTemplate) { template in
+            .fullScreenCover(item: $activeTemplate,
+                             onDismiss: { ReviewPrompt.askIfEarned(requestReview) }) { template in
                 ActiveWorkoutView(template: template)
             }
         }
@@ -139,8 +156,8 @@ struct HomeView: View {
             // le nombre de jours est déjà mis en avant dans la carte « streak » :
             // ici on garde un message d'encouragement sans répéter le chiffre
             Text(streak > 0
-                 ? "Belle régularité, garde le rythme 🔥"
-                 : "Prêt à t'y remettre aujourd'hui ?")
+                 ? String(localized: "Belle régularité, garde le rythme 🔥")
+                 : InclusiveText.backAtItToday(UserSex(stored: profileSexRaw)))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -244,7 +261,7 @@ struct HomeView: View {
                        trailing: "\(session.sets.count) séries")
         } else if let run = lastRun {
             recentCard(title: "Dernière activité", icon: "figure.run", tint: .green,
-                       name: String(format: "Course · %.2f km", run.distanceKm), date: run.date,
+                       name: String(format: String(localized: "Course · %.2f km"), run.distanceKm), date: run.date,
                        trailing: PaceFormatter.duration(run.durationSeconds))
         }
     }
@@ -280,7 +297,9 @@ private struct GlassStatCard: View {
     let icon: String
     let tint: Color
     let value: String
-    let label: String
+    /// `LocalizedStringKey` : les libellés fournis aux sites d'appel sont donc
+    /// extraits automatiquement dans le String Catalog.
+    let label: LocalizedStringKey
     var pulse: Bool = false
 
     var body: some View {
@@ -338,6 +357,61 @@ extension View {
                         )
                 )
                 .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+        }
+    }
+}
+
+// MARK: - Carte de niveau (gamification)
+
+/// Niveau, XP et progression vers le palier suivant.
+///
+/// La barre s'anime à l'apparition plutôt que d'être dessinée pleine : on veut
+/// que l'utilisateur *voie* sa progression, pas seulement un état.
+private struct LevelCard: View {
+    let progression: Progression
+    @State private var shownProgress: Double = 0
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("Niveau \(progression.level)")
+                    .font(.title3.weight(.bold))
+                Spacer()
+                Text("\(progression.totalXP) XP")
+                    .font(.subheadline.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(Color.brand)
+                    .contentTransition(.numericText())
+                // affordance : la carte mène au détail du barème
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+
+            Text(progression.title)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
+
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Color.brand.opacity(0.15))
+                    Capsule()
+                        .fill(LinearGradient(colors: [Color.brand, .purple],
+                                             startPoint: .leading, endPoint: .trailing))
+                        .frame(width: max(0, geo.size.width * shownProgress))
+                }
+            }
+            .frame(height: 10)
+
+            Text("\(progression.xpAtCurrentLevel) / \(progression.xpForThisLevel) XP")
+                .font(.caption2.monospacedDigit())
+                .foregroundStyle(.tertiary)
+        }
+        .padding(16)
+        .glassCard()
+        .onAppear {
+            withAnimation(.spring(response: 0.9, dampingFraction: 0.85).delay(0.25)) {
+                shownProgress = progression.progress
+            }
         }
     }
 }

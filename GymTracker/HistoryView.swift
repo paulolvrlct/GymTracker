@@ -416,7 +416,7 @@ private struct RunRow: View {
                 .foregroundStyle(.green)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(String(format: "Course · %.2f km", run.distanceKm))
+                Text(String(format: String(localized: "Course · %.2f km"), run.distanceKm))
                     .font(.subheadline.weight(.semibold))
                 Text(run.date.formatted(date: .abbreviated, time: .shortened))
                     .font(.caption)

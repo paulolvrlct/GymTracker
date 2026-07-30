@@ -17,8 +17,15 @@ struct CatalogExercise: Codable, Identifiable, Hashable {
     let secondary: [String]
     let steps: [String]
 
-    var categoryFR: String { Self.categoryFR[category] ?? category.capitalized }
-    var equipmentFR: String { Self.equipmentFR[equipment] ?? equipment.capitalized }
+    /// Nom affiché : traduction curée si elle existe, sinon le nom source du
+    /// dataset — cf. `ExerciseNames`.
+    var displayName: String { ExerciseNames.localized(id: id) ?? name.capitalized }
+
+    /// Libellés traduits (FR/EN/ES) du vocabulaire du dataset — cf. `ExerciseTaxonomy`.
+    var categoryLabel: String { ExerciseTaxonomy.category(category) }
+    var equipmentLabel: String { ExerciseTaxonomy.equipment(equipment) }
+    var targetLabel: String { ExerciseTaxonomy.muscle(target) }
+    var secondaryLabel: String { ExerciseTaxonomy.muscles(secondary) }
 
     /// Symbole SF illustrant la zone travaillée (remplace les GIFs propriétaires)
     var illustrationSymbol: String {
@@ -33,26 +40,6 @@ struct CatalogExercise: Codable, Identifiable, Hashable {
         "upper legs": "figure.cross.training", "waist": "figure.core.training",
     ]
 
-    static let categoryFR: [String: String] = [
-        "back": "Dos", "cardio": "Cardio", "chest": "Pectoraux",
-        "lower arms": "Avant-bras", "lower legs": "Mollets", "neck": "Cou",
-        "shoulders": "Épaules", "upper arms": "Bras", "upper legs": "Jambes",
-        "waist": "Abdos / Tronc",
-    ]
-
-    static let equipmentFR: [String: String] = [
-        "body weight": "Poids du corps", "dumbbell": "Haltères", "barbell": "Barre",
-        "cable": "Poulie", "leverage machine": "Machine", "band": "Élastique",
-        "smith machine": "Smith machine", "kettlebell": "Kettlebell",
-        "weighted": "Lesté", "stability ball": "Swiss ball", "ez barbell": "Barre EZ",
-        "assisted": "Assisté", "medicine ball": "Medecine ball", "rope": "Corde",
-        "resistance band": "Bande de résistance", "olympic barbell": "Barre olympique",
-        "trap bar": "Trap bar", "bosu ball": "Bosu", "roller": "Roulette",
-        "wheel roller": "Roue abdos", "hammer": "Masse", "tire": "Pneu",
-        "sled machine": "Sled", "stationary bike": "Vélo", "elliptical machine": "Elliptique",
-        "stepmill machine": "Stepper", "skierg machine": "SkiErg",
-        "upper body ergometer": "Ergomètre",
-    ]
 }
 
 // MARK: - Chargement du catalogue
@@ -156,7 +143,7 @@ struct ExerciseIllustrationBanner: View {
             Image(systemName: exercise.illustrationSymbol)
                 .font(.system(size: 64))
                 .foregroundStyle(Color.brand)
-            Text(exercise.categoryFR)
+            Text(exercise.categoryLabel)
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
         }

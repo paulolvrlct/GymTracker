@@ -153,13 +153,13 @@ struct NutritionView: View {
                     Button {
                         goalRaw = g.rawValue
                     } label: {
-                        Label(g.rawValue, systemImage: g.icon)
+                        Label(g.localizedName, systemImage: g.icon)
                     }
                 }
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: goal.icon)
-                    Text("Objectif : \(goal.rawValue)")
+                    Text("Objectif : \(goal.localizedName)")
                         .font(.subheadline.weight(.medium))
                     Image(systemName: "chevron.up.chevron.down")
                         .font(.caption2)
@@ -184,7 +184,7 @@ struct NutritionView: View {
                     detailRow("Métabolisme de base", "\(Int(plan.bmr)) kcal")
                     detailRow("Dépense estimée (activité mesurée)", "\(Int(plan.tdee)) kcal")
                     detailRow("Brûlées par le sport ce jour", "\(burnedKcal) kcal")
-                    detailRow(goal.rawValue, goal.blurb)
+                    detailRow(goal.localizedName, goal.blurb)
                 }
                 .padding(.top, 6)
             } label: {
@@ -262,7 +262,7 @@ struct NutritionView: View {
     private func mealCard(_ meal: MealKind, entries: [FoodEntry]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Label(meal.rawValue, systemImage: meal.icon)
+                Label(meal.localizedName, systemImage: meal.icon)
                     .font(.subheadline.weight(.semibold))
                 Spacer()
                 Text("\(Int(entries.reduce(0) { $0 + $1.kcal })) kcal")
@@ -370,6 +370,14 @@ struct AddFoodView: View {
         case common = "Courants"
         case all = "Tout"
         var id: String { rawValue }
+
+        var localizedName: String {
+            switch self {
+            case .recent: String(localized: "Récents")
+            case .common: String(localized: "Courants")
+            case .all: String(localized: "Tout")
+            }
+        }
     }
 
     @State private var source: Source = .recent
@@ -415,7 +423,7 @@ struct AddFoodView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 Picker("Source", selection: $source) {
-                    ForEach(Source.allCases) { Text($0.rawValue).tag($0) }
+                    ForEach(Source.allCases) { Text($0.localizedName).tag($0) }
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
@@ -694,7 +702,7 @@ struct FoodQuantityView: View {
                 Section("Repas") {
                     Picker("Repas", selection: $mealRaw) {
                         ForEach(MealKind.allCases) { meal in
-                            Label(meal.rawValue, systemImage: meal.icon).tag(meal.rawValue)
+                            Label(meal.localizedName, systemImage: meal.icon).tag(meal.rawValue)
                         }
                     }
                     .pickerStyle(.inline)

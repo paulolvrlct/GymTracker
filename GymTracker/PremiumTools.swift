@@ -115,7 +115,7 @@ struct RecordFlashView: View {
         .opacity(pop ? 1 : 0)
         .onAppear {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) { pop = true }
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            Feedback.record()
         }
     }
 }
@@ -149,7 +149,7 @@ struct PlateCalculatorView: View {
     var body: some View {
         Form {
             Section("Objectif") {
-                Stepper(String(format: "Poids visé : %.1f kg", target),
+                Stepper(String(format: String(localized: "Poids visé : %.1f kg"), target),
                         value: $target, in: barWeight...400, step: 2.5)
                 Picker("Barre", selection: $barWeight) {
                     Text("Olympique · 20 kg").tag(20.0)
@@ -174,10 +174,12 @@ struct PlateCalculatorView: View {
                         }
                     }
                     LabeledContent("Chargé de chaque côté",
-                                   value: "\(perSide.count) disque\(perSide.count > 1 ? "s" : "")")
+                                   value: String(format: String(localized: "%lld disque%@"),
+                                                 perSide.count,
+                                                 perSide.count > 1 ? "s" : ""))
                 }
                 if abs(achievable - target) > 0.01 {
-                    Label(String(format: "Atteignable : %.1f kg (disques limités)", achievable),
+                    Label(String(format: String(localized: "Atteignable : %.1f kg (disques limités)"), achievable),
                           systemImage: "exclamationmark.triangle")
                         .font(.caption).foregroundStyle(.orange)
                 }
@@ -330,14 +332,14 @@ enum AccentTheme: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .indigo: "Indigo"
-        case .purple: "Violet"
-        case .blue: "Bleu"
-        case .teal: "Turquoise"
-        case .green: "Vert"
-        case .orange: "Orange"
-        case .pink: "Rose"
-        case .red: "Rouge"
+        case .indigo: String(localized: "Indigo")
+        case .purple: String(localized: "Violet")
+        case .blue: String(localized: "Bleu")
+        case .teal: String(localized: "Turquoise")
+        case .green: String(localized: "Vert")
+        case .orange: String(localized: "Orange")
+        case .pink: String(localized: "Rose")
+        case .red: String(localized: "Rouge")
         }
     }
 }

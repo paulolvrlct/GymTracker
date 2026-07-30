@@ -12,6 +12,9 @@ struct RunningView: View {
     @State private var showPaywall = false
     @State private var selectedCircuit: RunCircuit?
     @State private var previewedCircuit: RunCircuit?
+    @State private var showVMATest = false
+    /// Observé pour que l'accord se mette à jour dès que le genre change au profil.
+    @AppStorage("profileSex") private var profileSexRaw = UserSex.unspecified.rawValue
     @State private var celebratedRun: RunSession?
 
     var body: some View {
@@ -19,6 +22,8 @@ struct RunningView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     startCard
+                    middleDistanceSection
+                    plansSection
                     if !CircuitLibrary.all.isEmpty { circuitsSection }
                     if !pastRuns.isEmpty { historySection }
                 }
@@ -27,6 +32,7 @@ struct RunningView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Course")
             .sheet(isPresented: $showPaywall) { PaywallView() }
+            .sheet(isPresented: $showVMATest) { VMATestView(tracker: tracker) }
             .sheet(item: $previewedCircuit) { circuit in
                 CircuitPreviewView(circuit: circuit,
                                    isSelected: selectedCircuit == circuit) {
@@ -77,7 +83,7 @@ struct RunningView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing),
                             in: Circle())
 
-            Text("Prêt à courir ?")
+            Text(InclusiveText.readyToRun(UserSex(stored: profileSexRaw)))
                 .font(.title3.weight(.semibold))
             Text("Suivi GPS de ton allure, ta distance et ton tracé, visible sur l'écran verrouillé.")
                 .font(.subheadline)
@@ -114,6 +120,71 @@ struct RunningView: View {
         .frame(maxWidth: .infinity)
         .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
+    }
+
+    // MARK: Demi-fond (VMA)
+
+    /// Entrée du mode demi-fond. Gratuit : c'est l'argument qui doit faire
+    /// préférer LiftRun à un abonnement concurrent.
+    private var middleDistanceSection: some View {
+        Button {
+            showVMATest = true
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "stopwatch")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .frame(width: 46, height: 46)
+                    .background(LinearGradient(colors: [.green, .teal],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing),
+                                in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Demi-fond").font(.headline)
+                    if let vma = VMAStore.value {
+                        Text("VMA \(vma.formatted(.number.precision(.fractionLength(1)))) km/h")
+                            .font(.subheadline).foregroundStyle(.secondary)
+                    } else {
+                        Text("Mesure ta VMA pour obtenir tes allures")
+                            .font(.subheadline).foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(14)
+            .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: Plans d'entraînement
+
+    private var plansSection: some View {
+        NavigationLink {
+            TrainingPlansView(tracker: tracker)
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "calendar.badge.clock")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .frame(width: 46, height: 46)
+                    .background(LinearGradient(colors: [.blue, .indigo],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing),
+                                in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Plans d'entraînement").font(.headline)
+                    Text("10 km, semi-marathon, marathon")
+                        .font(.subheadline).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(14)
+            .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: Circuits préenregistrés (Premium)

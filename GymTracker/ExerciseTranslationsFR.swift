@@ -132,9 +132,17 @@ enum ExerciseTranslationsFR {
         ],
     ]
 
-    /// Renvoie les étapes FR si disponibles, sinon nil (fallback EN dans l'UI).
+    /// Renvoie les étapes FR uniquement si l'interface tourne en français *et*
+    /// qu'une traduction existe. Dans les autres langues on renvoie nil : l'UI
+    /// affiche alors les instructions anglaises du dataset, avec le badge « EN ».
     static func steps(for catalogID: String?) -> [String]? {
-        guard let catalogID else { return nil }
+        guard isFrenchUI, let catalogID else { return nil }
         return steps[catalogID]
+    }
+
+    /// Langue effectivement retenue pour le bundle (et non la région) : couvre
+    /// « fr », mais aussi « fr-CA », « fr-BE »…
+    private static var isFrenchUI: Bool {
+        Bundle.main.preferredLocalizations.first?.hasPrefix("fr") ?? false
     }
 }

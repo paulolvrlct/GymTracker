@@ -1,11 +1,13 @@
 import SwiftUI
 import SwiftData
+import StoreKit
 
 // MARK: - Liste des séances
 
 struct TemplatesView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \WorkoutTemplate.order) private var templates: [WorkoutTemplate]
+    @Environment(\.requestReview) private var requestReview
 
     @ObservedObject private var premium = PremiumStore.shared
     @State private var activeTemplate: WorkoutTemplate?
@@ -65,7 +67,8 @@ struct TemplatesView: View {
                 }
             }
             .sheet(isPresented: $showPaywall) { PaywallView() }
-            .fullScreenCover(item: $activeTemplate) { template in
+            .fullScreenCover(item: $activeTemplate,
+                             onDismiss: { ReviewPrompt.askIfEarned(requestReview) }) { template in
                 ActiveWorkoutView(template: template)
             }
         }

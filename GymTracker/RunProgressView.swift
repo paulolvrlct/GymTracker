@@ -11,6 +11,14 @@ struct RunProgressSection: View {
         case pace = "Allure"
         case distance = "Distance"
         case duration = "Durée"
+
+        var localizedName: String {
+            switch self {
+            case .pace: String(localized: "Allure")
+            case .distance: String(localized: "Distance")
+            case .duration: String(localized: "Durée")
+            }
+        }
     }
 
     private var validRuns: [RunSession] {
@@ -60,7 +68,7 @@ struct RunProgressSection: View {
 
     private var metricPicker: some View {
         Picker("Métrique", selection: $metric) {
-            ForEach(Metric.allCases, id: \.self) { Text($0.rawValue) }
+            ForEach(Metric.allCases, id: \.self) { Text($0.localizedName) }
         }
         .pickerStyle(.segmented)
     }

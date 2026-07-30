@@ -16,8 +16,14 @@ struct ExerciseLibraryView: View {
             (selectedCategory == nil || ex.category == selectedCategory)
             && (selectedEquipment == nil || ex.equipment == selectedEquipment)
             && (searchText.isEmpty
+                // nom traduit ET nom source : le jargon anglais reste la
+                // référence en salle, on doit pouvoir chercher dans les deux
+                || ex.displayName.localizedCaseInsensitiveContains(searchText)
                 || ex.name.localizedCaseInsensitiveContains(searchText)
-                || ex.target.localizedCaseInsensitiveContains(searchText))
+                // muscles traduits ET sources : « pectoraux » comme « pectorals »
+                || ex.targetLabel.localizedCaseInsensitiveContains(searchText)
+                || ex.target.localizedCaseInsensitiveContains(searchText)
+                || ex.secondaryLabel.localizedCaseInsensitiveContains(searchText))
         }
     }
 
@@ -65,7 +71,7 @@ struct ExerciseLibraryView: View {
                 HStack(spacing: 8) {
                     filterChip("Toutes zones", isOn: selectedCategory == nil) { selectedCategory = nil }
                     ForEach(ExerciseCatalog.categories, id: \.self) { cat in
-                        filterChip(CatalogExercise.categoryFR[cat] ?? cat,
+                        filterChip(ExerciseTaxonomy.category(cat),
                                    isOn: selectedCategory == cat) {
                             selectedCategory = selectedCategory == cat ? nil : cat
                         }
@@ -77,7 +83,7 @@ struct ExerciseLibraryView: View {
                 HStack(spacing: 8) {
                     filterChip("Tout matériel", isOn: selectedEquipment == nil) { selectedEquipment = nil }
                     ForEach(ExerciseCatalog.equipments, id: \.self) { eq in
-                        filterChip(CatalogExercise.equipmentFR[eq] ?? eq,
+                        filterChip(ExerciseTaxonomy.equipment(eq),
                                    isOn: selectedEquipment == eq) {
                             selectedEquipment = selectedEquipment == eq ? nil : eq
                         }
@@ -125,13 +131,13 @@ private struct LibraryRow: View {
             }
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(exercise.name.capitalized)
+                Text(exercise.displayName)
                     .font(.subheadline.weight(.medium))
                     .lineLimit(2)
                 HStack(spacing: 6) {
-                    Text(exercise.categoryFR)
+                    Text(exercise.categoryLabel)
                     Text("·")
-                    Text(exercise.equipmentFR)
+                    Text(exercise.equipmentLabel)
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -154,15 +160,15 @@ struct ExerciseDetailView: View {
 
                 // Badges
                 HStack(spacing: 8) {
-                    badge(exercise.categoryFR, icon: "figure.arms.open", color: Color.brand)
-                    badge(exercise.equipmentFR, icon: "dumbbell.fill", color: .purple)
+                    badge(exercise.categoryLabel, icon: "figure.arms.open", color: Color.brand)
+                    badge(exercise.equipmentLabel, icon: "dumbbell.fill", color: .purple)
                 }
 
                 // Muscles
                 VStack(alignment: .leading, spacing: 6) {
                     Label {
                         Text("Muscle ciblé : ").foregroundStyle(.secondary)
-                        + Text(exercise.target.capitalized).fontWeight(.semibold)
+                        + Text(exercise.targetLabel).fontWeight(.semibold)
                     } icon: {
                         Image(systemName: "target").foregroundStyle(.red)
                     }
@@ -171,7 +177,7 @@ struct ExerciseDetailView: View {
                     if !exercise.secondary.isEmpty {
                         Label {
                             Text("Secondaires : ").foregroundStyle(.secondary)
-                            + Text(exercise.secondary.map(\.capitalized).joined(separator: ", "))
+                            + Text(exercise.secondaryLabel)
                         } icon: {
                             Image(systemName: "circle.dashed").foregroundStyle(.orange)
                         }
@@ -220,7 +226,7 @@ struct ExerciseDetailView: View {
             .padding()
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle(exercise.name.capitalized)
+        .navigationTitle(exercise.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {
             if let onSelect {

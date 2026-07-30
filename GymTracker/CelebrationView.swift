@@ -167,7 +167,7 @@ struct RunCelebrationView: View {
             .opacity(appeared ? 1 : 0)
         }
         .onAppear {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            Feedback.runFinished()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { appeared = true }
                 withAnimation(.easeInOut(duration: 2.2).delay(0.35)) { drawProgress = 1 }
@@ -270,7 +270,7 @@ struct WorkoutCelebrationView: View {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.55).delay(0.05)) {
                 appeared = true
             }
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            Feedback.workoutFinished()
         }
     }
 

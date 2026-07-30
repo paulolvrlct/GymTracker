@@ -157,7 +157,7 @@ struct ActiveWorkoutView: View {
         let index = loggedSets.filter { $0.exerciseName == exercise.name }.count + 1
         loggedSets.append(DraftSet(exerciseName: exercise.name, setIndex: index, reps: reps, weight: weight))
         restTimer.start(seconds: exercise.restSeconds, exerciseName: exercise.name, workoutName: template.name)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        Feedback.setLogged()
 
         // Record personnel ? → flash animé + mémorisé pour la célébration
         if let pr = PersonalRecords.check(exercise: exercise.name, reps: reps,
@@ -199,6 +199,10 @@ struct ActiveWorkoutView: View {
             await HealthKitManager.shared.saveStrengthWorkout(
                 start: startDate, durationSeconds: duration, kcal: kcal)
         }
+
+        // Séance enregistrée : on retiendra de proposer la note au retour sur
+        // l'écran d'accueil — jamais pendant la célébration.
+        ReviewPrompt.workoutCompleted()
 
         withAnimation(.easeOut(duration: 0.3)) { showCelebration = true }
     }
@@ -434,8 +438,7 @@ final class RestTimerModel: ObservableObject {
             // son + haptique seulement si la fin vient d'arriver
             // (pas de fanfare tardive au retour dans l'app)
             if endDate.timeIntervalSinceNow > -3 {
-                AudioServicesPlaySystemSound(1007)
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                Feedback.restFinished()
             }
             stop()
         }

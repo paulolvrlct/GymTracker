@@ -4,6 +4,15 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<!-- Langues supportées, déclarées explicitement. Sans cette clé, iOS n'expose
+	     pas le sélecteur « Langue » dans Réglages › Apps › LiftRun, et l'App Store
+	     n'annonce pas les langues sur la fiche produit. -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>fr</string>
+		<string>en</string>
+		<string>es</string>
+	</array>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>LiftRun enregistre tes séances, tes courses et ta nutrition dans Apple Santé.</string>
 	<key>NSCameraUsageDescription</key>

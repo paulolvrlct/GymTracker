@@ -4,11 +4,21 @@ import WidgetKit
 
 // MARK: - Objectif nutritionnel (Premium)
 
+/// `rawValue` est persisté (UserDefaults / SwiftData) : jamais traduit.
+/// Tout affichage passe par `localizedName`.
 enum NutritionGoal: String, CaseIterable, Identifiable {
     case cut = "Sèche"
     case maintain = "Maintien"
     case bulk = "Prise de masse"
     var id: String { rawValue }
+
+    var localizedName: String {
+        switch self {
+        case .cut: String(localized: "Sèche")
+        case .maintain: String(localized: "Maintien")
+        case .bulk: String(localized: "Prise de masse")
+        }
+    }
 
     var icon: String {
         switch self {
@@ -38,9 +48,9 @@ enum NutritionGoal: String, CaseIterable, Identifiable {
 
     var blurb: String {
         switch self {
-        case .cut: "Déficit d'environ 17 % pour perdre du gras en préservant le muscle."
-        case .maintain: "L'équilibre : tu manges ce que tu dépenses."
-        case .bulk: "Surplus d'environ 12 % pour construire du muscle."
+        case .cut: String(localized: "Déficit d'environ 17 % pour perdre du gras en préservant le muscle.")
+        case .maintain: String(localized: "L'équilibre : tu manges ce que tu dépenses.")
+        case .bulk: String(localized: "Surplus d'environ 12 % pour construire du muscle.")
         }
     }
 }
@@ -247,12 +257,22 @@ enum FoodCatalog {
 
 // MARK: - Repas
 
+/// `rawValue` est persisté dans SwiftData (`FoodEntry.meal`) : jamais traduit.
 enum MealKind: String, CaseIterable, Identifiable {
     case breakfast = "Petit-déjeuner"
     case lunch = "Déjeuner"
     case dinner = "Dîner"
     case snack = "Collation"
     var id: String { rawValue }
+
+    var localizedName: String {
+        switch self {
+        case .breakfast: String(localized: "Petit-déjeuner")
+        case .lunch: String(localized: "Déjeuner")
+        case .dinner: String(localized: "Dîner")
+        case .snack: String(localized: "Collation")
+        }
+    }
 
     var icon: String {
         switch self {
