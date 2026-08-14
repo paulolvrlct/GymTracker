@@ -7,6 +7,8 @@ struct HomeView: View {
     @Query(sort: \WorkoutSession.date, order: .reverse) private var sessions: [WorkoutSession]
     @Query(sort: \RunSession.date, order: .reverse) private var runs: [RunSession]
     @Query private var intakes: [SupplementIntake]
+    @Query private var allSets: [SetRecord]
+    @Query private var food: [FoodEntry]
 
     @State private var activeTemplate: WorkoutTemplate?
     @State private var showLibrary = false
@@ -191,8 +193,17 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    /// Recalculé à la volée, jamais stocké — même principe que `Progression`.
+    private var briefing: CoachBriefing {
+        CoachBriefing.make(sets: allSets, runs: runs, food: food,
+                           maintenanceKcal: nil)
+    }
+
     private var coachMessage: String {
-        MascotCoach.message(totalSessions: sessions.count,
+        // Le bilan croisé prime : s'il a quelque chose de notable à dire, il est
+        // plus utile qu'un encouragement générique.
+        if let insight = MascotCoach.insight(briefing) { return insight }
+        return MascotCoach.message(totalSessions: sessions.count,
                             streak: streak,
                             sessionsThisWeek: sessionsThisWeek,
                             kmThisMonth: kmThisMonth)

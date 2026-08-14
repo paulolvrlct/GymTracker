@@ -203,3 +203,48 @@ enum MascotCoach {
         return String(localized: "Content de te voir. Quand tu veux, on s'y met.")
     }
 }
+
+// MARK: - Lecture du bilan
+
+extension MascotCoach {
+
+    /// Phrase tirée du bilan croisé, ou nil s'il n'y a rien de notable à dire.
+    ///
+    /// Deux règles de rédaction :
+    ///
+    /// - **Aucune causalité inventée.** « Ton développé stagne *parce que* tu
+    ///   cours » n'est pas établi. On écrit « sur la même période » : le
+    ///   rapprochement est fourni, l'interprétation reste à l'utilisateur.
+    /// - **Rien sur l'alimentation.** Le bilan calcule l'apport calorique, mais
+    ///   la mascotte n'en parle jamais spontanément. Un chiffre non demandé, sur
+    ///   ce sujet-là, se reçoit mal.
+    static func insight(_ briefing: CoachBriefing) -> String? {
+        if let exercise = briefing.stalledExercise, briefing.stalledWeeks >= 3 {
+            let weeks = briefing.stalledWeeks
+
+            if briefing.volumeTonnes.isNotable,
+               let change = briefing.volumeTonnes.changePercent, change < 0 {
+                let drop = Int(abs(change))
+                return String(localized: "\(exercise) plafonne depuis \(weeks) semaines. Sur la même période, ton volume a baissé de \(drop) %.")
+            }
+            if briefing.kilometres.isNotable,
+               let change = briefing.kilometres.changePercent, change > 0 {
+                let rise = Int(change)
+                return String(localized: "\(exercise) plafonne depuis \(weeks) semaines, pendant que ta course augmentait de \(rise) %.")
+            }
+            return String(localized: "\(exercise) plafonne depuis \(weeks) semaines.")
+        }
+
+        if briefing.volumeTonnes.isNotable,
+           let change = briefing.volumeTonnes.changePercent, change > 0 {
+            let rise = Int(change)
+            return String(localized: "Ton volume a augmenté de \(rise) % sur deux semaines.")
+        }
+        if briefing.kilometres.isNotable,
+           let change = briefing.kilometres.changePercent, change > 0 {
+            let rise = Int(change)
+            return String(localized: "Tu as couru \(rise) % de plus que les deux semaines précédentes.")
+        }
+        return nil
+    }
+}

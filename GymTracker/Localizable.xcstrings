@@ -23,6 +23,66 @@
         }
       }
     },
+    "%@ plafonne depuis %lld semaines, pendant que ta course augmentait de %lld %%.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ plafonne depuis %2$lld semaines, pendant que ta course augmentait de %3$lld %%."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has been flat for %lld weeks, while your running went up by %lld%%."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lleva %lld semanas estancado, mientras tu carrera subía un %lld %%."
+          }
+        }
+      }
+    },
+    "%@ plafonne depuis %lld semaines.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has been flat for %lld weeks."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lleva %lld semanas estancado."
+          }
+        }
+      }
+    },
+    "%@ plafonne depuis %lld semaines. Sur la même période, ton volume a baissé de %lld %%.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ plafonne depuis %2$lld semaines. Sur la même période, ton volume a baissé de %3$lld %%."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has been flat for %lld weeks. Over the same period your volume dropped by %lld%%."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lleva %lld semanas estancado. En el mismo periodo tu volumen bajó un %lld %%."
+          }
+        }
+      }
+    },
     "%@ – %@": {
       "shouldTranslate": false
     },
@@ -39,8 +99,7 @@
       "shouldTranslate": false
     },
     "%lld / %lld XP": {
-      "shouldTranslate": false,
-      "localizations": {}
+      "shouldTranslate": false
     },
     "%lld / %lld g": {
       "shouldTranslate": false
@@ -90,8 +149,7 @@
       }
     },
     "%lld XP": {
-      "shouldTranslate": false,
-      "localizations": {}
+      "shouldTranslate": false
     },
     "%lld disque%@": {
       "localizations": {
@@ -5452,6 +5510,22 @@
         }
       }
     },
+    "Ton volume a augmenté de %lld %% sur deux semaines.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your volume is up %lld%% over two weeks."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu volumen ha subido un %lld %% en dos semanas."
+          }
+        }
+      }
+    },
     "Tout": {
       "localizations": {
         "en": {
@@ -5518,6 +5592,22 @@
           "stringUnit": {
             "state": "new",
             "value": "Tu as battu %1$lld record%2$@ 🔥"
+          }
+        }
+      }
+    },
+    "Tu as couru %lld %% de plus que les deux semaines précédentes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You ran %lld%% more than the previous two weeks."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Has corrido un %lld %% más que las dos semanas anteriores."
           }
         }
       }
