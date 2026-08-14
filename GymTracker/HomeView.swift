@@ -209,6 +209,21 @@ struct HomeView: View {
                             kmThisMonth: kmThisMonth)
     }
 
+    /// Volume du mois : en tonnes au-delà de 1 000 kg, sinon en kilos.
+    private var volumeText: String {
+        volumeThisMonth >= 1000
+            ? "\(oneDecimal(Double(volumeThisMonth) / 1000)) t"
+            : "\(volumeThisMonth)"
+    }
+
+    /// Une décimale, séparateur selon la langue.
+    ///
+    /// `String(format:)` écrit toujours un point : « 23.5 t » au lieu de
+    /// « 23,5 t » en français comme en espagnol.
+    private func oneDecimal(_ value: Double) -> String {
+        value.formatted(.number.precision(.fractionLength(1)))
+    }
+
     // MARK: Grille de stats
 
     @State private var statsAppeared = false
@@ -217,19 +232,23 @@ struct HomeView: View {
     private var statsGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
             GlassStatCard(icon: "flame.fill", tint: .orange,
-                          value: "\(sessionsThisWeek)", label: "séances cette semaine",
+                          value: "\(sessionsThisWeek)",
+                          // accord au singulier : « 1 séances » se remarque
+                          label: sessionsThisWeek > 1 ? "séances cette semaine"
+                                                      : "séance cette semaine",
                           pulse: sessionsThisWeek > 0)
                 .statEntrance(statsAppeared, index: 0)
             GlassStatCard(icon: "bolt.fill", tint: Color.brand,
-                          value: "\(streak)", label: "jours de streak",
+                          value: "\(streak)",
+                          label: streak > 1 ? "jours de streak" : "jour de streak",
                           pulse: streak > 0)
                 .statEntrance(statsAppeared, index: 1)
             GlassStatCard(icon: "scalemass.fill", tint: .purple,
-                          value: volumeThisMonth >= 1000 ? String(format: "%.1ft", Double(volumeThisMonth) / 1000) : "\(volumeThisMonth)",
+                          value: volumeText,
                           label: "volume ce mois (kg)")
                 .statEntrance(statsAppeared, index: 2)
             GlassStatCard(icon: "figure.run", tint: .green,
-                          value: String(format: "%.1f", kmThisMonth), label: "km ce mois")
+                          value: oneDecimal(kmThisMonth), label: "km ce mois")
                 .statEntrance(statsAppeared, index: 3)
         }
         .onAppear {

@@ -8604,6 +8604,22 @@
         }
       }
     },
+    "jour de streak": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "day streak"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "día de racha"
+          }
+        }
+      }
+    },
     "jours de streak": {
       "localizations": {
         "en": {
@@ -9434,6 +9450,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fractions courtes et rapides, avec récupération de durée égale."
+          }
+        }
+      }
+    },
+    "séance cette semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "workout this week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "entreno esta semana"
           }
         }
       }
