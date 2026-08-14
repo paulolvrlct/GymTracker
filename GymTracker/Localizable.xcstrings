@@ -5980,22 +5980,6 @@
         }
       }
     },
-    "ce mois": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "this month"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "este mes"
-          }
-        }
-      }
-    },
     "ciqual.anses.fr": {
       "shouldTranslate": false
     },
@@ -8620,22 +8604,6 @@
         }
       }
     },
-    "jour": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "día"
-          }
-        }
-      }
-    },
     "jour de streak": {
       "localizations": {
         "en": {
@@ -8648,22 +8616,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "día de racha"
-          }
-        }
-      }
-    },
-    "jours": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "days"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "días"
           }
         }
       }
@@ -9502,22 +9454,6 @@
         }
       }
     },
-    "séance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "workout"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "entreno"
-          }
-        }
-      }
-    },
     "séance cette semaine": {
       "localizations": {
         "en": {
@@ -9530,22 +9466,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "entreno esta semana"
-          }
-        }
-      }
-    },
-    "séances": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "workouts"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "entrenos"
           }
         }
       }
