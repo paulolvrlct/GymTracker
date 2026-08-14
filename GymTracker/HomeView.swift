@@ -65,13 +65,14 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 14) {
                     header
+                    quickStartSection
                     NavigationLink {
                         ProgressionDetailView(progression: progression)
                     } label: {
                         LevelCard(progression: progression)
                     }
                     .buttonStyle(.plain)
-                    statsGrid
+                    if hasAnyStat { statsLine }
                     NavigationLink {
                         NutritionView()
                     } label: {
@@ -84,7 +85,6 @@ struct HomeView: View {
                         SupplementsCard()
                     }
                     .buttonStyle(.plain)
-                    quickStartSection
                     recentActivitySection
                     footerSignature
                 }
@@ -222,6 +222,56 @@ struct HomeView: View {
     /// « 23,5 t » en français comme en espagnol.
     private func oneDecimal(_ value: Double) -> String {
         value.formatted(.number.precision(.fractionLength(1)))
+    }
+
+    /// Vrai dès qu'un chiffre vaut la peine d'être montré.
+    private var hasAnyStat: Bool {
+        sessionsThisWeek > 0 || streak > 0 || volumeThisMonth > 0 || kmThisMonth > 0.05
+    }
+
+    /// Les chiffres du moment, sur **une seule ligne**.
+    ///
+    /// Remplace quatre cartes qui occupaient le tiers supérieur de l'écran. Et
+    /// une statistique à zéro n'est pas affichée du tout : le meilleur
+    /// emplacement de l'app ne doit pas servir à annoncer à quelqu'un qu'il n'a
+    /// rien fait. Le détail complet reste à un tap, dans l'onglet Progression.
+    private var statsLine: some View {
+        HStack(spacing: 0) {
+            if sessionsThisWeek > 0 {
+                statChip("flame.fill", .orange, "\(sessionsThisWeek)",
+                         sessionsThisWeek > 1 ? "séances" : "séance")
+            }
+            if streak > 0 {
+                statChip("bolt.fill", Color.brand, "\(streak)",
+                         streak > 1 ? "jours" : "jour")
+            }
+            if volumeThisMonth > 0 {
+                statChip("scalemass.fill", .purple, volumeText, "ce mois")
+            }
+            if kmThisMonth > 0.05 {
+                statChip("figure.run", .green, oneDecimal(kmThisMonth), "km")
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 11)
+        .glassCard()
+    }
+
+    private func statChip(_ icon: String, _ tint: Color,
+                          _ value: String, _ label: LocalizedStringKey) -> some View {
+        VStack(spacing: 2) {
+            Image(systemName: icon)
+                .font(.caption2)
+                .foregroundStyle(tint)
+            Text(value)
+                .font(.headline.monospacedDigit())
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: Grille de stats
