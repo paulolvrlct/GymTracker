@@ -638,6 +638,22 @@
         }
       }
     },
+    "Ajoute d'un coup tous les aliments reconnus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adds every food it recognises at once"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade de una vez todos los alimentos reconocidos"
+          }
+        }
+      }
+    },
     "Ajouter": {
       "localizations": {
         "en": {
@@ -922,6 +938,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alcanzable: %.1f kg (discos limitados)"
+          }
+        }
+      }
+    },
+    "Aucun aliment reconnu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No food recognised"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún alimento reconocido"
           }
         }
       }
@@ -2916,6 +2948,22 @@
         }
       }
     },
+    "Interpréter la phrase": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interpret the sentence"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interpretar la frase"
+          }
+        }
+      }
+    },
     "J'ai un code": {
       "localizations": {
         "en": {
@@ -4498,6 +4546,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Repetir el test"
+          }
+        }
+      }
+    },
+    "Reformule en nommant les aliments, par exemple « deux œufs et un bol de riz ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again naming the foods, for example “two eggs and a bowl of rice”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inténtalo nombrando los alimentos, por ejemplo «dos huevos y un bol de arroz»."
           }
         }
       }

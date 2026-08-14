@@ -389,6 +389,57 @@ struct AddFoodView: View {
     @State private var scannedProduct: ScannedProduct?
     // poids net du paquet du produit sélectionné (scan uniquement)
     @State private var selectedPackageGrams: Double?
+    @State private var isInterpreting = false
+    @State private var interpretationFailed = false
+
+    /// Une phrase, pas un mot-clé : au moins deux mots. En dessous, l'utilisateur
+    /// fait une recherche classique et la bannière n'aurait rien à interpréter.
+    private var looksLikeSentence: Bool {
+        query.split(separator: " ").count >= 2
+    }
+
+    /// Analyse la phrase, ajoute tous les aliments reconnus, puis referme.
+    ///
+    /// Le repas est déduit de l'heure : quelqu'un qui dicte son déjeuner à midi
+    /// n'a pas envie de le préciser en plus.
+    private func interpret() {
+        isInterpreting = true
+        Task {
+            defer { isInterpreting = false }
+            guard #available(iOS 26.0, *) else { return }
+            do {
+                let matches = try await NaturalFoodEntry.parse(query)
+                guard !matches.isEmpty else {
+                    interpretationFailed = true
+                    return
+                }
+                insert(matches)
+            } catch {
+                interpretationFailed = true
+            }
+        }
+    }
+
+    /// Insère les aliments reconnus, en reprenant la règle d'horodatage de
+    /// l'ajout manuel : maintenant si le jour affiché est aujourd'hui, midi sinon.
+    @available(iOS 26.0, *)
+    private func insert(_ matches: [NaturalFoodEntry.Match]) {
+        let date = Calendar.current.isDateInToday(day) ? Date.now
+            : Calendar.current.date(byAdding: .hour, value: 12, to: day) ?? day
+        let meal = MealKind.current.rawValue
+
+        for match in matches {
+            context.insert(FoodEntry(date: date, name: match.food.name, grams: match.grams,
+                                     kcalPer100: match.food.k, proteinPer100: match.food.p,
+                                     carbsPer100: match.food.c, fatPer100: match.food.f,
+                                     meal: meal, category: match.food.g))
+        }
+        context.saveLogging()
+        NutritionPlanner.publishForWidget(context: context)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        dismiss()
+    }
+
 
     /// Derniers aliments consommés, sans doublon, du plus récent au plus ancien
     private var recents: [CiqualFood] {
@@ -455,6 +506,39 @@ struct AddFoodView: View {
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 8)
+                }
+
+                // Saisie en langage naturel. Volontairement discrète : elle
+                // n'apparaît que si le modèle embarqué est disponible ET si la
+                // recherche ressemble à une phrase, pour ne pas parasiter la
+                // recherche classique par mot-clé.
+                if NaturalFoodEntry.isAvailable, looksLikeSentence {
+                    Button(action: interpret) {
+                        HStack(spacing: 10) {
+                            Image(systemName: "sparkles")
+                                .foregroundStyle(Color.brand)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Interpréter la phrase")
+                                    .font(.subheadline.weight(.medium))
+                                Text("Ajoute d'un coup tous les aliments reconnus")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            if isInterpreting { ProgressView() }
+                        }
+                        .padding(12)
+                        .background(Color.brand.opacity(0.12),
+                                    in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .padding(.horizontal)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(isInterpreting)
+                    .alert("Aucun aliment reconnu", isPresented: $interpretationFailed) {
+                        Button("OK", role: .cancel) {}
+                    } message: {
+                        Text("Reformule en nommant les aliments, par exemple « deux œufs et un bol de riz ».")
+                    }
                 }
 
                 if results.isEmpty {
