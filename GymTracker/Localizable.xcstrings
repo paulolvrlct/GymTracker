@@ -169,6 +169,22 @@
         }
       }
     },
+    "%lld jours d'affilée. C'est exactement comme ça que ça marche.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days in a row. That's exactly how this works."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld días seguidos. Así es justamente como funciona."
+          }
+        }
+      }
+    },
     "%lld kcal": {
       "shouldTranslate": false
     },
@@ -235,6 +251,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld semanas · %lld sesiones por semana"
+          }
+        }
+      }
+    },
+    "%lld séances cette semaine. Du solide.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld workouts this week. Solid."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld entrenos esta semana. Sólido."
           }
         }
       }
@@ -1444,6 +1476,22 @@
         }
       }
     },
+    "Coach LiftRun": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun coach"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coach LiftRun"
+          }
+        }
+      }
+    },
     "Coach nutrition": {
       "localizations": {
         "en": {
@@ -1616,6 +1664,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indicaciones técnicas"
+          }
+        }
+      }
+    },
+    "Content de te voir. Quand tu veux, on s'y met.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good to see you. Whenever you're ready, we go."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Me alegro de verte. Cuando quieras, empezamos."
           }
         }
       }
@@ -4220,6 +4284,22 @@
         }
       }
     },
+    "Prêt quand tu veux. Une première séance, et on commence à mesurer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready when you are. One first workout and we start measuring."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando quieras. Un primer entreno y empezamos a medir."
+          }
+        }
+      }
+    },
     "Quantité": {
       "localizations": {
         "en": {
@@ -5244,6 +5324,22 @@
         }
       }
     },
+    "Tes jambes travaillent : ça fait des kilomètres, ce mois-ci.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your legs are working: that's a good few kilometres this month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus piernas trabajan: llevas unos cuantos kilómetros este mes."
+          }
+        }
+      }
+    },
     "Tes points sont recalculés depuis ton historique. Ils restent donc justes, même si tu supprimes une séance.": {
       "localizations": {
         "en": {
@@ -5550,6 +5646,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Una repetición más"
+          }
+        }
+      }
+    },
+    "Une séance cette semaine, c'est déjà du concret.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One workout this week is already something real."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un entreno esta semana ya es algo real."
           }
         }
       }

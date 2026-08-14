@@ -150,23 +150,58 @@ struct HomeView: View {
     // MARK: En-tête
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(profileName.isEmpty ? greeting + " 👋" : "\(greeting), \(profileName) 👋")
-                .font(.largeTitle.weight(.bold))
-            // le nombre de jours est déjà mis en avant dans la carte « streak » :
-            // ici on garde un message d'encouragement sans répéter le chiffre
-            Text(streak > 0
-                 ? String(localized: "Belle régularité, garde le rythme 🔥")
-                 : InclusiveText.backAtItToday(UserSex(stored: profileSexRaw)))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center, spacing: 12) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(profileName.isEmpty ? greeting + " 👋" : "\(greeting), \(profileName) 👋")
+                        .font(.largeTitle.weight(.bold))
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
+                    // le nombre de jours est déjà mis en avant dans la carte
+                    // « streak » : ici on garde un encouragement sans le chiffre
+                    Text(streak > 0
+                         ? String(localized: "Belle régularité, garde le rythme 🔥")
+                         : InclusiveText.backAtItToday(UserSex(stored: profileSexRaw)))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer(minLength: 0)
+
+                // La mascotte occupe de l'espace HORIZONTAL libre : son coût
+                // vertical est nul, ce qui préserve la remontée de la carte
+                // Compléments au-dessus de la ligne de flottaison.
+                Button {
+                    withAnimation(.spring(response: 0.38, dampingFraction: 0.7)) {
+                        showsCoach.toggle()
+                    }
+                } label: {
+                    MascotView(mood: showsCoach ? .happy : .idle)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Coach LiftRun")
+            }
+
+            if showsCoach {
+                SpeechBubble(text: coachMessage)
+                    .transition(.scale(scale: 0.9, anchor: .topTrailing)
+                        .combined(with: .opacity))
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var coachMessage: String {
+        MascotCoach.message(totalSessions: sessions.count,
+                            streak: streak,
+                            sessionsThisWeek: sessionsThisWeek,
+                            kmThisMonth: kmThisMonth)
     }
 
     // MARK: Grille de stats
 
     @State private var statsAppeared = false
+    @State private var showsCoach = false
 
     private var statsGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
