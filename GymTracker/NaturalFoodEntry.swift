@@ -59,15 +59,68 @@ enum NaturalFoodEntry {
 
     /// Meilleure correspondance CIQUAL pour un nom d'aliment.
     ///
-    /// On retient le nom le plus court parmi les résultats : la table contient
-    /// beaucoup d'entrées très spécifiques (« riz blanc étuvé, cuit, non salé »)
-    /// et l'entrée générique est presque toujours la bonne réponse à une phrase
-    /// du quotidien.
+    /// La recherche de l'app fait du sous-chaîne brut, ce qui est acceptable
+    /// quand un humain lit la liste, mais désastreux pour un choix automatique :
+    /// « oeuf » y remonte « Boeuf aux carottes » et « riz » y remonte
+    /// « Chorizo ». On note donc les candidats plutôt que d'en prendre un.
+    ///
+    /// Le **mot de tête** pèse plus lourd que les autres, parce qu'en français
+    /// le nom principal vient en premier : « Lait de riz » est un lait, pas un
+    /// riz. Et les 219 aliments du quotidien sont favorisés sur les 2 298
+    /// entrées scientifiques, beaucoup plus spécifiques.
     static func bestMatch(for name: String) -> CiqualFood? {
-        let results = FoodCatalog.search(name)
-        guard !results.isEmpty else { return nil }
-        return results.min { $0.n.count < $1.n.count }
+        let query = normalised(name)
+        let queryWords = words(in: query)
+        guard !queryWords.isEmpty else { return nil }
+
+        var best: (score: Double, food: CiqualFood)?
+        for food in FoodCatalog.all {
+            guard let value = score(food, query: query, queryWords: queryWords) else { continue }
+            if best == nil || value > best!.score { best = (value, food) }
+        }
+        return best?.food
     }
+
+    private static func score(_ food: CiqualFood,
+                              query: String,
+                              queryWords: [String]) -> Double? {
+        let name = normalised(food.n)
+        let nameWords = words(in: name)
+        guard let head = nameWords.first else { return nil }
+
+        var base: Double
+        if name == query {
+            base = 1000
+        } else if name.hasPrefix(query) {
+            base = 900
+        } else if queryWords.allSatisfy({ token in
+            nameWords.contains { $0 == token || $0.hasPrefix(token) }
+        }) {
+            base = head.hasPrefix(queryWords[0]) ? 700 : 450
+        } else {
+            return nil   // sous-chaîne libre : refusée
+        }
+
+        if everydayNames.contains(food.n.lowercased()) { base += 200 }
+        // à score égal, le nom le plus court est le plus générique
+        return base - Double(name.count) * 0.4
+    }
+
+    /// Minuscules, sans accent, ligatures dépliées : « Œuf » et « oeuf » doivent
+    /// se rencontrer.
+    private static func normalised(_ text: String) -> String {
+        text.lowercased()
+            .replacingOccurrences(of: "œ", with: "oe")
+            .replacingOccurrences(of: "æ", with: "ae")
+            .folding(options: .diacriticInsensitive, locale: Locale(identifier: "fr"))
+    }
+
+    private static func words(in text: String) -> [String] {
+        text.split { !$0.isLetter && !$0.isNumber }.map(String.init)
+    }
+
+    private static let everydayNames: Set<String> =
+        Set(FoodCatalog.common.map { $0.n.lowercased() })
 
     private static let instructions = """
         Tu extrais la liste des aliments mentionnés dans une phrase.
