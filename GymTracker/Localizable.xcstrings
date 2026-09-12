@@ -524,18 +524,18 @@
         }
       }
     },
-    "%lld records battus": {
+    "%lld records": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld personal records"
+            "value": "%lld records"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld récords batidos"
+            "value": "%lld récords"
           }
         }
       }
@@ -603,6 +603,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld semanas · %lld sesiones por semana"
+          }
+        }
+      }
+    },
+    "%lld sorties": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld runs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld salidas"
+          }
+        }
+      }
+    },
+    "%lld séances": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sesiones"
           }
         }
       }
@@ -772,18 +804,18 @@
         }
       }
     },
-    "1 record battu": {
+    "1 record": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "1 personal record"
+            "value": "1 record"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "1 récord batido"
+            "value": "1 récord"
           }
         }
       }
@@ -800,6 +832,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 semana cumpliendo el objetivo"
+          }
+        }
+      }
+    },
+    "1 sortie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 salida"
+          }
+        }
+      }
+    },
+    "1 séance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 sesión"
           }
         }
       }
@@ -1344,22 +1408,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alcanzable: %.1f kg (discos limitados)"
-          }
-        }
-      }
-    },
-    "Au format story (9:16) : prête pour Instagram, WhatsApp ou le groupe de ta salle.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Story format (9:16): ready for Instagram, WhatsApp or your gym's group chat."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Formato historia (9:16): lista para Instagram, WhatsApp o el grupo de tu gimnasio."
           }
         }
       }
@@ -1922,6 +1970,22 @@
         }
       }
     },
+    "Braise": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brasa"
+          }
+        }
+      }
+    },
     "Bras + Dos · 50-60 min": {
       "localizations": {
         "en": {
@@ -2084,6 +2148,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calendario"
+          }
+        }
+      }
+    },
+    "Carré": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Square"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuadrado"
           }
         }
       }
@@ -3726,6 +3806,22 @@
         }
       }
     },
+    "Force": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza"
+          }
+        }
+      }
+    },
     "Format": {
       "localizations": {
         "en": {
@@ -4931,6 +5027,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nuevo entreno"
+          }
+        }
+      }
+    },
+    "Nuit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche"
           }
         }
       }
@@ -6469,6 +6581,38 @@
         }
       }
     },
+    "Story": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historia"
+          }
+        }
+      }
+    },
+    "Story pour Instagram et WhatsApp, carré pour une publication ou le groupe de ta salle.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story for Instagram and WhatsApp, square for a post or your gym's group chat."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historia para Instagram y WhatsApp, cuadrado para una publicación o el grupo de tu gimnasio."
+          }
+        }
+      }
+    },
     "Structure et instructions issues du dataset « exercises-dataset » © 2026 Hasan Emir Yıldırım, sous licence MIT. Les médias d'origine (© Gym visual) ne sont pas utilisés dans cette app.": {
       "localizations": {
         "en": {
@@ -7597,6 +7741,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Volumen levantado"
+          }
+        }
+      }
+    },
+    "aucune sortie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no runs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ninguna salida"
+          }
+        }
+      }
+    },
+    "aucune séance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ninguna sesión"
           }
         }
       }
@@ -10703,38 +10879,6 @@
         }
       }
     },
-    "jour actif": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "active day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "día activo"
-          }
-        }
-      }
-    },
-    "jours actifs": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "active days"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "días activos"
-          }
-        }
-      }
-    },
     "kg": {
       "shouldTranslate": false
     },
@@ -10800,6 +10944,22 @@
     },
     "openstreetmap.org/copyright": {
       "shouldTranslate": false
+    },
+    "plus longue %@ km": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "longest %@ km"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la más larga %@ km"
+          }
+        }
+      }
     },
     "progression.tier.consistency": {
       "comment": "Titre de palier - nom, sans accord de genre",
@@ -11617,22 +11777,6 @@
         }
       }
     },
-    "séance de muscu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "strength session"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "sesión de fuerza"
-          }
-        }
-      }
-    },
     "séances cette semaine": {
       "localizations": {
         "en": {
@@ -11645,38 +11789,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "entrenos esta semana"
-          }
-        }
-      }
-    },
-    "séances de muscu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "strength sessions"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "sesiones de fuerza"
-          }
-        }
-      }
-    },
-    "tonnes soulevées": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "tonnes lifted"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "toneladas levantadas"
           }
         }
       }
