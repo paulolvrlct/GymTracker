@@ -73,7 +73,8 @@ struct RunningView: View {
                 RunCelebrationView(run: run)
             }
             .onAppear {
-                tracker.requestAuthorization()
+                // La localisation n'est plus demandée ici mais au départ d'une
+                // course (`RunTracker.start()`), là où elle a un sens.
                 #if DEBUG
                 // Captures d'écran automatisées : `-debugOpenHybridRace YES`.
                 if UserDefaults.standard.bool(forKey: "debugOpenHybridRace") { showHybridRace = true }

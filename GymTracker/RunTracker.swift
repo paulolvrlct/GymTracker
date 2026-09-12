@@ -34,16 +34,20 @@ final class RunTracker: NSObject, ObservableObject {
 
     // MARK: Contrôle
 
-    func requestAuthorization() {
-        manager.requestWhenInUseAuthorization()
-    }
-
     func start() {
         guard !isRunning else { return }
         reset()
         isRunning = true
         isPaused = false
         startDate = .now
+
+        // Permission demandée au moment où l'on appuie sur « Démarrer » : c'est
+        // là qu'elle a un sens. Demandée à l'affichage de l'onglet Course, elle
+        // surgissait dès le lancement de l'app, le système préchargeant les
+        // onglets. Le suivi démarre dès l'accord (voir le délégué).
+        if manager.authorizationStatus == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        }
 
         manager.allowsBackgroundLocationUpdates = true   // suivi écran verrouillé
         manager.pausesLocationUpdatesAutomatically = false
@@ -149,6 +153,11 @@ extension RunTracker: CLLocationManagerDelegate {
             switch manager.authorizationStatus {
             case .denied, .restricted: authorizationDenied = true
             default: authorizationDenied = false
+            }
+            // Accord donné pendant une course déjà lancée : le suivi démarre.
+            let status = self.manager.authorizationStatus
+            if isRunning, !isPaused, status == .authorizedWhenInUse || status == .authorizedAlways {
+                self.manager.startUpdatingLocation()
             }
         }
     }
