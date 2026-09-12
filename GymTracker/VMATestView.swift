@@ -59,6 +59,13 @@ struct VMATestView: View {
                 bullet("Reste en extérieur, GPS dégagé : c'est lui qui mesure la distance.")
             }
 
+            // Test à effort maximal : la mise en garde est affichée avant de
+            // pouvoir le lancer, pas enfouie dans des mentions légales.
+            Label("Effort maximal : évite ce test en cas de douleur, de contre-indication médicale ou de reprise après une longue pause. Dans le doute, demande l'avis d'un médecin.",
+                  systemImage: "heart.text.square")
+                .font(.footnote)
+                .foregroundStyle(.orange)
+
             if let vma = VMAStore.value, let date = VMAStore.testDate {
                 Divider()
                 LabeledContent("Ta VMA actuelle") {

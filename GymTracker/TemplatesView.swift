@@ -238,12 +238,15 @@ struct TemplateEditorView: View {
         .toolbar { EditButton() }
         .sheet(isPresented: $showLibraryPicker) {
             ExerciseLibraryView { catalogEx in
+                // Nom traduit et nettoyé plutôt que le nom anglais brut du
+                // dataset. Les consignes restent sur la fiche (bouton livre) au
+                // lieu d'encombrer les notes d'un paragraphe en anglais.
                 let ex = ExerciseTemplate(
-                    name: catalogEx.name.capitalized,
+                    name: catalogEx.displayName,
                     targetSets: 3,
                     repRange: "8-12",
                     restSeconds: 90,
-                    notes: catalogEx.steps.joined(separator: " "),
+                    notes: "",
                     order: template.exercises.count,
                     catalogID: catalogEx.id
                 )

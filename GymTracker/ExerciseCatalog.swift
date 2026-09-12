@@ -19,7 +19,18 @@ struct CatalogExercise: Codable, Identifiable, Hashable {
 
     /// Nom affiché : traduction curée si elle existe, sinon le nom source du
     /// dataset — cf. `ExerciseNames`.
-    var displayName: String { ExerciseNames.localized(id: id) ?? name.capitalized }
+    var displayName: String { ExerciseNames.localized(id: id) ?? Self.cleaned(name) }
+
+    /// Nom source débarrassé des scories du dataset (« V. 2 », « (male) ») :
+    /// des détails de numérotation interne, pas des noms d'exercice.
+    static func cleaned(_ raw: String) -> String {
+        var text = raw
+        for pattern in [#"\s*\((male|female)\)"#, #"\s+v\.\s*\d+"#] {
+            text = text.replacingOccurrences(of: pattern, with: "",
+                                             options: [.regularExpression, .caseInsensitive])
+        }
+        return text.trimmingCharacters(in: .whitespaces).capitalized
+    }
 
     /// Libellés traduits (FR/EN/ES) du vocabulaire du dataset — cf. `ExerciseTaxonomy`.
     var categoryLabel: String { ExerciseTaxonomy.category(category) }

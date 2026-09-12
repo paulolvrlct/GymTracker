@@ -3454,6 +3454,22 @@
         }
       }
     },
+    "Effort maximal : évite ce test en cas de douleur, de contre-indication médicale ou de reprise après une longue pause. Dans le doute, demande l'avis d'un médecin.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximal effort: skip this test if you're in pain, have a medical contraindication or are coming back after a long break. If in doubt, ask a doctor."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esfuerzo máximo: evita esta prueba si tienes dolor, una contraindicación médica o vuelves tras un largo parón. En caso de duda, consulta a un médico."
+          }
+        }
+      }
+    },
     "Enregistrement impossible": {
       "localizations": {
         "en": {
