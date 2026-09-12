@@ -144,6 +144,12 @@ struct HomeView: View {
             .onChange(of: weeklyGoal) {
                 WidgetCenter.shared.reloadTimelines(ofKind: "StreakWidget")
             }
+            // Prévision de forme pour le widget : republiée à chaque nouvelle
+            // activité, et au retour sur l'accueil pour couvrir les 48 h suivantes.
+            .task(id: forecastSignature) {
+                TodayState.publishForecast(templates: templates, sessions: sessions,
+                                           runs: runs, races: races)
+            }
             .sheet(isPresented: $showProfile) {
                 ProfileView()
             }
@@ -159,6 +165,12 @@ struct HomeView: View {
     /// Recalculé à chaque rendu, comme `progression` et `briefing`.
     private var today: TodayState {
         TodayState.make(templates: templates, sessions: sessions, runs: runs, races: races)
+    }
+
+    /// Change dès qu'une activité est ajoutée ou supprimée, et toutes les 3 h.
+    private var forecastSignature: String {
+        let slot = Calendar.current.component(.hour, from: .now) / 3
+        return "\(sessions.count)-\(runs.count)-\(races.count)-\(templates.count)-\(slot)"
     }
 
     private func start(_ action: TodayPlan.Action) {

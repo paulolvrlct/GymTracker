@@ -335,3 +335,134 @@ struct RunShortcutWidget: Widget {
         .supportedFamilies([.systemSmall])
     }
 }
+
+// MARK: - Widget Forme du jour
+
+struct ReadinessEntry: TimelineEntry {
+    let date: Date
+    /// nil tant que l'app n'a jamais publié de prévision.
+    let point: ReadinessForecastPoint?
+}
+
+struct ReadinessProvider: TimelineProvider {
+    func placeholder(in context: Context) -> ReadinessEntry {
+        ReadinessEntry(date: .now,
+                       point: ReadinessForecastPoint(date: .now, score: 82, title: "Séance B"))
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (ReadinessEntry) -> Void) {
+        completion(currentEntry())
+    }
+
+    /// Une entrée par point de la prévision encore à venir : le widget change
+    /// de lui-même au fil des heures, sans réveiller l'app.
+    func getTimeline(in context: Context, completion: @escaping (Timeline<ReadinessEntry>) -> Void) {
+        let points = ReadinessForecast.load()
+        let now = Date.now
+        // Le point en cours (dernier passé) puis tous les suivants.
+        let current = points.last { $0.date <= now }
+        let upcoming = points.filter { $0.date > now }
+        var entries = [ReadinessEntry(date: now, point: current ?? upcoming.first)]
+        entries += upcoming.map { ReadinessEntry(date: $0.date, point: $0) }
+        completion(Timeline(entries: entries, policy: .atEnd))
+    }
+
+    private func currentEntry() -> ReadinessEntry {
+        let points = ReadinessForecast.load()
+        let point = points.last { $0.date <= .now } ?? points.first
+        return ReadinessEntry(date: .now, point: point)
+    }
+}
+
+struct ReadinessWidgetView: View {
+    let entry: ReadinessEntry
+    @Environment(\.widgetFamily) private var family
+
+    private var tint: Color {
+        guard let score = entry.point?.score else { return .secondary }
+        switch score {
+        case 80...: return .green
+        case 60...: return .yellow
+        case 40...: return .orange
+        default:    return .red
+        }
+    }
+
+    var body: some View {
+        Group {
+            switch family {
+            case .accessoryCircular: circular
+            case .accessoryRectangular: rectangular
+            default: small
+            }
+        }
+        .containerBackground(.fill.tertiary, for: .widget)
+    }
+
+    private var circular: some View {
+        Gauge(value: Double(entry.point?.score ?? 0), in: 0...100) {
+            Image(systemName: "bolt.heart.fill")
+        } currentValueLabel: {
+            Text(entry.point.map { "\($0.score)" } ?? "–")
+        }
+        .gaugeStyle(.accessoryCircularCapacity)
+    }
+
+    private var rectangular: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("Forme du jour").font(.caption2.weight(.semibold))
+            if let point = entry.point {
+                Text("\(point.score) · \(point.title)")
+                    .font(.headline)
+                    .lineLimit(1)
+            } else {
+                Text("Ouvre LiftRun").font(.headline)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var small: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                ZStack {
+                    Circle().stroke(tint.opacity(0.2), lineWidth: 6)
+                    Circle()
+                        .trim(from: 0, to: Double(entry.point?.score ?? 0) / 100)
+                        .stroke(tint, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                        .rotationEffect(.degrees(-90))
+                    Text(entry.point.map { "\($0.score)" } ?? "–")
+                        .font(.system(size: 18, weight: .bold, design: .rounded).monospacedDigit())
+                }
+                .frame(width: 50, height: 50)
+                Spacer(minLength: 0)
+            }
+            Spacer(minLength: 0)
+            Text("Aujourd'hui")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .textCase(.uppercase)
+            if let point = entry.point {
+                Text(point.title)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(2)
+            } else {
+                Text("Ouvre LiftRun pour calculer ta forme.")
+                    .font(.caption)
+                    .lineLimit(3)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+    }
+}
+
+struct ReadinessWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: ReadinessForecast.widgetKind, provider: ReadinessProvider()) { entry in
+            ReadinessWidgetView(entry: entry)
+        }
+        .configurationDisplayName("Forme du jour")
+        .description("Ta forme du jour et la séance conseillée, muscu et course confondues.")
+        .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular])
+    }
+}

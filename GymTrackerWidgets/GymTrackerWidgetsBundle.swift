@@ -9,6 +9,7 @@ struct GymTrackerWidgetsBundle: WidgetBundle {
         RestTimerLiveActivity()
         RunLiveActivity()
         StreakWidget()
+        ReadinessWidget()
         VolumeChartWidget()
         CalorieWidget()
         RunShortcutWidget()

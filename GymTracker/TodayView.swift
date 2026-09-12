@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 // MARK: - Nom d'exercice → zones sollicitées
 
@@ -95,6 +96,38 @@ struct TodayState {
                                   lastRun: runs.first?.date,
                                   lastWorkout: sessions.first?.date, now: now)
         return TodayState(readiness: readiness, plan: plan)
+    }
+}
+
+// MARK: - Prévision pour le widget
+
+extension TodayState {
+    /// Forme et séance conseillée toutes les 3 h sur les 48 prochaines heures,
+    /// en supposant qu'aucune activité n'est enregistrée d'ici là : c'est ce
+    /// qui permet au widget d'évoluer seul au fil de la journée.
+    static func forecast(templates: [WorkoutTemplate],
+                         sessions: [WorkoutSession],
+                         runs: [RunSession],
+                         races: [HybridRaceResult],
+                         from start: Date = .now) -> [ReadinessForecastPoint] {
+        stride(from: 0, through: 48, by: 3).map { hours in
+            let date = start.addingTimeInterval(Double(hours) * 3600)
+            let state = make(templates: templates, sessions: sessions, runs: runs,
+                             races: races, now: date)
+            return ReadinessForecastPoint(date: date, score: state.readiness.score,
+                                          title: state.plan.action.title)
+        }
+    }
+
+    /// Publie la prévision et demande au widget de se redessiner.
+    @MainActor
+    static func publishForecast(templates: [WorkoutTemplate],
+                                sessions: [WorkoutSession],
+                                runs: [RunSession],
+                                races: [HybridRaceResult]) {
+        ReadinessForecast.save(forecast(templates: templates, sessions: sessions,
+                                        runs: runs, races: races))
+        WidgetCenter.shared.reloadTimelines(ofKind: ReadinessForecast.widgetKind)
     }
 }
 

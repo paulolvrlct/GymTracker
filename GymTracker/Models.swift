@@ -371,3 +371,37 @@ final class HybridRaceResult {
     var splits: [Int] { splitsEncoded.split(separator: ",").compactMap { Int($0) } }
     var totalSeconds: Int { splits.reduce(0, +) }
 }
+
+// MARK: - Forme du jour, pour le widget (partagé app ↔ widget)
+
+/// Un point de la prévision de forme : note et séance conseillée à une heure
+/// donnée.
+struct ReadinessForecastPoint: Codable, Hashable {
+    let date: Date
+    let score: Int
+    let title: String
+}
+
+/// Prévision de forme publiée par l'app pour le widget.
+///
+/// Le widget n'a ni le catalogue d'exercices ni le moteur de récupération.
+/// Plutôt que de les dupliquer, l'app calcule d'avance la forme heure par
+/// heure pour les deux prochains jours — la fatigue ne fait que décroître
+/// tant qu'on ne s'entraîne pas — et le widget affiche le point de l'heure.
+/// C'est exactement le modèle des timelines WidgetKit.
+enum ReadinessForecast {
+    static let key = "widget.readinessForecast"
+    static let widgetKind = "ReadinessWidget"
+
+    static func save(_ points: [ReadinessForecastPoint]) {
+        guard let data = try? JSONEncoder().encode(points) else { return }
+        SharedStore.groupDefaults?.set(data, forKey: key)
+    }
+
+    static func load() -> [ReadinessForecastPoint] {
+        guard let data = SharedStore.groupDefaults?.data(forKey: key),
+              let points = try? JSONDecoder().decode([ReadinessForecastPoint].self, from: data)
+        else { return [] }
+        return points
+    }
+}

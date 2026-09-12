@@ -20,15 +20,30 @@
         }
       }
     },
-    "%lld/%lld": {
+    "%lld · %@": {
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld · %@"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "new",
-            "value": "%1$lld/%2$lld"
+            "value": "%1$lld · %2$@"
           }
         }
       }
+    },
+    "%lld/%lld": {
+      "shouldTranslate": false
     },
     "1 semaine d'affilée": {
       "localizations": {
@@ -42,6 +57,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 semana seguida"
+          }
+        }
+      }
+    },
+    "Aujourd'hui": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
           }
         }
       }
@@ -110,6 +141,22 @@
         }
       }
     },
+    "Forme du jour": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's readiness"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma del día"
+          }
+        }
+      }
+    },
     "Objectif de la semaine": {
       "localizations": {
         "en": {
@@ -122,6 +169,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Objetivo semanal"
+          }
+        }
+      }
+    },
+    "Ouvre LiftRun": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open LiftRun"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre LiftRun"
+          }
+        }
+      }
+    },
+    "Ouvre LiftRun pour calculer ta forme.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open LiftRun to work out your readiness."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre LiftRun para calcular tu forma."
           }
         }
       }
@@ -202,6 +281,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semana"
+          }
+        }
+      }
+    },
+    "Ta forme du jour et la séance conseillée, muscu et course confondues.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's readiness and the suggested session, lifting and running combined."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu forma del día y la sesión recomendada, fuerza y carrera juntas."
           }
         }
       }
@@ -384,7 +479,8 @@
           }
         }
       }
-    }
+    },
+    "–": {}
   },
   "version": "1.0"
 }
