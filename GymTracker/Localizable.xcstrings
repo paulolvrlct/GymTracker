@@ -676,6 +676,38 @@
     "/ %lld kcal": {
       "shouldTranslate": false
     },
+    "1 km": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 km"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 km"
+          }
+        }
+      }
+    },
+    "1 km de course, un atelier, et on recommence. Le format qui fait exploser l'entraînement hybride, chronométré segment par segment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 km of running, one station, repeat. The format behind the hybrid training boom, timed segment by segment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 km de carrera, una estación, y otra vez. El formato que ha disparado el entrenamiento híbrido, cronometrado segmento a segmento."
+          }
+        }
+      }
+    },
     "10 km, semi-marathon, marathon": {
       "localizations": {
         "en": {
@@ -708,6 +740,22 @@
         }
       }
     },
+    "8 × 1 km + 8 ateliers, chronométré": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 × 1 km + 8 stations, timed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 × 1 km + 8 estaciones, cronometrado"
+          }
+        }
+      }
+    },
     "Abandonner": {
       "localizations": {
         "en": {
@@ -720,6 +768,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abandonar"
+          }
+        }
+      }
+    },
+    "Abandonner la course ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit the race?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Abandonar la carrera?"
           }
         }
       }
@@ -1188,6 +1252,22 @@
         }
       }
     },
+    "Au vert %@ matin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green %@ morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde el %@ por la mañana"
+          }
+        }
+      }
+    },
     "Au vert %@ vers %@": {
       "localizations": {
         "en": {
@@ -1206,6 +1286,38 @@
           "stringUnit": {
             "state": "new",
             "value": "Au vert %1$@ vers %2$@"
+          }
+        }
+      }
+    },
+    "Au vert ce matin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green this morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde esta mañana"
+          }
+        }
+      }
+    },
+    "Au vert demain matin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green tomorrow morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde mañana por la mañana"
           }
         }
       }
@@ -1470,6 +1582,22 @@
           "stringUnit": {
             "state": "new",
             "value": "Aujourd'hui : %1$lld × %2$@ kg, on consolide"
+          }
+        }
+      }
+    },
+    "Aussi rapide ou plus rapide que ton record sur chaque segment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As fast as or faster than your best on every segment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Igual o más rápido que tu récord en cada segmento."
           }
         }
       }
@@ -1762,6 +1890,28 @@
         }
       }
     },
+    "C'est sur « %@ » que tu as perdu le plus de temps par rapport à ton record (%@).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” is where you lost the most time against your best (%@)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Donde más tiempo perdiste frente a tu récord fue en «%@» (%@)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "C'est sur « %1$@ » que tu as perdu le plus de temps par rapport à ton record (%2$@)."
+          }
+        }
+      }
+    },
     "C'est une estimation à partir de ce que tu enregistres, pas un avis médical : tes sensations passent en premier.": {
       "localizations": {
         "en": {
@@ -1838,6 +1988,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catálogo de ejercicios"
+          }
+        }
+      }
+    },
+    "Catégorie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Division"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría"
           }
         }
       }
@@ -2514,6 +2680,22 @@
         }
       }
     },
+    "Course %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera %lld"
+          }
+        }
+      }
+    },
     "Course de qualité": {
       "localizations": {
         "en": {
@@ -2526,6 +2708,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Carrera de calidad"
+          }
+        }
+      }
+    },
+    "Course hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hybrid race"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera híbrida"
+          }
+        }
+      }
+    },
+    "Course terminée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Race complete"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera terminada"
           }
         }
       }
@@ -3160,6 +3374,22 @@
         }
       }
     },
+    "Ensuite : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next up: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Después: %@"
+          }
+        }
+      }
+    },
     "Essaie « Tout » pour chercher dans la table complète.": {
       "localizations": {
         "en": {
@@ -3364,6 +3594,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rodaje suave"
+          }
+        }
+      }
+    },
+    "Format": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato"
           }
         }
       }
@@ -3918,6 +4164,22 @@
         }
       }
     },
+    "Les temps de cette course ne seront pas enregistrés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times from this race won't be saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los tiempos de esta carrera no se guardarán."
+          }
+        }
+      }
+    },
     "Licences et crédits": {
       "localizations": {
         "en": {
@@ -4442,6 +4704,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notas"
+          }
+        }
+      }
+    },
+    "Nouveau record !": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New record!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Nuevo récord!"
           }
         }
       }
@@ -5072,6 +5350,22 @@
         }
       }
     },
+    "Premier chrono enregistré : ta prochaine course se comparera à celle-ci, segment par segment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First time logged: your next race will be compared to this one, segment by segment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primer tiempo registrado: tu próxima carrera se comparará con esta, segmento a segmento."
+          }
+        }
+      }
+    },
     "Premium": {
       "localizations": {
         "en": {
@@ -5356,6 +5650,44 @@
           "stringUnit": {
             "state": "translated",
             "value": "¡Récord!"
+          }
+        }
+      }
+    },
+    "Record : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord: %@"
+          }
+        }
+      }
+    },
+    "Record précédent : %@ (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous best: %@ (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord anterior: %@ (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Record précédent : %1$@ (%2$@)"
           }
         }
       }
@@ -5728,6 +6060,44 @@
         }
       }
     },
+    "Segment %lld / %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segment %lld / %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segmento %lld / %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Segment %1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "Segment précédent : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous segment: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segmento anterior: %@"
+          }
+        }
+      }
+    },
     "Semaine %lld · %@": {
       "localizations": {
         "en": {
@@ -5884,6 +6254,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estructura e instrucciones del conjunto de datos “exercises-dataset” © 2026 Hasan Emir Yıldırım, con licencia MIT. Los medios originales (© Gym visual) no se usan en esta app."
+          }
+        }
+      }
+    },
+    "Suivant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siguiente"
           }
         }
       }
@@ -6460,6 +6846,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu nombre"
+          }
+        }
+      }
+    },
+    "Ton record sur ce segment : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your best on this segment: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu récord en este segmento: %@"
           }
         }
       }
@@ -7128,6 +7530,22 @@
     },
     "ciqual.anses.fr": {
       "shouldTranslate": false
+    },
+    "en course": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "corriendo"
+          }
+        }
+      }
     },
     "et %lld de plus…": {
       "localizations": {
@@ -9474,6 +9892,314 @@
     "github.com/yuhonas/free-exercise-db": {
       "shouldTranslate": false
     },
+    "hybrid.division.openMen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open men"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open hombres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open hommes"
+          }
+        }
+      }
+    },
+    "hybrid.division.openWomen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open women"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open mujeres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open femmes"
+          }
+        }
+      }
+    },
+    "hybrid.division.proMen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro men"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro hombres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro hommes"
+          }
+        }
+      }
+    },
+    "hybrid.division.proWomen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro women"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro mujeres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro femmes"
+          }
+        }
+      }
+    },
+    "hybrid.format.full": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full race"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera completa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Course complète"
+          }
+        }
+      }
+    },
+    "hybrid.format.half": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Half race"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media carrera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demi-course"
+          }
+        }
+      }
+    },
+    "hybrid.station.burpeeBroadJump": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpee broad jumps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpees con salto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpees sautés"
+          }
+        }
+      }
+    },
+    "hybrid.station.farmersCarry": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farmers carry"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paseo del granjero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porté de charges"
+          }
+        }
+      }
+    },
+    "hybrid.station.rowing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rameur"
+          }
+        }
+      }
+    },
+    "hybrid.station.sandbagLunges": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sandbag lunges"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zancadas con saco"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fentes sac lesté"
+          }
+        }
+      }
+    },
+    "hybrid.station.skiErg": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ski erg"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergómetro de esquí"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ski-ergomètre"
+          }
+        }
+      }
+    },
+    "hybrid.station.sledPull": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sled pull"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastre de trineo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traîneau tiré"
+          }
+        }
+      }
+    },
+    "hybrid.station.sledPush": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sled push"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empuje de trineo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traîneau poussé"
+          }
+        }
+      }
+    },
+    "hybrid.station.wallBalls": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wall balls"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wall balls"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wall balls"
+          }
+        }
+      }
+    },
     "inclusive.backAtItToday.f": {
       "comment": "Accord féminin - choisi selon profileSex",
       "localizations": {
@@ -10600,6 +11326,22 @@
         }
       }
     },
+    "sur les ateliers": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "on stations"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "en estaciones"
+          }
+        }
+      }
+    },
     "séance cette semaine": {
       "localizations": {
         "en": {
@@ -10740,6 +11482,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calienta antes de empezar: el cronómetro arranca de inmediato."
+          }
+        }
+      }
+    },
+    "Échauffe-toi avant de partir. Touche « Suivant » à la fin de chaque kilomètre et de chaque atelier : le chrono enchaîne tout seul. Effort très intense : adapte les charges à ton niveau.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm up before you start. Tap “Next” at the end of every kilometre and every station: the timer rolls on by itself. Very intense effort: adjust the loads to your level."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calienta antes de salir. Toca «Siguiente» al final de cada kilómetro y de cada estación: el crono sigue solo. Esfuerzo muy intenso: adapta las cargas a tu nivel."
           }
         }
       }

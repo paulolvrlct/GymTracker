@@ -10,6 +10,7 @@ struct HomeView: View {
     @Query private var intakes: [SupplementIntake]
     @Query private var allSets: [SetRecord]
     @Query private var food: [FoodEntry]
+    @Query(sort: \HybridRaceResult.date, order: .reverse) private var races: [HybridRaceResult]
 
     /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
     /// quand elle recommande une course.
@@ -52,7 +53,9 @@ struct HomeView: View {
     private var weekly: WeeklyStreak.Status {
         WeeklyStreak.status(activityDates: activityDates, goal: weeklyGoal)
     }
-    private var activityDates: [Date] { sessions.map(\.date) + runs.map(\.date) }
+    private var activityDates: [Date] {
+        sessions.map(\.date) + runs.map(\.date) + races.map(\.date)
+    }
 
     private var greeting: String {
         let h = calendar.component(.hour, from: .now)
@@ -120,6 +123,12 @@ struct HomeView: View {
             .navigationDestination(isPresented: $showRecovery) {
                 RecoveryDetailView(state: today, onStart: start)
             }
+            #if DEBUG
+            .onAppear {
+                // Captures d'écran automatisées : `-debugOpenRecovery YES`.
+                if UserDefaults.standard.bool(forKey: "debugOpenRecovery") { showRecovery = true }
+            }
+            #endif
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()
             }
@@ -143,7 +152,7 @@ struct HomeView: View {
 
     /// Recalculé à chaque rendu, comme `progression` et `briefing`.
     private var today: TodayState {
-        TodayState.make(templates: templates, sessions: sessions, runs: runs)
+        TodayState.make(templates: templates, sessions: sessions, runs: runs, races: races)
     }
 
     private func start(_ action: TodayPlan.Action) {

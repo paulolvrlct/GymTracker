@@ -13,6 +13,7 @@ struct RunningView: View {
     @State private var selectedCircuit: RunCircuit?
     @State private var previewedCircuit: RunCircuit?
     @State private var showVMATest = false
+    @State private var showHybridRace = false
     /// Observé pour que l'accord se mette à jour dès que le genre change au profil.
     @AppStorage("profileSex") private var profileSexRaw = UserSex.unspecified.rawValue
     @State private var celebratedRun: RunSession?
@@ -23,6 +24,7 @@ struct RunningView: View {
                 VStack(spacing: 16) {
                     startCard
                     middleDistanceSection
+                    hybridRaceSection
                     plansSection
                     if !CircuitLibrary.all.isEmpty { circuitsSection }
                     if !pastRuns.isEmpty { historySection }
@@ -33,6 +35,7 @@ struct RunningView: View {
             .navigationTitle("Course")
             .sheet(isPresented: $showPaywall) { PaywallView() }
             .sheet(isPresented: $showVMATest) { VMATestView(tracker: tracker) }
+            .fullScreenCover(isPresented: $showHybridRace) { HybridRaceView() }
             .sheet(item: $previewedCircuit) { circuit in
                 CircuitPreviewView(circuit: circuit,
                                    isSelected: selectedCircuit == circuit) {
@@ -69,7 +72,13 @@ struct RunningView: View {
             .fullScreenCover(item: $celebratedRun) { run in
                 RunCelebrationView(run: run)
             }
-            .onAppear { tracker.requestAuthorization() }
+            .onAppear {
+                tracker.requestAuthorization()
+                #if DEBUG
+                // Captures d'écran automatisées : `-debugOpenHybridRace YES`.
+                if UserDefaults.standard.bool(forKey: "debugOpenHybridRace") { showHybridRace = true }
+                #endif
+            }
         }
     }
 
@@ -147,6 +156,37 @@ struct RunningView: View {
                         Text("Mesure ta VMA pour obtenir tes allures")
                             .font(.subheadline).foregroundStyle(.secondary)
                     }
+                }
+                Spacer()
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(14)
+            .background(.background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: Course hybride
+
+    /// Entrée du simulateur de course hybride. Gratuit, comme le demi-fond :
+    /// c'est le terrain où aucune app de muscu ni de course ne va.
+    private var hybridRaceSection: some View {
+        Button {
+            showHybridRace = true
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "flag.checkered")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .frame(width: 46, height: 46)
+                    .background(LinearGradient(colors: [.orange, .pink],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing),
+                                in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Course hybride").font(.headline)
+                    Text("8 × 1 km + 8 ateliers, chronométré")
+                        .font(.subheadline).foregroundStyle(.secondary)
                 }
                 Spacer()
                 Image(systemName: "chevron.right").font(.caption.weight(.semibold))

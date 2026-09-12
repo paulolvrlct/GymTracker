@@ -215,7 +215,8 @@ enum SharedStore {
     static var schema: Schema {
         Schema([WorkoutTemplate.self, ExerciseTemplate.self,
                 WorkoutSession.self, SetRecord.self, RunSession.self,
-                FoodEntry.self, Supplement.self, SupplementIntake.self])
+                FoodEntry.self, Supplement.self, SupplementIntake.self,
+                HybridRaceResult.self])
     }
 
     static func makeContainer() throws -> ModelContainer {
@@ -345,4 +346,28 @@ enum WeeklyStreak {
         }
         return Status(weeks: weeks, thisWeek: thisWeek, goal: goal)
     }
+}
+
+// MARK: - Simulation de course hybride
+
+/// Une simulation terminée : le temps de chaque segment (course, atelier,
+/// course…). Format et catégorie sont stockés en texte pour que le widget,
+/// qui ne connaît pas `HybridRace`, puisse lire la base sans rien de plus.
+@Model
+final class HybridRaceResult {
+    var date: Date
+    var formatRaw: String
+    var divisionRaw: String
+    /// Durées des segments en secondes, séparées par des virgules.
+    var splitsEncoded: String
+
+    init(date: Date = .now, formatRaw: String, divisionRaw: String, splits: [Int]) {
+        self.date = date
+        self.formatRaw = formatRaw
+        self.divisionRaw = divisionRaw
+        self.splitsEncoded = splits.map(String.init).joined(separator: ",")
+    }
+
+    var splits: [Int] { splitsEncoded.split(separator: ",").compactMap { Int($0) } }
+    var totalSeconds: Int { splits.reduce(0, +) }
 }

@@ -66,6 +66,13 @@ final class HealthKitManager {
                           kcal: kcal, distanceMeters: distanceMeters)
     }
 
+    /// Simulation de course hybride : entraînement croisé, avec la distance courue.
+    func saveHybridRace(start: Date, durationSeconds: Int, kcal: Int, distanceMeters: Double) async {
+        await saveWorkout(activity: .crossTraining,
+                          start: start, durationSeconds: durationSeconds,
+                          kcal: kcal, distanceMeters: distanceMeters)
+    }
+
     private func saveWorkout(activity: HKWorkoutActivityType, start: Date,
                              durationSeconds: Int, kcal: Int, distanceMeters: Double?) async {
         guard isAvailable, durationSeconds > 0 else { return }

@@ -61,6 +61,12 @@ enum DemoData {
                                       durationSeconds: Int(run.km * run.pace)))
         }
 
+        // Une demi-course hybride la semaine dernière : un premier record à battre.
+        context.insert(HybridRaceResult(date: daysAgo(8, hour: 10),
+                                        formatRaw: HybridRace.Format.half.rawValue,
+                                        divisionRaw: HybridRace.Division.openWomen.rawValue,
+                                        splits: [282, 265, 301, 214, 290, 248, 296, 305]))
+
         if VMAStore.value == nil { VMAStore.save(15) }
         context.saveLogging()
     }

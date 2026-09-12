@@ -51,6 +51,12 @@ struct RootTabView: View {
             if hasCompletedOnboarding {
                 Task { await HealthKitManager.shared.backfillIfNeeded(context: context) }
             }
+            #if DEBUG
+            // Captures d'écran automatisées : `-debugTab 2` ouvre directement un onglet.
+            if UserDefaults.standard.object(forKey: "debugTab") != nil {
+                selection = UserDefaults.standard.integer(forKey: "debugTab")
+            }
+            #endif
         }
         // Lien profond depuis le widget raccourci (gymtracker://run)
         .onOpenURL { url in

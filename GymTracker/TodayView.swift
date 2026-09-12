@@ -57,6 +57,7 @@ struct TodayState {
     static func make(templates: [WorkoutTemplate],
                      sessions: [WorkoutSession],
                      runs: [RunSession],
+                     races: [HybridRaceResult] = [],
                      now: Date = .now) -> TodayState {
         let resolver = ExerciseRegionResolver(templates: templates)
         let since = now.addingTimeInterval(-Double(lookbackDays) * 86_400)
@@ -71,6 +72,9 @@ struct TodayState {
         for run in runs where run.date >= since {
             loads.append(.run(date: run.date, km: run.distanceKm,
                               paceSecPerKm: run.averagePaceSecPerKm, vma: vma))
+        }
+        for race in races where race.date >= since {
+            loads.append(.hybridRace(date: race.date, completedSegments: race.splits.count))
         }
         let readiness = HybridReadiness(loads: loads, now: now)
 
@@ -358,7 +362,19 @@ struct RecoveryDetailView: View {
 
     private func readyText(_ date: Date) -> String {
         let calendar = Calendar.current
-        let hour = date.formatted(.dateTime.hour())
+        let hourOfDay = calendar.component(.hour, from: date)
+
+        // « Au vert demain vers 3 h » ne sert à rien : la nuit, on annonce le
+        // matin qui suit.
+        if hourOfDay < 7 || hourOfDay >= 22 {
+            let morning = hourOfDay >= 22 ? (calendar.date(byAdding: .day, value: 1, to: date) ?? date) : date
+            if calendar.isDateInToday(morning) { return String(localized: "Au vert ce matin") }
+            if calendar.isDateInTomorrow(morning) { return String(localized: "Au vert demain matin") }
+            let weekday = morning.formatted(.dateTime.weekday(.wide))
+            return String(localized: "Au vert \(weekday) matin")
+        }
+
+        let hour = date.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)))
         if calendar.isDateInToday(date) { return String(localized: "Au vert vers \(hour)") }
         if calendar.isDateInTomorrow(date) { return String(localized: "Au vert demain vers \(hour)") }
         let weekday = date.formatted(.dateTime.weekday(.wide))
