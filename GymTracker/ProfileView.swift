@@ -171,6 +171,8 @@ struct ProfileView: View {
     @State private var healthImportMessage: String?
     @State private var healthConnected = false
     @State private var connectingHealth = false
+    /// Lecture des entraînements, du sommeil et de la VFC (forme du jour).
+    @AppStorage("healthImportEnabled") private var healthImportEnabled = false
 
     /// Rafraîchit l'état affiché de la connexion Apple Santé
     private func refreshHealthStatus() {
@@ -279,7 +281,7 @@ struct ProfileView: View {
                     }
                     .padding(.vertical, 4)
 
-                    Text("LiftRun enregistre tes séances de musculation, tes courses et ton journal alimentaire dans l'app Santé d'Apple. Avec ton autorisation, il peut aussi y lire ton poids pour pré-remplir ton profil.")
+                    Text("LiftRun enregistre tes séances de musculation, tes courses et ton journal alimentaire dans l'app Santé d'Apple. Avec ton autorisation, il peut aussi y lire ton poids pour pré-remplir ton profil et, si tu l'actives ci-dessous, tes entraînements, ton sommeil et ta variabilité cardiaque pour la forme du jour.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
 
@@ -306,6 +308,16 @@ struct ProfileView: View {
                         }
                     }
                     .disabled(importingWeight)
+
+                    // Opt-in explicite : la lecture n'est demandée qu'à l'activation.
+                    Toggle(isOn: $healthImportEnabled) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Forme du jour enrichie")
+                            Text("Courses faites à la montre, vélo, natation, sommeil et variabilité cardiaque.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
 
                     if let healthImportMessage {
                         Text(healthImportMessage)

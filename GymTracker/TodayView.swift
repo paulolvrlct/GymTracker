@@ -59,6 +59,8 @@ struct TodayState {
                      sessions: [WorkoutSession],
                      runs: [RunSession],
                      races: [HybridRaceResult] = [],
+                     imported: [ImportedActivity] = [],
+                     signals: RecoverySignals? = nil,
                      now: Date = .now) -> TodayState {
         let resolver = ExerciseRegionResolver(templates: templates)
         let since = now.addingTimeInterval(-Double(lookbackDays) * 86_400)
@@ -68,16 +70,24 @@ struct TodayState {
         for session in sessions where session.date >= since {
             loads.append(.workout(name: session.templateName, date: session.date,
                                   exerciseNames: session.sets.map(\.exerciseName),
+                                  effort: session.perceivedEffort,
                                   regions: resolver.regions(for:)))
         }
         for run in runs where run.date >= since {
             loads.append(.run(date: run.date, km: run.distanceKm,
-                              paceSecPerKm: run.averagePaceSecPerKm, vma: vma))
+                              paceSecPerKm: run.averagePaceSecPerKm, vma: vma,
+                              effort: run.perceivedEffort))
         }
         for race in races where race.date >= since {
             loads.append(.hybridRace(date: race.date, completedSegments: race.splits.count))
         }
-        let readiness = HybridReadiness(loads: loads, now: now)
+        // Entraînements de la montre et des autres apps (hors course).
+        for activity in imported where activity.date >= since {
+            guard let kind = ImportedKind(rawValue: activity.kindRaw) else { continue }
+            loads.append(.imported(kind: kind, date: activity.date,
+                                   minutes: Double(activity.durationSeconds) / 60))
+        }
+        let readiness = HybridReadiness(loads: loads, now: now, signals: signals)
 
         // `sessions` et `runs` arrivent triés du plus récent au plus ancien.
         let infos = templates.map { template in
@@ -109,11 +119,16 @@ extension TodayState {
                          sessions: [WorkoutSession],
                          runs: [RunSession],
                          races: [HybridRaceResult],
+                         imported: [ImportedActivity] = [],
+                         signals: RecoverySignals? = nil,
                          from start: Date = .now) -> [ReadinessForecastPoint] {
         stride(from: 0, through: 48, by: 3).map { hours in
             let date = start.addingTimeInterval(Double(hours) * 3600)
+            // La nuit dernière ne dit rien de la forme d'après-demain : les
+            // signaux ne valent que pour aujourd'hui.
+            let daySignals = Calendar.current.isDate(date, inSameDayAs: start) ? signals : nil
             let state = make(templates: templates, sessions: sessions, runs: runs,
-                             races: races, now: date)
+                             races: races, imported: imported, signals: daySignals, now: date)
             return ReadinessForecastPoint(date: date, score: state.readiness.score,
                                           title: state.plan.action.title)
         }
@@ -124,9 +139,12 @@ extension TodayState {
     static func publishForecast(templates: [WorkoutTemplate],
                                 sessions: [WorkoutSession],
                                 runs: [RunSession],
-                                races: [HybridRaceResult]) {
+                                races: [HybridRaceResult],
+                                imported: [ImportedActivity] = [],
+                                signals: RecoverySignals? = nil) {
         ReadinessForecast.save(forecast(templates: templates, sessions: sessions,
-                                        runs: runs, races: races))
+                                        runs: runs, races: races,
+                                        imported: imported, signals: signals))
         WidgetCenter.shared.reloadTimelines(ofKind: ReadinessForecast.widgetKind)
     }
 }
@@ -280,6 +298,7 @@ struct RegionStrip: View {
 struct RecoveryDetailView: View {
     let state: TodayState
     var onStart: (TodayPlan.Action) -> Void
+    @AppStorage("healthImportEnabled") private var healthImportEnabled = false
 
     private var readiness: HybridReadiness { state.readiness }
 
@@ -289,6 +308,7 @@ struct RecoveryDetailView: View {
                 header
                 planCard
                 regionsCard
+                healthCard
                 if !readiness.recentLoads.isEmpty { recentCard }
                 methodNote
             }
@@ -393,6 +413,77 @@ struct RecoveryDetailView: View {
         .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
+    // MARK: Nuit et cœur (Apple Santé)
+
+    @ViewBuilder
+    private var healthCard: some View {
+        if let signals = readiness.signals {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Nuit et cœur").font(.headline)
+                if let sleep = signals.sleepText {
+                    signalRow(symbol: "bed.double.fill", title: String(localized: "Sommeil"),
+                              value: sleep, adjustment: signals.sleepPenalty)
+                }
+                if let ratio = signals.hrvRatio {
+                    let percent = Int(((ratio - 1) * 100).rounded())
+                    let signed = percent.formatted(.number.sign(strategy: .always()))
+                    signalRow(symbol: "waveform.path.ecg",
+                              title: String(localized: "Variabilité cardiaque"),
+                              value: String(localized: "\(signed) % par rapport à ta moyenne"),
+                              adjustment: signals.hrvAdjustment)
+                }
+                Text("Lus dans Apple Santé : ils modulent la note globale, pas les zones.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        } else if !healthImportEnabled {
+            Button {
+                healthImportEnabled = true
+            } label: {
+                HStack(spacing: 12) {
+                    Image(systemName: "heart.text.square.fill")
+                        .font(.title2)
+                        .foregroundStyle(.pink)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Connecter Apple Santé")
+                            .font(.subheadline.weight(.semibold))
+                        Text("Tes courses faites à la montre, ton sommeil et ta variabilité cardiaque rendent la forme du jour plus juste.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.leading)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .padding(16)
+                .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private func signalRow(symbol: String, title: String, value: String, adjustment: Int) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: symbol)
+                .foregroundStyle(.indigo)
+                .frame(width: 26)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.subheadline.weight(.medium))
+                Text(value).font(.caption).foregroundStyle(.secondary)
+            }
+            Spacer()
+            Text(adjustment == 0 ? "—" : adjustment.formatted(.number.sign(strategy: .always())))
+                .font(.subheadline.monospacedDigit().weight(.semibold))
+                .foregroundStyle(adjustment < 0 ? .orange : adjustment > 0 ? .green : .secondary)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
     private func readyText(_ date: Date) -> String {
         let calendar = Calendar.current
         let hourOfDay = calendar.component(.hour, from: date)
@@ -445,6 +536,7 @@ struct RecoveryDetailView: View {
         case .workout: "dumbbell.fill"
         case .run: "figure.run"
         case .hybridRace: "flag.checkered"
+        case .imported(let kind): kind.symbol
         }
     }
 
@@ -454,6 +546,7 @@ struct RecoveryDetailView: View {
         case .run(let km):
             String(localized: "Course · \(km.formatted(.number.precision(.fractionLength(1)))) km")
         case .hybridRace: String(localized: "Simulation de course hybride")
+        case .imported(let kind): kind.label
         }
     }
 

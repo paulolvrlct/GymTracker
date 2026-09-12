@@ -18,7 +18,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>LiftRun utilise la caméra pour scanner le code-barres de tes produits et récupérer automatiquement leurs valeurs nutritionnelles.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>LiftRun lit ton poids depuis Apple Santé pour pré-remplir ton profil, uniquement quand tu le demandes.</string>
+	<string>LiftRun lit ton poids pour pré-remplir ton profil et, si tu l'actives, tes entraînements (montre, autres apps), ton sommeil et ta variabilité cardiaque pour calculer ta forme du jour. Ces données restent sur ton appareil.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

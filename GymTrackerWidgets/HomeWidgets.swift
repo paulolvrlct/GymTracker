@@ -35,7 +35,8 @@ struct StreakProvider: TimelineProvider {
         let sessions = (try? context.fetch(FetchDescriptor<WorkoutSession>())) ?? []
         let runs = (try? context.fetch(FetchDescriptor<RunSession>())) ?? []
         let races = (try? context.fetch(FetchDescriptor<HybridRaceResult>())) ?? []
-        let dates = sessions.map(\.date) + runs.map(\.date) + races.map(\.date)
+        let imported = (try? context.fetch(FetchDescriptor<ImportedActivity>())) ?? []
+        let dates = sessions.map(\.date) + runs.map(\.date) + races.map(\.date) + imported.map(\.date)
         let status = WeeklyStreak.status(activityDates: dates, goal: goal)
         return StreakEntry(date: .now, status: status)
     }

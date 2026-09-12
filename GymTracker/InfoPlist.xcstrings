@@ -30,19 +30,19 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "LiftRun lit ton poids depuis Apple Santé pour pré-remplir ton profil, uniquement quand tu le demandes."
+            "value": "LiftRun lit ton poids pour pré-remplir ton profil et, si tu l'actives, tes entraînements (montre, autres apps), ton sommeil et ta variabilité cardiaque pour calculer ta forme du jour. Ces données restent sur ton appareil."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "LiftRun reads your weight from Apple Health to prefill your profile, only when you ask it to."
+            "value": "LiftRun reads your weight to prefill your profile and, if you turn it on, your workouts (watch, other apps), sleep and heart rate variability to work out your daily readiness. This data stays on your device."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "LiftRun lee tu peso desde Apple Salud para rellenar tu perfil, solo cuando tú lo pides."
+            "value": "LiftRun lee tu peso para rellenar tu perfil y, si lo activas, tus entrenamientos (reloj, otras apps), tu sueño y tu variabilidad cardíaca para calcular tu forma del día. Estos datos se quedan en tu dispositivo."
           }
         }
       }

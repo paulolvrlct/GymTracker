@@ -176,6 +176,7 @@ struct TrainingLoad {
         case workout(name: String)
         case run(km: Double)
         case hybridRace
+        case imported(kind: ImportedKind)
     }
 
     let date: Date
@@ -183,12 +184,13 @@ struct TrainingLoad {
     let loads: [BodyRegion: Double]
 
     /// Séance de musculation : chaque série sollicite les zones de son exercice.
-    static func workout(name: String, date: Date, exerciseNames: [String],
+    static func workout(name: String, date: Date, exerciseNames: [String], effort: Int = 0,
                         regions: (String) -> [BodyRegion: Double]) -> TrainingLoad {
+        let factor = effortFactor(effort)
         var loads: [BodyRegion: Double] = [:]
         for exercise in exerciseNames {
             for (region, value) in regions(exercise) {
-                loads[region, default: 0] += value
+                loads[region, default: 0] += value * factor
             }
         }
         return TrainingLoad(date: date, source: .workout(name: name), loads: loads)
@@ -199,12 +201,29 @@ struct TrainingLoad {
     /// Sans VMA connue, toutes les courses comptent comme de l'endurance : on
     /// sous-estime alors la fatigue d'un fractionné plutôt que d'inventer une
     /// intensité.
-    static func run(date: Date, km: Double, paceSecPerKm: Double, vma: Double?) -> TrainingLoad {
-        let intensity = intensityFactor(paceSecPerKm: paceSecPerKm, vma: vma)
+    static func run(date: Date, km: Double, paceSecPerKm: Double, vma: Double?,
+                    effort: Int = 0) -> TrainingLoad {
+        let intensity = intensityFactor(paceSecPerKm: paceSecPerKm, vma: vma) * effortFactor(effort)
         return TrainingLoad(date: date, source: .run(km: km), loads: [
             .legs: km * 0.8 * intensity,
             .cardio: km * intensity,
         ])
+    }
+
+    /// Activité lue dans Apple Santé (montre, autre app) : sans le détail des
+    /// séries ni l'allure, on se fonde sur la durée et le type d'activité.
+    static func imported(kind: ImportedKind, date: Date, minutes: Double) -> TrainingLoad {
+        TrainingLoad(date: date, source: .imported(kind: kind),
+                     loads: kind.loadPerMinute.mapValues { $0 * minutes })
+    }
+
+    /// Ressenti de fin de séance, de 1 à 10 (0 = non renseigné). 5 sert de
+    /// référence ; une séance à 10/10 pèse 40 % de plus, une séance à 2/10
+    /// un quart de moins. C'est ce qui distingue deux séances identiques sur
+    /// le papier, l'une facile, l'autre à l'échec.
+    static func effortFactor(_ effort: Int) -> Double {
+        guard (1...10).contains(effort) else { return 1 }
+        return 0.6 + 0.08 * Double(effort)
     }
 
     /// Simulation de course hybride (8 × 1 km + 8 ateliers) : l'une des séances
@@ -224,6 +243,112 @@ struct TrainingLoad {
         if ratio >= 0.9 { return 1.6 }
         if ratio >= 0.82 { return 1.3 }
         return 1
+    }
+}
+
+// MARK: - Activités importées d'Apple Santé
+
+/// Les entraînements faits avec une montre ou une autre app, lus dans Santé.
+enum ImportedKind: String, CaseIterable {
+    case cycling, swimming, rowing, hiit, strength, walking, hiking, other
+
+    /// Charge par minute et par zone. Repère : une heure de vélo pèse sur le
+    /// cardio autant qu'un footing de 10 km.
+    var loadPerMinute: [BodyRegion: Double] {
+        switch self {
+        case .cycling:  [.cardio: 1.0 / 6, .legs: 1.0 / 9]
+        case .swimming: [.cardio: 1.0 / 6, .shoulders: 1.0 / 10, .back: 1.0 / 12, .arms: 1.0 / 15]
+        case .rowing:   [.cardio: 1.0 / 7, .back: 1.0 / 10, .legs: 1.0 / 12, .arms: 1.0 / 20]
+        case .hiit:     [.cardio: 1.0 / 8, .legs: 1.0 / 10, .core: 1.0 / 15, .shoulders: 1.0 / 20]
+        case .strength: [.legs: 1.0 / 15, .back: 1.0 / 15, .chest: 1.0 / 15,
+                         .shoulders: 1.0 / 15, .arms: 1.0 / 20, .core: 1.0 / 20]
+        case .walking:  [.legs: 1.0 / 30, .cardio: 1.0 / 30]
+        case .hiking:   [.legs: 1.0 / 12, .cardio: 1.0 / 12]
+        case .other:    [.cardio: 1.0 / 10]
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .cycling:  String(localized: "imported.kind.cycling")
+        case .swimming: String(localized: "imported.kind.swimming")
+        case .rowing:   String(localized: "imported.kind.rowing")
+        case .hiit:     String(localized: "imported.kind.hiit")
+        case .strength: String(localized: "imported.kind.strength")
+        case .walking:  String(localized: "imported.kind.walking")
+        case .hiking:   String(localized: "imported.kind.hiking")
+        case .other:    String(localized: "imported.kind.other")
+        }
+    }
+
+    /// Complément de phrase : « après ta sortie vélo d'hier ».
+    var phrase: String {
+        switch self {
+        case .cycling:  String(localized: "imported.phrase.cycling")
+        case .swimming: String(localized: "imported.phrase.swimming")
+        case .rowing:   String(localized: "imported.phrase.rowing")
+        case .hiit:     String(localized: "imported.phrase.hiit")
+        case .strength: String(localized: "imported.phrase.strength")
+        case .walking:  String(localized: "imported.phrase.walking")
+        case .hiking:   String(localized: "imported.phrase.hiking")
+        case .other:    String(localized: "imported.phrase.other")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .cycling:  "bicycle"
+        case .swimming: "figure.pool.swim"
+        case .rowing:   "figure.rower"
+        case .hiit:     "figure.highintensity.intervaltraining"
+        case .strength: "figure.strengthtraining.traditional"
+        case .walking:  "figure.walk"
+        case .hiking:   "figure.hiking"
+        case .other:    "figure.mixed.cardio"
+        }
+    }
+}
+
+// MARK: - Signaux de récupération
+
+/// Sommeil et variabilité cardiaque lus dans Apple Santé.
+///
+/// Ils modulent la note globale sans toucher aux zones : une nuit courte ne
+/// fatigue pas les jambes, elle réduit la capacité à encaisser un effort.
+/// Barème volontairement modeste et lisible — un signal isolé ne doit pas
+/// faire basculer une journée entière.
+struct RecoverySignals: Equatable {
+    /// Sommeil de la nuit dernière, en heures.
+    var sleepHours: Double?
+    /// Variabilité cardiaque du jour rapportée à sa moyenne sur 30 jours.
+    var hrvRatio: Double?
+
+    var sleepPenalty: Int {
+        guard let hours = sleepHours else { return 0 }
+        if hours < 5 { return -15 }
+        if hours < 6 { return -8 }
+        if hours < 7 { return -3 }
+        return 0
+    }
+
+    var hrvAdjustment: Int {
+        guard let ratio = hrvRatio else { return 0 }
+        if ratio < 0.8 { return -12 }
+        if ratio < 0.9 { return -6 }
+        if ratio > 1.1 { return 3 }
+        return 0
+    }
+
+    var adjustment: Int { sleepPenalty + hrvAdjustment }
+
+    /// Moins de 6 h : pas de séance intense ce jour-là.
+    var isShortNight: Bool { sleepPenalty <= -8 }
+
+    /// « 5 h 12 »
+    var sleepText: String? {
+        guard let hours = sleepHours else { return nil }
+        let minutes = Int((hours * 60).rounded())
+        return String(format: "%d h %02d", minutes / 60, minutes % 60)
     }
 }
 
@@ -250,9 +375,13 @@ struct HybridReadiness {
     /// Jours consécutifs avec au moins une activité, jusqu'à aujourd'hui (ou
     /// hier si rien n'a encore été fait aujourd'hui).
     let consecutiveActiveDays: Int
+    /// Sommeil et variabilité cardiaque, s'ils sont disponibles.
+    let signals: RecoverySignals?
 
-    init(loads: [TrainingLoad], now: Date = .now, calendar: Calendar = .current) {
+    init(loads: [TrainingLoad], now: Date = .now, calendar: Calendar = .current,
+         signals: RecoverySignals? = nil) {
         self.now = now
+        self.signals = signals
         let horizon = now.addingTimeInterval(-Double(Self.horizonDays) * 86_400)
         let recent = loads.filter { $0.date >= horizon && $0.date <= now }
             .sorted { $0.date > $1.date }
@@ -287,11 +416,17 @@ struct HybridReadiness {
 
     func percent(_ region: BodyRegion) -> Int { Int((freshness(region) * 100).rounded()) }
 
-    /// Note de forme globale, de 0 à 100.
-    var score: Int {
+    /// Note issue des seules charges d'entraînement, de 0 à 100.
+    var baseScore: Int {
         let totalWeight = BodyRegion.allCases.reduce(0) { $0 + $1.scoreWeight }
         let weighted = BodyRegion.allCases.reduce(0) { $0 + freshness($1) * $1.scoreWeight }
         return Int((weighted / totalWeight * 100).rounded())
+    }
+
+    /// Note de forme globale, de 0 à 100 : les charges d'entraînement,
+    /// ajustées par le sommeil et la variabilité cardiaque.
+    var score: Int {
+        max(0, min(100, baseScore + (signals?.adjustment ?? 0)))
     }
 
     /// Moment où la zone repasse au-dessus du seuil de récupération, ou nil si
@@ -389,9 +524,11 @@ struct TodayPlan: Equatable {
 
         // 4. Course possible ?
         let legs = r.freshness(.legs), cardio = r.freshness(.cardio)
-        let run: Action? = legs >= 0.8 && cardio >= 0.8 ? .hardRun
+        var run: Action? = legs >= 0.8 && cardio >= 0.8 ? .hardRun
                          : legs >= 0.5 && cardio >= 0.5 ? .easyRun
                          : nil
+        // Nuit courte : pas de séance intense en course, un footing facile au mieux.
+        if run == .hardRun, r.signals?.isShortNight == true { run = .easyRun }
 
         // 5. On ne pousse pas une discipline que la personne ne pratique pas :
         //    un pur pratiquant de muscu ne verra la course qu'en alternative.
@@ -436,6 +573,14 @@ struct TodayPlan: Equatable {
     // MARK: Raison
 
     private static func reason(for action: Action, readiness r: HybridReadiness, now: Date) -> String {
+        let base = baseReason(for: action, readiness: r, now: now)
+        // Une nuit courte se dit en premier : c'est elle qui explique qu'on
+        // lève le pied, pas les muscles.
+        guard r.signals?.isShortNight == true, let sleep = r.signals?.sleepText else { return base }
+        return String(localized: "Nuit courte (\(sleep)).") + " " + base
+    }
+
+    private static func baseReason(for action: Action, readiness r: HybridReadiness, now: Date) -> String {
         // La zone la plus entamée, et ce qui l'a entamée : c'est la phrase qui
         // montre que l'app a compris la semaine de la personne.
         if let tired = r.mostFatigued {
@@ -488,6 +633,11 @@ struct TodayPlan: Equatable {
             return String(localized: "\(label) : \(pct) % après ta course de \(weekday).")
         case .hybridRace:
             return String(localized: "\(label) : \(pct) % après ta simulation de course hybride.")
+        case .imported(let kind):
+            let activity = kind.phrase
+            if isToday { return String(localized: "\(label) : \(pct) % après \(activity) du jour.") }
+            if isYesterday { return String(localized: "\(label) : \(pct) % après \(activity) d'hier.") }
+            return String(localized: "\(label) : \(pct) % après \(activity) de \(weekday).")
         case .workout:
             if isToday { return String(localized: "\(label) : \(pct) % après ta séance du jour.") }
             if isYesterday { return String(localized: "\(label) : \(pct) % après ta séance d'hier.") }

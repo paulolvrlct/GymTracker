@@ -11,6 +11,12 @@ struct HomeView: View {
     @Query private var allSets: [SetRecord]
     @Query private var food: [FoodEntry]
     @Query(sort: \HybridRaceResult.date, order: .reverse) private var races: [HybridRaceResult]
+    @Query(sort: \ImportedActivity.date, order: .reverse) private var importedActivities: [ImportedActivity]
+    @Environment(\.modelContext) private var context
+    @Environment(\.scenePhase) private var scenePhase
+    /// Lecture d'Apple Santé (entraînements, sommeil, VFC), activée par la personne.
+    @AppStorage("healthImportEnabled") private var healthImportEnabled = false
+    @State private var signals: RecoverySignals?
 
     /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
     /// quand elle recommande une course.
@@ -55,7 +61,7 @@ struct HomeView: View {
         WeeklyStreak.status(activityDates: activityDates, goal: weeklyGoal)
     }
     private var activityDates: [Date] {
-        sessions.map(\.date) + runs.map(\.date) + races.map(\.date)
+        sessions.map(\.date) + runs.map(\.date) + races.map(\.date) + importedActivities.map(\.date)
     }
 
     private var greeting: String {
@@ -148,7 +154,14 @@ struct HomeView: View {
             // activité, et au retour sur l'accueil pour couvrir les 48 h suivantes.
             .task(id: forecastSignature) {
                 TodayState.publishForecast(templates: templates, sessions: sessions,
-                                           runs: runs, races: races)
+                                           runs: runs, races: races,
+                                           imported: importedActivities, signals: signals)
+            }
+            // Apple Santé : import et signaux de récupération, à l'ouverture,
+            // à l'activation de l'option et au retour au premier plan.
+            .task(id: healthImportEnabled) { await refreshHealth() }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { await refreshHealth() } }
             }
             .sheet(isPresented: $showProfile) {
                 ProfileView()
@@ -164,13 +177,26 @@ struct HomeView: View {
 
     /// Recalculé à chaque rendu, comme `progression` et `briefing`.
     private var today: TodayState {
-        TodayState.make(templates: templates, sessions: sessions, runs: runs, races: races)
+        TodayState.make(templates: templates, sessions: sessions, runs: runs, races: races,
+                        imported: importedActivities, signals: signals)
     }
 
     /// Change dès qu'une activité est ajoutée ou supprimée, et toutes les 3 h.
     private var forecastSignature: String {
         let slot = Calendar.current.component(.hour, from: .now) / 3
-        return "\(sessions.count)-\(runs.count)-\(races.count)-\(templates.count)-\(slot)"
+        return "\(sessions.count)-\(runs.count)-\(races.count)-\(templates.count)-"
+            + "\(importedActivities.count)-\(signals?.adjustment ?? 99)-\(slot)"
+    }
+
+    /// Lit Apple Santé si la personne l'a activé : importe les entraînements
+    /// de la montre et des autres apps, et relève sommeil et VFC.
+    private func refreshHealth() async {
+        guard healthImportEnabled else {
+            signals = nil
+            return
+        }
+        await HealthKitManager.shared.importWorkouts(context: context)
+        signals = await HealthKitManager.shared.recoverySignals()
     }
 
     private func start(_ action: TodayPlan.Action) {

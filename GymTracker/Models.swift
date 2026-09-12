@@ -76,6 +76,8 @@ final class WorkoutSession {
     var date: Date
     var templateName: String
     var durationSeconds: Int
+    /// Ressenti de fin de séance, de 1 à 10 (0 = non renseigné).
+    var perceivedEffort: Int = 0
 
     @Relationship(deleteRule: .cascade, inverse: \SetRecord.session)
     var sets: [SetRecord] = []
@@ -100,6 +102,14 @@ final class RunSession {
     var durationSeconds: Int
     /// Tracé GPS encodé : suite de "lat,lon" séparés par ";"
     var routeEncoded: String
+    /// Ressenti de fin de course, de 1 à 10 (0 = non renseigné).
+    var perceivedEffort: Int = 0
+    /// Course importée d'Apple Santé (montre, autre app) : UUID de
+    /// l'entraînement, pour ne jamais l'importer deux fois. Vide pour une
+    /// course suivie par LiftRun.
+    var healthUUID: String = ""
+    /// App ou appareil d'origine d'une course importée (« Apple Watch »).
+    var sourceName: String = ""
 
     init(date: Date = .now, distanceMeters: Double = 0, durationSeconds: Int = 0, routeEncoded: String = "") {
         self.date = date
@@ -123,6 +133,34 @@ final class RunSession {
             guard c.count == 2, let lat = Double(c[0]), let lon = Double(c[1]) else { return nil }
             return (lat, lon)
         }
+    }
+}
+
+// MARK: - Activité importée d'Apple Santé
+
+/// Entraînement fait avec une montre ou une autre app (vélo, natation…), lu
+/// dans Apple Santé. Les courses importées deviennent des `RunSession` ; le
+/// reste arrive ici, pour peser dans la forme du jour et la régularité.
+@Model
+final class ImportedActivity {
+    var date: Date
+    /// Famille d'activité (`ImportedKind.rawValue` : « cycling », « swimming »…),
+    /// stockée en texte pour que le widget lise la base sans connaître le moteur.
+    var kindRaw: String
+    var durationSeconds: Int
+    var distanceMeters: Double
+    var sourceName: String
+    /// UUID de l'entraînement dans Santé : évite de l'importer deux fois.
+    var healthUUID: String
+
+    init(date: Date, kindRaw: String, durationSeconds: Int, distanceMeters: Double,
+         sourceName: String, healthUUID: String) {
+        self.date = date
+        self.kindRaw = kindRaw
+        self.durationSeconds = durationSeconds
+        self.distanceMeters = distanceMeters
+        self.sourceName = sourceName
+        self.healthUUID = healthUUID
     }
 }
 
@@ -216,7 +254,7 @@ enum SharedStore {
         Schema([WorkoutTemplate.self, ExerciseTemplate.self,
                 WorkoutSession.self, SetRecord.self, RunSession.self,
                 FoodEntry.self, Supplement.self, SupplementIntake.self,
-                HybridRaceResult.self])
+                HybridRaceResult.self, ImportedActivity.self])
     }
 
     static func makeContainer() throws -> ModelContainer {

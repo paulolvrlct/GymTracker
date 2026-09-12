@@ -506,7 +506,10 @@ private struct RunHistoryRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(String(format: "%.2f km", run.distanceKm))
                     .font(.headline.monospacedDigit())
-                Text(run.date.formatted(date: .abbreviated, time: .shortened))
+                // Course importée (montre, autre app) : on dit d'où elle vient.
+                Text(run.sourceName.isEmpty
+                     ? run.date.formatted(date: .abbreviated, time: .shortened)
+                     : "\(run.date.formatted(date: .abbreviated, time: .shortened)) · \(run.sourceName)")
                     .font(.caption).foregroundStyle(.secondary)
             }
 

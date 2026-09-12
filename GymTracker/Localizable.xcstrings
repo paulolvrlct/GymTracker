@@ -4,6 +4,22 @@
     "": {
       "shouldTranslate": false
     },
+    "%@ %% par rapport à ta moyenne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%% vs your average"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %% respecto a tu media"
+          }
+        }
+      }
+    },
     "%@ : %lld %%": {
       "localizations": {
         "en": {
@@ -22,6 +38,72 @@
           "stringUnit": {
             "state": "new",
             "value": "%1$@ : %2$lld %%"
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après %@ d'hier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld%% after %3$@ yesterday."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld %% tras %3$@ de ayer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après %3$@ d'hier."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après %@ de %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld%% after %3$@ on %4$@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld %% tras %3$@ del %4$@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après %3$@ de %4$@."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après %@ du jour.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld%% after %3$@ today."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$lld %% tras %3$@ de hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après %3$@ du jour."
           }
         }
       }
@@ -3016,6 +3098,22 @@
         }
       }
     },
+    "Courses faites à la montre, vélo, natation, sommeil et variabilité cardiaque.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch runs, cycling, swimming, sleep and heart rate variability."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carreras con reloj, bici, natación, sueño y variabilidad cardíaca."
+          }
+        }
+      }
+    },
     "Courte · 10 kg": {
       "localizations": {
         "en": {
@@ -3892,6 +3990,22 @@
         }
       }
     },
+    "Forme du jour enrichie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enhanced daily readiness"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma del día mejorada"
+          }
+        }
+      }
+    },
     "Fourchette de reps (ex : 8-12)": {
       "localizations": {
         "en": {
@@ -4439,18 +4553,18 @@
         }
       }
     },
-    "LiftRun enregistre tes séances de musculation, tes courses et ton journal alimentaire dans l'app Santé d'Apple. Avec ton autorisation, il peut aussi y lire ton poids pour pré-remplir ton profil.": {
+    "LiftRun enregistre tes séances de musculation, tes courses et ton journal alimentaire dans l'app Santé d'Apple. Avec ton autorisation, il peut aussi y lire ton poids pour pré-remplir ton profil et, si tu l'actives ci-dessous, tes entraînements, ton sommeil et ta variabilité cardiaque pour la forme du jour.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "LiftRun saves your strength workouts, runs and food log to Apple's Health app. With your permission, it can also read your weight from there to prefill your profile."
+            "value": "LiftRun saves your strength sessions, runs and food diary to Apple's Health app. With your permission, it can also read your weight to prefill your profile and, if you turn it on below, your workouts, sleep and heart rate variability for your daily readiness."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "LiftRun guarda tus entrenos de fuerza, tus carreras y tu diario de comidas en la app Salud de Apple. Con tu permiso, también puede leer ahí tu peso para rellenar tu perfil."
+            "value": "LiftRun guarda tus sesiones de fuerza, tus carreras y tu diario de comidas en la app Salud de Apple. Con tu permiso, también puede leer tu peso para rellenar tu perfil y, si lo activas abajo, tus entrenamientos, tu sueño y tu variabilidad cardíaca para la forma del día."
           }
         }
       }
@@ -4483,6 +4597,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ubicación denegada: activa el permiso en Ajustes para el seguimiento GPS."
+          }
+        }
+      }
+    },
+    "Lus dans Apple Santé : ils modulent la note globale, pas les zones.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read from Apple Health: they adjust the overall score, not the areas."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leídos de Apple Salud: ajustan la nota global, no las zonas."
           }
         }
       }
@@ -5043,6 +5173,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Noche"
+          }
+        }
+      }
+    },
+    "Nuit courte (%@).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Short night (%@)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche corta (%@)."
+          }
+        }
+      }
+    },
+    "Nuit et cœur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleep & heart"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sueño y corazón"
           }
         }
       }
@@ -6501,6 +6663,22 @@
         }
       }
     },
+    "Sommeil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleep"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sueño"
+          }
+        }
+      }
+    },
     "Sons": {
       "localizations": {
         "en": {
@@ -7077,6 +7255,22 @@
         }
       }
     },
+    "Tes courses faites à la montre, ton sommeil et ta variabilité cardiaque rendent la forme du jour plus juste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your watch runs, sleep and heart rate variability make your daily readiness more accurate."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus carreras con reloj, tu sueño y tu variabilidad cardíaca hacen la forma del día más precisa."
+          }
+        }
+      }
+    },
     "Tes jambes travaillent : ça fait des kilomètres, ce mois-ci.": {
       "localizations": {
         "en": {
@@ -7629,6 +7823,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Validar la serie"
+          }
+        }
+      }
+    },
+    "Variabilité cardiaque": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heart rate variability"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variabilidad cardíaca"
           }
         }
       }
@@ -10599,6 +10809,358 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wall balls"
+          }
+        }
+      }
+    },
+    "imported.kind.cycling": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cycling"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciclismo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vélo"
+          }
+        }
+      }
+    },
+    "imported.kind.hiit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HIIT"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HIIT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HIIT"
+          }
+        }
+      }
+    },
+    "imported.kind.hiking": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senderismo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Randonnée"
+          }
+        }
+      }
+    },
+    "imported.kind.other": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other activity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra actividad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autre activité"
+          }
+        }
+      }
+    },
+    "imported.kind.rowing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rameur"
+          }
+        }
+      }
+    },
+    "imported.kind.strength": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength training"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renforcement"
+          }
+        }
+      }
+    },
+    "imported.kind.swimming": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swimming"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natation"
+          }
+        }
+      }
+    },
+    "imported.kind.walking": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caminata"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marche"
+          }
+        }
+      }
+    },
+    "imported.phrase.cycling": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your ride"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu salida en bici"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta sortie vélo"
+          }
+        }
+      }
+    },
+    "imported.phrase.hiit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your HIIT session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu sesión HIIT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta séance HIIT"
+          }
+        }
+      }
+    },
+    "imported.phrase.hiking": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your hike"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu ruta de senderismo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta randonnée"
+          }
+        }
+      }
+    },
+    "imported.phrase.other": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your activity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu actividad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ton activité"
+          }
+        }
+      }
+    },
+    "imported.phrase.rowing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu sesión de remo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta séance de rameur"
+          }
+        }
+      }
+    },
+    "imported.phrase.strength": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your strength session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu sesión de fuerza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta séance de renforcement"
+          }
+        }
+      }
+    },
+    "imported.phrase.swimming": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your swim"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu sesión de natación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta séance de natation"
+          }
+        }
+      }
+    },
+    "imported.phrase.walking": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your walk"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tu caminata"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ta marche"
           }
         }
       }
