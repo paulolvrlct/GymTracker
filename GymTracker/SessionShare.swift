@@ -289,7 +289,7 @@ struct ShareCardsPreview: View {
                 WorkoutShareCard(name: session.templateName, date: session.date,
                                  setCount: session.sets.count, volumeKg: session.totalVolume,
                                  durationSeconds: session.durationSeconds,
-                                 records: ["Curl barre EZ — 24.5 kg (+2.5)"])
+                                 records: ["Curl barre EZ — 24,5 kg (+2,5)"])
                     .scaleEffect(0.5)
                     .frame(width: 180, height: 320)
             }
