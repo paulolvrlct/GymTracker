@@ -27,6 +27,7 @@ struct HomeView: View {
     @AppStorage(WeeklyStreak.goalKey, store: SharedStore.groupDefaults)
     private var weeklyGoal = WeeklyStreak.defaultGoal
     @State private var showGoalSheet = false
+    @State private var showRecap = false
     @Environment(\.requestReview) private var requestReview
 
     private var calendar: Calendar { Calendar.current }
@@ -81,6 +82,7 @@ struct HomeView: View {
                     }
                     .buttonStyle(.plain)
                     statsGrid
+                    if hasActivityThisWeek { shareWeekButton }
                     NavigationLink {
                         NutritionView()
                     } label: {
@@ -127,6 +129,7 @@ struct HomeView: View {
             .onAppear {
                 // Captures d'écran automatisées : `-debugOpenRecovery YES`.
                 if UserDefaults.standard.bool(forKey: "debugOpenRecovery") { showRecovery = true }
+                if UserDefaults.standard.bool(forKey: "debugOpenRecap") { showRecap = true }
             }
             #endif
             .sheet(isPresented: $showLibrary) {
@@ -134,6 +137,9 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showGoalSheet) {
                 WeeklyGoalSheet(goal: $weeklyGoal, activityDates: activityDates)
+            }
+            .sheet(isPresented: $showRecap) {
+                WeeklyRecapSheet(recap: weekRecap)
             }
             .onChange(of: weeklyGoal) {
                 WidgetCenter.shared.reloadTimelines(ofKind: "StreakWidget")
@@ -165,6 +171,49 @@ struct HomeView: View {
         case .rest:
             break
         }
+    }
+
+    // MARK: Partage de la semaine
+
+    /// Le bouton n'apparaît que s'il y a quelque chose à montrer.
+    private var hasActivityThisWeek: Bool {
+        let since = Date.now.addingTimeInterval(-7 * 86_400)
+        return [sessions.first?.date, runs.first?.date, races.first?.date]
+            .contains { ($0 ?? .distantPast) >= since }
+    }
+
+    /// Calculé à l'ouverture de la feuille seulement : parcourir toutes les
+    /// séries à chaque rendu de l'accueil serait du gaspillage.
+    private var weekRecap: WeeklyRecap {
+        WeeklyRecap.make(
+            workouts: sessions.map { (date: $0.date, volumeKg: $0.totalVolume) },
+            runs: runs.map { (date: $0.date, km: $0.distanceKm) },
+            raceDates: races.map(\.date),
+            sets: allSets.map { WeeklyRecap.LoggedSet(exercise: $0.exerciseName, reps: $0.reps,
+                                                      weight: $0.weight, date: $0.date) },
+            streakWeeks: weekly.weeks)
+    }
+
+    private var shareWeekButton: some View {
+        Button {
+            showRecap = true
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundStyle(Color.brand)
+                Text("Partager ma semaine")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .glassCard()
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: Signature

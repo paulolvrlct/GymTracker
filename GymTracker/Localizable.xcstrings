@@ -349,6 +349,22 @@
     "%lld XP": {
       "shouldTranslate": false
     },
+    "%lld courses hybrides": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hybrid races"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld carreras híbridas"
+          }
+        }
+      }
+    },
     "%lld disque%@": {
       "localizations": {
         "en": {
@@ -508,6 +524,22 @@
         }
       }
     },
+    "%lld records battus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld personal records"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld récords batidos"
+          }
+        }
+      }
+    },
     "%lld reps": {
       "shouldTranslate": false
     },
@@ -523,6 +555,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld s"
+          }
+        }
+      }
+    },
+    "%lld semaines d'objectif d'affilée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld weeks in a row on target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld semanas seguidas cumpliendo el objetivo"
           }
         }
       }
@@ -676,6 +724,22 @@
     "/ %lld kcal": {
       "shouldTranslate": false
     },
+    "1 course hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 hybrid race"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 carrera híbrida"
+          }
+        }
+      }
+    },
     "1 km": {
       "localizations": {
         "en": {
@@ -704,6 +768,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 km de carrera, una estación, y otra vez. El formato que ha disparado el entrenamiento híbrido, cronometrado segmento a segmento."
+          }
+        }
+      }
+    },
+    "1 record battu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 personal record"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 récord batido"
+          }
+        }
+      }
+    },
+    "1 semaine d'objectif tenue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 week on target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 semana cumpliendo el objetivo"
           }
         }
       }
@@ -1248,6 +1344,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alcanzable: %.1f kg (discos limitados)"
+          }
+        }
+      }
+    },
+    "Au format story (9:16) : prête pour Instagram, WhatsApp ou le groupe de ta salle.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story format (9:16): ready for Instagram, WhatsApp or your gym's group chat."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato historia (9:16): lista para Instagram, WhatsApp o el grupo de tu gimnasio."
           }
         }
       }
@@ -4196,6 +4308,9 @@
         }
       }
     },
+    "LiftRun": {
+      "shouldTranslate": false
+    },
     "LiftRun Premium": {
       "localizations": {
         "en": {
@@ -4256,6 +4371,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ubicación denegada: activa el permiso en Ajustes para el seguimiento GPS."
+          }
+        }
+      }
+    },
+    "Ma semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi semana"
+          }
+        }
+      }
+    },
+    "Ma semaine LiftRun": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My LiftRun week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi semana LiftRun"
+          }
+        }
+      }
+    },
+    "Ma semaine hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My hybrid week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi semana híbrida"
           }
         }
       }
@@ -4576,6 +4739,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Músculo objetivo: "
+          }
+        }
+      }
+    },
+    "Muscu + course, une seule app.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifting + running, one app."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza + carrera, una sola app."
           }
         }
       }
@@ -5122,6 +5301,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Parte del producto"
+          }
+        }
+      }
+    },
+    "Partager": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir"
+          }
+        }
+      }
+    },
+    "Partager ma semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share my week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir mi semana"
           }
         }
       }
@@ -10476,6 +10687,38 @@
         }
       }
     },
+    "jour actif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "active day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "día activo"
+          }
+        }
+      }
+    },
+    "jours actifs": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "active days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "días activos"
+          }
+        }
+      }
+    },
     "kg": {
       "shouldTranslate": false
     },
@@ -11358,6 +11601,22 @@
         }
       }
     },
+    "séance de muscu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "strength session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sesión de fuerza"
+          }
+        }
+      }
+    },
     "séances cette semaine": {
       "localizations": {
         "en": {
@@ -11370,6 +11629,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "entrenos esta semana"
+          }
+        }
+      }
+    },
+    "séances de muscu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "strength sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sesiones de fuerza"
+          }
+        }
+      }
+    },
+    "tonnes soulevées": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tonnes lifted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "toneladas levantadas"
           }
         }
       }
