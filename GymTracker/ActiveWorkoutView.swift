@@ -29,6 +29,8 @@ struct ActiveWorkoutView: View {
     @State private var showCelebration = false
     @State private var prFlash: PRResult?
     @State private var sessionPRs: [PRResult] = []
+    /// Séance enregistrée, pour y noter le ressenti choisi sur l'écran de fin.
+    @State private var savedSession: WorkoutSession?
     @StateObject private var restTimer = RestTimerModel()
 
     /// Dernière série enregistrée pour cet exercice (dernière séance, dernière
@@ -136,10 +138,15 @@ struct ActiveWorkoutView: View {
                         setCount: loggedSets.count,
                         volume: loggedSets.reduce(0) { $0 + Double($1.reps) * $1.weight },
                         durationSeconds: Int(Date.now.timeIntervalSince(startDate)),
-                        records: sessionPRs
-                    ) {
-                        dismiss()
-                    }
+                        records: sessionPRs,
+                        templateName: template.name,
+                        date: startDate,
+                        onEffort: { effort in
+                            savedSession?.perceivedEffort = effort
+                            context.saveLogging()
+                        },
+                        onContinue: { dismiss() }
+                    )
                     .transition(.opacity)
                 }
             }
@@ -211,6 +218,7 @@ struct ActiveWorkoutView: View {
             return
         }
         restTimer.stop()   // coupe chrono de repos, Live Activity et notification
+        savedSession = session
 
         // Enregistre l'entraînement dans Apple Santé
         let duration = session.durationSeconds

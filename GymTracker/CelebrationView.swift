@@ -100,6 +100,7 @@ struct RoutePathShape: Shape {
 struct RunCelebrationView: View {
     let run: RunSession
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
 
     @State private var appeared = false
     @State private var drawProgress: CGFloat = 0
@@ -151,6 +152,13 @@ struct RunCelebrationView: View {
                     runTile("\(runBurnedKcal)", "kcal")
                 }
 
+                EffortPicker { effort in
+                    run.perceivedEffort = effort
+                    context.saveLogging()
+                }
+
+                ShareImageButton(title: "Partager ma course", card: RunShareCard(run: run))
+
                 Button {
                     dismiss()
                 } label: {
@@ -193,6 +201,10 @@ struct WorkoutCelebrationView: View {
     let volume: Double
     let durationSeconds: Int
     var records: [PRResult] = []
+    var templateName: String = ""
+    var date: Date = .now
+    /// Ressenti choisi en fin de séance (nil : pas de question posée).
+    var onEffort: ((Int) -> Void)? = nil
     var onContinue: () -> Void
 
     @State private var appeared = false
@@ -248,6 +260,14 @@ struct WorkoutCelebrationView: View {
                     celebrationTile(PaceFormatter.duration(durationSeconds), "durée")
                     celebrationTile("\(burnedKcal)", "kcal")
                 }
+
+                if let onEffort { EffortPicker(onSelect: onEffort) }
+
+                ShareImageButton(title: "Partager ma séance",
+                                 card: WorkoutShareCard(name: templateName, date: date,
+                                                        setCount: setCount, volumeKg: volume,
+                                                        durationSeconds: durationSeconds,
+                                                        records: records.map(\.line)))
 
                 Button {
                     onContinue()

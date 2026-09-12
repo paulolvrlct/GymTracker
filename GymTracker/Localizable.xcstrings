@@ -2650,6 +2650,22 @@
         }
       }
     },
+    "Comment c'était ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How did it feel?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué tal fue?"
+          }
+        }
+      }
+    },
     "Comment ça marche": {
       "localizations": {
         "en": {
@@ -3376,6 +3392,22 @@
         }
       }
     },
+    "Dur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duro"
+          }
+        }
+      }
+    },
     "Durée": {
       "localizations": {
         "en": {
@@ -3820,6 +3852,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejecución"
+          }
+        }
+      }
+    },
+    "Facile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Easy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fácil"
           }
         }
       }
@@ -4713,6 +4761,22 @@
         }
       }
     },
+    "Max": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Máx."
+          }
+        }
+      }
+    },
     "Max théorique (1RM estimé)": {
       "localizations": {
         "en": {
@@ -4905,6 +4969,22 @@
         }
       }
     },
+    "Modéré": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderado"
+          }
+        }
+      }
+    },
     "Moins 1,25 kilo": {
       "localizations": {
         "en": {
@@ -4981,6 +5061,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Músculo objetivo: "
+          }
+        }
+      }
+    },
+    "Muscu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza"
           }
         }
       }
@@ -5125,6 +5221,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notas"
+          }
+        }
+      }
+    },
+    "Noté : la forme du jour en tient compte.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noted: your daily readiness takes it into account."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anotado: la forma del día lo tiene en cuenta."
           }
         }
       }
@@ -5611,6 +5723,22 @@
         }
       }
     },
+    "Partager ma course": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share my run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir mi carrera"
+          }
+        }
+      }
+    },
     "Partager ma semaine": {
       "localizations": {
         "en": {
@@ -5623,6 +5751,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compartir mi semana"
+          }
+        }
+      }
+    },
+    "Partager ma séance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share my workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir mi sesión"
           }
         }
       }
@@ -7549,6 +7693,22 @@
         }
       }
     },
+    "Très dur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Very hard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muy duro"
+          }
+        }
+      }
+    },
     "Tu as battu %lld record%@ 🔥": {
       "localizations": {
         "en": {
@@ -7955,6 +8115,22 @@
         }
       }
     },
+    "allure": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ritmo"
+          }
+        }
+      }
+    },
     "aucune sortie": {
       "localizations": {
         "en": {
@@ -8143,6 +8319,22 @@
     },
     "ciqual.anses.fr": {
       "shouldTranslate": false
+    },
+    "durée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "duración"
+          }
+        }
+      }
     },
     "en course": {
       "localizations": {
@@ -12351,6 +12543,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "entrenos esta semana"
+          }
+        }
+      }
+    },
+    "séries": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "series"
+          }
+        }
+      }
+    },
+    "volume": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "volume"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "volumen"
           }
         }
       }

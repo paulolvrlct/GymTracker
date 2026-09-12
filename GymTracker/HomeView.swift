@@ -34,6 +34,9 @@ struct HomeView: View {
     private var weeklyGoal = WeeklyStreak.defaultGoal
     @State private var showGoalSheet = false
     @State private var showRecap = false
+    #if DEBUG
+    @State private var showShareCardsPreview = false
+    #endif
     @Environment(\.requestReview) private var requestReview
 
     private var calendar: Calendar { Calendar.current }
@@ -136,7 +139,9 @@ struct HomeView: View {
                 // Captures d'écran automatisées : `-debugOpenRecovery YES`.
                 if UserDefaults.standard.bool(forKey: "debugOpenRecovery") { showRecovery = true }
                 if UserDefaults.standard.bool(forKey: "debugOpenRecap") { showRecap = true }
+                if UserDefaults.standard.bool(forKey: "debugOpenShareCards") { showShareCardsPreview = true }
             }
+            .sheet(isPresented: $showShareCardsPreview) { ShareCardsPreview() }
             #endif
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()

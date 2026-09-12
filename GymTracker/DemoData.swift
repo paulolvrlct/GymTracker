@@ -58,7 +58,8 @@ enum DemoData {
         for run in runs {
             context.insert(RunSession(date: daysAgo(run.days, hour: 19),
                                       distanceMeters: run.km * 1000,
-                                      durationSeconds: Int(run.km * run.pace)))
+                                      durationSeconds: Int(run.km * run.pace),
+                                      routeEncoded: loopRoute(km: run.km, seed: run.days)))
         }
 
         // Une demi-course hybride la semaine dernière : un premier record à battre.
@@ -69,6 +70,22 @@ enum DemoData {
 
         if VMAStore.value == nil { VMAStore.save(15) }
         context.saveLogging()
+    }
+
+    /// Boucle fictive autour de Nantes, légèrement irrégulière, pour que les
+    /// captures montrent un vrai tracé.
+    private static func loopRoute(km: Double, seed: Double) -> String {
+        let center = (lat: 47.2184, lon: -1.5536)
+        let radius = km / (2 * .pi) / 111   // en degrés de latitude
+        let lonScale = cos(center.lat * .pi / 180)
+        return (0...72).map { index -> String in
+            let angle = Double(index) / 72 * 2 * .pi
+            let wobble = 1 + 0.18 * sin(angle * 3 + seed)
+            let lat = center.lat + radius * wobble * sin(angle)
+            let lon = center.lon + radius * wobble * cos(angle) / lonScale
+            return "\(lat),\(lon)"
+        }
+        .joined(separator: ";")
     }
 }
 #endif
