@@ -2186,6 +2186,22 @@
         }
       }
     },
+    "C'est l'heure de bouger 💪": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time to move 💪"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de moverse 💪"
+          }
+        }
+      }
+    },
     "C'est parti": {
       "localizations": {
         "en": {
@@ -2214,6 +2230,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "¡Vamos! 💪"
+          }
+        }
+      }
+    },
+    "C'est reparti ! %@, série suivante.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back at it! %@, next set."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Vamos otra vez! %@, siguiente serie."
           }
         }
       }
@@ -4108,6 +4140,28 @@
         }
       }
     },
+    "Forme %lld %% · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Readiness %lld%% · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma %lld %% · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Forme %1$lld %% · %2$@"
+          }
+        }
+      }
+    },
     "Forme du jour": {
       "localizations": {
         "en": {
@@ -4664,6 +4718,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "La ruta elegida aparece con línea de puntos en el mapa mientras corres."
+          }
+        }
+      }
+    },
+    "Le point du matin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morning briefing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen matinal"
           }
         }
       }
@@ -6519,6 +6589,22 @@
         }
       }
     },
+    "Recevoir le point du matin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get the morning briefing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibir el resumen matinal"
+          }
+        }
+      }
+    },
     "Recherche du produit…": {
       "localizations": {
         "en": {
@@ -6681,6 +6767,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Descanso: %lld s"
+          }
+        }
+      }
+    },
+    "Repos terminé 💪": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rest over 💪"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descanso terminado 💪"
           }
         }
       }
@@ -7395,6 +7497,22 @@
         }
       }
     },
+    "Séance prévue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planned workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión prevista"
+          }
+        }
+      }
+    },
     "Séance record ! 🏆": {
       "localizations": {
         "en": {
@@ -7555,6 +7673,22 @@
         }
       }
     },
+    "Ta forme et la séance conseillée, une fois par jour au plus. Si tu fais une pause, l'app ne te relance pas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your readiness and suggested workout, once a day at most. If you take a break, the app won't chase you."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu forma y la sesión recomendada, una vez al día como máximo. Si haces una pausa, la app no te insiste."
+          }
+        }
+      }
+    },
     "Ta routine quotidienne": {
       "localizations": {
         "en": {
@@ -7583,6 +7717,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se pudo guardar tu entreno. Comprueba el espacio de almacenamiento e inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "Ta séance t'attend dans LiftRun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your workout is waiting in LiftRun."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu sesión te espera en LiftRun."
           }
         }
       }

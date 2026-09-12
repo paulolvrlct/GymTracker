@@ -147,6 +147,26 @@ extension TodayState {
                                         imported: imported, signals: signals))
         WidgetCenter.shared.reloadTimelines(ofKind: ReadinessForecast.widgetKind)
     }
+
+    /// Programme le point du matin avec la forme **prévue** à l'heure choisie,
+    /// selon le même calcul que la prévision du widget.
+    @MainActor
+    static func scheduleMorningBriefing(templates: [WorkoutTemplate],
+                                        sessions: [WorkoutSession],
+                                        runs: [RunSession],
+                                        races: [HybridRaceResult],
+                                        imported: [ImportedActivity] = [],
+                                        signals: RecoverySignals? = nil,
+                                        hour: Int, minute: Int) {
+        guard let date = MorningBriefing.nextDate(after: .now, hour: hour, minute: minute) else { return }
+        let daySignals = Calendar.current.isDateInToday(date) ? signals : nil
+        let state = make(templates: templates, sessions: sessions, runs: runs, races: races,
+                         imported: imported, signals: daySignals, now: date)
+        NotificationManager.shared.scheduleMorningBriefing(
+            at: date,
+            title: MorningBriefing.title(score: state.readiness.score, action: state.plan.action.title),
+            body: state.plan.reason)
+    }
 }
 
 // MARK: - Présentation des actions

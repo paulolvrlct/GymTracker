@@ -164,6 +164,10 @@ struct ProfileView: View {
     @AppStorage("reminderDays") private var reminderDaysRaw = ""      // ex : "2,4,6"
     @AppStorage("reminderHour") private var reminderHour = 18
     @AppStorage("reminderMinute") private var reminderMinute = 0
+    // Le point du matin (programmé depuis l'accueil, qui a l'historique)
+    @AppStorage(MorningBriefing.enabledKey) private var morningBriefing = false
+    @AppStorage(MorningBriefing.hourKey) private var briefingHour = MorningBriefing.defaultHour
+    @AppStorage(MorningBriefing.minuteKey) private var briefingMinute = 0
     // Thème (Premium)
     @AppStorage("accentTheme") private var accentRaw = AccentTheme.indigo.rawValue
     @State private var showPaywall = false
@@ -341,6 +345,31 @@ struct ProfileView: View {
                     Text("Fin de repos, série validée, records. Les vibrations restent actives.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
+                }
+
+                Section {
+                    Toggle("Recevoir le point du matin", isOn: $morningBriefing)
+                        .onChange(of: morningBriefing) {
+                            if morningBriefing { NotificationManager.shared.requestAuthorization() }
+                        }
+                    if morningBriefing {
+                        DatePicker("Heure",
+                                   selection: Binding(
+                                    get: {
+                                        Calendar.current.date(from: DateComponents(
+                                            hour: briefingHour, minute: briefingMinute)) ?? .now
+                                    },
+                                    set: {
+                                        let c = Calendar.current.dateComponents([.hour, .minute], from: $0)
+                                        briefingHour = c.hour ?? MorningBriefing.defaultHour
+                                        briefingMinute = c.minute ?? 0
+                                    }),
+                                   displayedComponents: .hourAndMinute)
+                    }
+                } header: {
+                    Text("Le point du matin")
+                } footer: {
+                    Text("Ta forme et la séance conseillée, une fois par jour au plus. Si tu fais une pause, l'app ne te relance pas.")
                 }
 
                 Section("Rappels de séance") {

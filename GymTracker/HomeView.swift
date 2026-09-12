@@ -17,6 +17,10 @@ struct HomeView: View {
     /// Lecture d'Apple Santé (entraînements, sommeil, VFC), activée par la personne.
     @AppStorage("healthImportEnabled") private var healthImportEnabled = false
     @State private var signals: RecoverySignals?
+    /// Le point du matin, activé et réglé depuis le profil.
+    @AppStorage(MorningBriefing.enabledKey) private var morningBriefing = false
+    @AppStorage(MorningBriefing.hourKey) private var briefingHour = MorningBriefing.defaultHour
+    @AppStorage(MorningBriefing.minuteKey) private var briefingMinute = 0
 
     /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
     /// quand elle recommande une course.
@@ -176,6 +180,14 @@ struct HomeView: View {
                 TodayState.publishForecast(templates: templates, sessions: sessions,
                                            runs: runs, races: races,
                                            imported: importedActivities, signals: signals)
+                if morningBriefing {
+                    TodayState.scheduleMorningBriefing(templates: templates, sessions: sessions,
+                                                       runs: runs, races: races,
+                                                       imported: importedActivities, signals: signals,
+                                                       hour: briefingHour, minute: briefingMinute)
+                } else {
+                    NotificationManager.shared.cancelMorningBriefing()
+                }
             }
             // Apple Santé : import et signaux de récupération, à l'ouverture,
             // à l'activation de l'option et au retour au premier plan.
@@ -205,7 +217,8 @@ struct HomeView: View {
     private var forecastSignature: String {
         let slot = Calendar.current.component(.hour, from: .now) / 3
         return "\(sessions.count)-\(runs.count)-\(races.count)-\(templates.count)-"
-            + "\(importedActivities.count)-\(signals?.adjustment ?? 99)-\(slot)"
+            + "\(importedActivities.count)-\(signals?.adjustment ?? 99)-\(slot)-"
+            + "\(morningBriefing)-\(briefingHour):\(briefingMinute)"
     }
 
     /// Lit Apple Santé si la personne l'a activé : importe les entraînements
