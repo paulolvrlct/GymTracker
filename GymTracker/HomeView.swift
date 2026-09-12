@@ -36,6 +36,7 @@ struct HomeView: View {
     @State private var showRecap = false
     #if DEBUG
     @State private var showShareCardsPreview = false
+    @State private var showProgressionDebug = false
     #endif
     @Environment(\.requestReview) private var requestReview
 
@@ -44,6 +45,16 @@ struct HomeView: View {
     /// Recalculé à chaque rendu : voir `Progression` pour le pourquoi.
     private var progression: Progression {
         Progression(workouts: sessions, runs: runs, intakes: intakes)
+    }
+
+    /// Paliers hybrides, recalculés à la volée comme la progression.
+    private var milestones: [MilestoneStatus] {
+        Milestones.evaluate(
+            workouts: sessions.map { (date: $0.date, volumeKg: $0.totalVolume) },
+            runs: runs.map { Milestones.Run(date: $0.date, km: $0.distanceKm,
+                                            durationSeconds: $0.durationSeconds) },
+            raceDates: races.map(\.date),
+            weeklyStreak: weekly.weeks)
     }
 
     private var sessionsThisWeek: Int {
@@ -85,7 +96,7 @@ struct HomeView: View {
                               onOpenDetail: { showRecovery = true },
                               onStart: start)
                     NavigationLink {
-                        ProgressionDetailView(progression: progression)
+                        ProgressionDetailView(progression: progression, milestones: milestones)
                     } label: {
                         LevelCard(progression: progression)
                     }
@@ -140,8 +151,12 @@ struct HomeView: View {
                 if UserDefaults.standard.bool(forKey: "debugOpenRecovery") { showRecovery = true }
                 if UserDefaults.standard.bool(forKey: "debugOpenRecap") { showRecap = true }
                 if UserDefaults.standard.bool(forKey: "debugOpenShareCards") { showShareCardsPreview = true }
+                if UserDefaults.standard.bool(forKey: "debugOpenProgression") { showProgressionDebug = true }
             }
             .sheet(isPresented: $showShareCardsPreview) { ShareCardsPreview() }
+            .navigationDestination(isPresented: $showProgressionDebug) {
+                ProgressionDetailView(progression: progression, milestones: milestones)
+            }
             #endif
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()

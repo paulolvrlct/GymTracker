@@ -7,6 +7,17 @@ import SwiftUI
 /// rend le système crédible et donne envie de le faire monter.
 struct ProgressionDetailView: View {
     let progression: Progression
+    /// Paliers hybrides (voir `Milestones`), calculés par l'accueil.
+    var milestones: [MilestoneStatus] = []
+
+    /// Franchis d'abord, du plus récent au plus ancien, puis les autres, du
+    /// plus avancé au moins avancé : ce qui est à portée de main en premier.
+    private var sortedMilestones: [MilestoneStatus] {
+        let achieved = milestones.filter(\.isAchieved)
+            .sorted { ($0.achievedOn ?? .distantPast) > ($1.achievedOn ?? .distantPast) }
+        let pending = milestones.filter { !$0.isAchieved }.sorted { $0.progress > $1.progress }
+        return achieved + pending
+    }
 
     var body: some View {
         List {
@@ -30,6 +41,18 @@ struct ProgressionDetailView: View {
                         .foregroundStyle(.tertiary)
                 }
                 .padding(.vertical, 4)
+            }
+
+            if !milestones.isEmpty {
+                Section {
+                    ForEach(sortedMilestones) { status in
+                        MilestoneRow(status: status)
+                    }
+                } header: {
+                    Text("Paliers hybrides · \(milestones.filter(\.isAchieved).count)/\(milestones.count)")
+                } footer: {
+                    Text("Muscu et course comptent ensemble : certains paliers ne se franchissent qu'en faisant les deux.")
+                }
             }
 
             Section {
@@ -92,5 +115,46 @@ struct ProgressionDetailView: View {
             Text("\(xp) XP")
                 .font(.subheadline.weight(.medium).monospacedDigit())
         }
+    }
+}
+
+// MARK: - Palier
+
+private struct MilestoneRow: View {
+    let status: MilestoneStatus
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: status.milestone.symbol)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(status.isAchieved ? Color.white : Color.secondary)
+                .frame(width: 36, height: 36)
+                .background(status.isAchieved
+                            ? AnyShapeStyle(LinearGradient(colors: [Color.brand, .purple],
+                                                           startPoint: .topLeading, endPoint: .bottomTrailing))
+                            : AnyShapeStyle(Color(.tertiarySystemFill)),
+                            in: Circle())
+            VStack(alignment: .leading, spacing: 3) {
+                Text(status.milestone.title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(status.isAchieved ? .primary : .secondary)
+                if status.milestone == .goalWeeks4, status.isAchieved {
+                    // Palier « en cours » : la série court toujours, pas de date figée.
+                    Text("Série en cours").font(.caption).foregroundStyle(.secondary)
+                } else if let date = status.achievedOn {
+                    Text(date.formatted(date: .abbreviated, time: .omitted))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text(status.milestone.detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    ProgressView(value: status.progress)
+                        .tint(Color.brand)
+                }
+            }
+        }
+        .padding(.vertical, 2)
+        .accessibilityElement(children: .combine)
     }
 }

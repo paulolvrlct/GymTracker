@@ -40,11 +40,13 @@ struct PRResult: Equatable, Identifiable {
     /// Message court pour la célébration de fin de séance
     var line: String {
         switch kind {
+        // Séparateur décimal de la langue (« 24,5 kg ») : ce texte s'affiche
+        // et se partage, contrairement à `clean` réservé à l'export CSV.
         case .weight:
-            let d = delta > 0 ? String(format: " (+%@)", delta.clean) : ""
-            return "\(exercise) — \(value.clean) kg\(d)"
+            let d = delta > 0 ? " (+\(delta.localizedClean))" : ""
+            return "\(exercise) — \(value.localizedClean) kg\(d)"
         case .oneRM:
-            return "\(exercise) — nouveau 1RM : \(value.clean) kg"
+            return String(localized: "\(exercise) — nouveau 1RM : \(value.localizedClean) kg")
         case .reps:
             return "\(exercise) — \(Int(value)) reps"
         }
