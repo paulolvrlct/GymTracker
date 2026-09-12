@@ -174,11 +174,16 @@ struct TemplateEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @Bindable var template: WorkoutTemplate
     @State private var showLibraryPicker = false
+    @Query private var allTemplates: [WorkoutTemplate]
+    /// Nom de la séance à l'ouverture de l'éditeur : l'historique enregistré
+    /// sous ce nom suit le renommage (voir `carryHistory`).
+    @State private var nameAtOpening: String?
 
     var body: some View {
         Form {
             Section("Séance") {
                 TextField("Nom", text: $template.name)
+                    .onSubmit(carryHistory)
                 TextField("Sous-titre", text: $template.subtitle)
             }
 
@@ -236,6 +241,10 @@ struct TemplateEditorView: View {
         .navigationTitle("Modifier")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { EditButton() }
+        .onAppear {
+            if nameAtOpening == nil { nameAtOpening = template.name }
+        }
+        .onDisappear(perform: carryHistory)
         .sheet(isPresented: $showLibraryPicker) {
             ExerciseLibraryView { catalogEx in
                 // Nom traduit et nettoyé plutôt que le nom anglais brut du
@@ -255,6 +264,34 @@ struct TemplateEditorView: View {
                 context.saveLogging()
             }
         }
+    }
+}
+
+// MARK: - Renommage : l'historique suit
+
+extension TemplateEditorView {
+    /// Les séances terminées gardent le nom de leur séance type. Sans ce
+    /// report, renommer « Séance C » en « Abdos » coupait le lien avec son
+    /// historique : la carte « Aujourd'hui » croyait la séance jamais faite et
+    /// la proposait en priorité, et le calendrier mêlait deux noms.
+    fileprivate func carryHistory() {
+        // Séance supprimée depuis l'éditeur : plus rien à reporter.
+        guard template.modelContext != nil, !template.isDeleted,
+              let oldName = nameAtOpening else { return }
+        let newName = template.name.trimmingCharacters(in: .whitespaces)
+        guard !newName.isEmpty, newName != oldName else { return }
+
+        // Une autre séance porte encore l'ancien nom, ou déjà le nouveau :
+        // on ne mélange jamais deux historiques.
+        let others = allTemplates.filter { $0.persistentModelID != template.persistentModelID }
+        guard !others.contains(where: { $0.name == oldName || $0.name == newName }) else { return }
+
+        let descriptor = FetchDescriptor<WorkoutSession>(
+            predicate: #Predicate { $0.templateName == oldName })
+        let past = (try? context.fetch(descriptor)) ?? []
+        for session in past { session.templateName = newName }
+        if !past.isEmpty { context.saveLogging() }
+        nameAtOpening = newName
     }
 }
 
