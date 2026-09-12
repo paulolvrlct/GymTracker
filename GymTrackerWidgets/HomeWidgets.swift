@@ -359,18 +359,27 @@ struct ReadinessProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<ReadinessEntry>) -> Void) {
         let points = ReadinessForecast.load()
         let now = Date.now
-        // Le point en cours (dernier passé) puis tous les suivants.
-        let current = points.last { $0.date <= now }
+        // Le point en cours puis tous les suivants.
         let upcoming = points.filter { $0.date > now }
-        var entries = [ReadinessEntry(date: now, point: current ?? upcoming.first)]
+        var entries = [ReadinessEntry(date: now, point: Self.current(in: points, at: now))]
         entries += upcoming.map { ReadinessEntry(date: $0.date, point: $0) }
-        completion(Timeline(entries: entries, policy: .atEnd))
+        // Prévision épuisée (app pas ouverte depuis deux jours) : pas de
+        // rechargement en boucle, on repasse dans quelques heures.
+        let policy: TimelineReloadPolicy = upcoming.isEmpty
+            ? .after(now.addingTimeInterval(6 * 3600)) : .atEnd
+        completion(Timeline(entries: entries, policy: policy))
     }
 
     private func currentEntry() -> ReadinessEntry {
-        let points = ReadinessForecast.load()
-        let point = points.last { $0.date <= .now } ?? points.first
-        return ReadinessEntry(date: .now, point: point)
+        ReadinessEntry(date: .now, point: Self.current(in: ReadinessForecast.load(), at: .now))
+    }
+
+    /// Point en vigueur à cette heure. Plus de 3 h après le dernier point, la
+    /// prévision est périmée : mieux vaut inviter à ouvrir l'app qu'afficher
+    /// une forme qui ignore les derniers jours.
+    static func current(in points: [ReadinessForecastPoint], at date: Date) -> ReadinessForecastPoint? {
+        guard let point = points.last(where: { $0.date <= date }) ?? points.first else { return nil }
+        return date.timeIntervalSince(point.date) <= 3 * 3600 ? point : nil
     }
 }
 
