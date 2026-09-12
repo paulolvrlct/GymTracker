@@ -40,6 +40,27 @@ struct ActiveWorkoutView: View {
             .map { ($0.reps, $0.weight) }
     }
 
+    /// Séries de la dernière séance où l'exercice a été fait. Toutes les séries
+    /// d'une séance portent la date de son début : c'est ce qui les regroupe.
+    private func lastSessionSets(for exercise: ExerciseTemplate) -> [ProgressiveOverload.PastSet] {
+        let records = history.filter { $0.exerciseName == exercise.name }
+        guard let lastDate = records.map(\.date).max() else { return [] }
+        return records.filter { $0.date == lastDate }
+            .map { ProgressiveOverload.PastSet(reps: $0.reps, weight: $0.weight) }
+    }
+
+    /// Objectif du jour : ce qui fait de la séance une progression, pas une
+    /// simple répétition de la précédente.
+    private func target(for exercise: ExerciseTemplate) -> ProgressiveOverload.Target? {
+        let sets = lastSessionSets(for: exercise)
+        let topWeight = sets.map(\.weight).max() ?? 0
+        let equipment = ExerciseCatalog.find(id: exercise.catalogID)?.equipment
+        return ProgressiveOverload.target(
+            lastSession: sets,
+            range: ProgressiveOverload.parse(exercise.repRange),
+            increment: ProgressiveOverload.increment(equipment: equipment, weight: topWeight))
+    }
+
     /// Nombre total de séries visées sur la séance
     private var targetSetCount: Int {
         template.sortedExercises.reduce(0) { $0 + $1.targetSets }
@@ -74,6 +95,7 @@ struct ActiveWorkoutView: View {
                             exercise: exercise,
                             sets: loggedSets.filter { $0.exerciseName == exercise.name },
                             last: lastValues(for: exercise),
+                            target: target(for: exercise),
                             onLog: { reps, weight in
                                 logSet(exercise: exercise, reps: reps, weight: weight)
                             }
@@ -214,6 +236,7 @@ private struct ExerciseLogCard: View {
     let exercise: ExerciseTemplate
     let sets: [DraftSet]
     let last: (reps: Int, weight: Double)?
+    let target: ProgressiveOverload.Target?
     var onLog: (Int, Double) -> Void
 
     @State private var reps: Int
@@ -225,14 +248,17 @@ private struct ExerciseLogCard: View {
     private enum Field { case reps, weight }
 
     init(exercise: ExerciseTemplate, sets: [DraftSet],
-         last: (reps: Int, weight: Double)?, onLog: @escaping (Int, Double) -> Void) {
+         last: (reps: Int, weight: Double)?, target: ProgressiveOverload.Target?,
+         onLog: @escaping (Int, Double) -> Void) {
         self.exercise = exercise
         self.sets = sets
         self.last = last
+        self.target = target
         self.onLog = onLog
-        // pré-remplit avec la dernière performance, sinon des valeurs par défaut
-        _reps = State(initialValue: last?.reps ?? 8)
-        _weight = State(initialValue: last?.weight ?? 20)
+        // pré-remplit avec l'objectif du jour, à défaut la dernière performance,
+        // sinon des valeurs par défaut
+        _reps = State(initialValue: target?.reps ?? last?.reps ?? 8)
+        _weight = State(initialValue: target?.weight ?? last?.weight ?? 20)
     }
 
     private var catalogEx: CatalogExercise? { ExerciseCatalog.find(id: exercise.catalogID) }
@@ -249,11 +275,17 @@ private struct ExerciseLogCard: View {
                         .foregroundStyle(.secondary)
                     if let last {
                         Label(last.weight > 0
-                              ? "Dernière : \(last.reps) × \(last.weight.clean) kg"
+                              ? "Dernière : \(last.reps) × \(last.weight.localizedClean) kg"
                               : "Dernière : \(last.reps) reps",
                               systemImage: "clock.arrow.circlepath")
                             .font(.caption2)
                             .foregroundStyle(Color.brand)
+                    }
+                    if let target {
+                        Label(targetText(target),
+                              systemImage: target.kind == .increaseWeight ? "arrow.up.circle.fill" : "scope")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.green)
                     }
                 }
                 Spacer()
@@ -296,7 +328,7 @@ private struct ExerciseLogCard: View {
             if !sets.isEmpty {
                 HStack(spacing: 8) {
                     ForEach(sets) { s in
-                        Text(s.weight > 0 ? "\(s.reps) × \(s.weight.clean) kg" : "\(s.reps) reps")
+                        Text(s.weight > 0 ? "\(s.reps) × \(s.weight.localizedClean) kg" : "\(s.reps) reps")
                             .font(.caption.monospacedDigit())
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
@@ -379,6 +411,29 @@ private struct ExerciseLogCard: View {
                 }
                 .presentationDetents([.large])
             }
+        }
+    }
+
+    /// « Aujourd'hui : 6 × 82,5 kg (+2,5 kg) » — l'objectif et ce qui change
+    /// depuis la dernière fois, en une ligne.
+    private func targetText(_ t: ProgressiveOverload.Target) -> String {
+        if ProgressiveOverload.parse(exercise.repRange)?.isTimed == true {
+            return String(localized: "Aujourd'hui : \(t.reps) s (+5 s)")
+        }
+        if t.weight == 0 {
+            return String(localized: "Aujourd'hui : \(t.reps) reps (+1 rep)")
+        }
+        let load = t.weight.localizedClean
+        switch t.kind {
+        case .increaseWeight:
+            let gain = (t.weight - t.previousWeight).localizedClean
+            return String(localized: "Aujourd'hui : \(t.reps) × \(load) kg (+\(gain) kg)")
+        case .addRep where t.reps > t.previousReps:
+            return String(localized: "Aujourd'hui : \(t.reps) × \(load) kg (+1 rep)")
+        case .addRep:
+            return String(localized: "Aujourd'hui : \(t.reps) × \(load) kg sur toutes les séries")
+        case .consolidate:
+            return String(localized: "Aujourd'hui : \(t.reps) × \(load) kg, on consolide")
         }
     }
 
@@ -520,5 +575,12 @@ extension Double {
         truncatingRemainder(dividingBy: 1) == 0
             ? String(format: "%.0f", self)
             : String(format: "%.2f", self).replacingOccurrences(of: ".00", with: "")
+    }
+
+    /// Même rendu que `clean`, avec le séparateur décimal de la langue
+    /// (« 82,5 » en français). `clean` reste réservé à l'export CSV, où le
+    /// point est obligatoire.
+    var localizedClean: String {
+        formatted(.number.precision(.fractionLength(0...2)))
     }
 }

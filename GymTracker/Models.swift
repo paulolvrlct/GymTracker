@@ -284,3 +284,65 @@ final class SetRecord {
         self.date = date
     }
 }
+
+// MARK: - Régularité hebdomadaire (partagée app ↔ widget)
+
+/// Objectif de jours actifs par semaine, et nombre de semaines d'affilée où il
+/// a été tenu.
+///
+/// Remplace la série de jours consécutifs, qui punissait le repos : une série
+/// quotidienne pousse à s'entraîner fatigué pour ne pas « casser la chaîne »,
+/// exactement l'inverse de ce que conseille la carte « Aujourd'hui ». À la
+/// semaine, un jour off ne coûte rien — c'est le choix de Strava, et celui qui
+/// tient sur la durée.
+enum WeeklyStreak {
+
+    static let goalKey = "weeklyGoalDays"
+    static let defaultGoal = 3
+    static let goalRange = 1...7
+
+    /// Objectif enregistré dans les préférences partagées (lu aussi par le widget).
+    static var goal: Int {
+        let stored = SharedStore.groupDefaults?.integer(forKey: goalKey) ?? 0
+        return goalRange.contains(stored) ? stored : defaultGoal
+    }
+
+    struct Status: Equatable {
+        /// Semaines d'affilée avec l'objectif tenu. La semaine en cours compte
+        /// dès qu'elle est validée ; tant qu'elle ne l'est pas, elle ne casse
+        /// rien : elle n'est pas finie.
+        let weeks: Int
+        /// Jours actifs distincts depuis lundi.
+        let thisWeek: Int
+        let goal: Int
+
+        var isThisWeekDone: Bool { thisWeek >= goal }
+        var progress: Double { min(1, Double(thisWeek) / Double(max(goal, 1))) }
+    }
+
+    /// Un jour avec une séance ET une course ne compte qu'une fois : on mesure
+    /// la régularité, pas le nombre d'activités.
+    static func status(activityDates: [Date], goal: Int, now: Date = .now,
+                       calendar: Calendar = .current) -> Status {
+        let days = Set(activityDates.map { calendar.startOfDay(for: $0) })
+
+        func activeDays(inWeekOf date: Date) -> Int {
+            guard let week = calendar.dateInterval(of: .weekOfYear, for: date) else { return 0 }
+            // Fin exclusive : `DateInterval.contains` inclut sa borne de fin, ce
+            // qui comptait le lundi 0 h dans la semaine précédente aussi.
+            return days.filter { $0 >= week.start && $0 < week.end }.count
+        }
+
+        let thisWeek = activeDays(inWeekOf: now)
+        var weeks = thisWeek >= goal ? 1 : 0
+        var reference = now
+        // Borne de sécurité : dix ans de semaines.
+        for _ in 0..<520 {
+            guard let previous = calendar.date(byAdding: .weekOfYear, value: -1, to: reference),
+                  activeDays(inWeekOf: previous) >= goal else { break }
+            weeks += 1
+            reference = previous
+        }
+        return Status(weeks: weeks, thisWeek: thisWeek, goal: goal)
+    }
+}

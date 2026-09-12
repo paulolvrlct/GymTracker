@@ -182,14 +182,14 @@ private struct MascotBubbleTip: Shape {
 enum MascotCoach {
 
     static func message(totalSessions: Int,
-                        streak: Int,
+                        weeksStreak: Int,
                         sessionsThisWeek: Int,
                         kmThisMonth: Double) -> String {
         if totalSessions == 0 {
             return String(localized: "Prêt quand tu veux. Une première séance, et on commence à mesurer.")
         }
-        if streak >= 3 {
-            return String(localized: "\(streak) jours d'affilée. C'est exactement comme ça que ça marche.")
+        if weeksStreak >= 2 {
+            return String(localized: "\(weeksStreak) semaines d'objectif tenues d'affilée. C'est exactement comme ça que ça marche.")
         }
         if sessionsThisWeek >= 2 {
             return String(localized: "\(sessionsThisWeek) séances cette semaine. Du solide.")

@@ -4,6 +4,204 @@
     "": {
       "shouldTranslate": false
     },
+    "%@ : %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %%"
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta course d'hier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after yesterday's run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu carrera de ayer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta course d'hier."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta course de %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after your %@ run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu carrera del %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta course de %3$@."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta course du jour.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after today's run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu carrera de hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta course du jour."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta simulation de course hybride.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after your hybrid race simulation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu simulación de carrera híbrida."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta simulation de course hybride."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta séance d'hier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after yesterday's workout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu sesión de ayer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta séance d'hier."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta séance de %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after your %@ workout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu sesión del %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta séance de %3$@."
+          }
+        }
+      }
+    },
+    "%@ : %lld %% après ta séance du jour.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% after today's workout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% tras tu sesión de hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %% après ta séance du jour."
+          }
+        }
+      }
+    },
+    "%@ : %lld %%.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%%."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %%."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ : %2$lld %%."
+          }
+        }
+      }
+    },
     "%@ kg": {
       "shouldTranslate": false
     },
@@ -25,12 +223,6 @@
     },
     "%@ plafonne depuis %lld semaines, pendant que ta course augmentait de %lld %%.": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ plafonne depuis %2$lld semaines, pendant que ta course augmentait de %3$lld %%."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -41,6 +233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ lleva %lld semanas estancado, mientras tu carrera subía un %lld %%."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ plafonne depuis %2$lld semaines, pendant que ta course augmentait de %3$lld %%."
           }
         }
       }
@@ -63,12 +261,6 @@
     },
     "%@ plafonne depuis %lld semaines. Sur la même période, ton volume a baissé de %lld %%.": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ plafonne depuis %2$lld semaines. Sur la même période, ton volume a baissé de %3$lld %%."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -79,6 +271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ lleva %lld semanas estancado. En el mismo periodo tu volumen bajó un %lld %%."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ plafonne depuis %2$lld semaines. Sur la même période, ton volume a baissé de %3$lld %%."
           }
         }
       }
@@ -205,6 +403,22 @@
         }
       }
     },
+    "%lld jour actif par semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld active day per week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld día activo por semana"
+          }
+        }
+      }
+    },
     "%lld jour%@ d'affilée": {
       "localizations": {
         "en": {
@@ -227,18 +441,34 @@
         }
       }
     },
-    "%lld jours d'affilée. C'est exactement comme ça que ça marche.": {
+    "%lld jours actifs par semaine": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld days in a row. That's exactly how this works."
+            "value": "%lld active days per week"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld días seguidos. Así es justamente como funciona."
+            "value": "%lld días activos por semana"
+          }
+        }
+      }
+    },
+    "%lld jours d'activité d'affilée. C'est pendant le repos que le corps progresse : journée off aujourd'hui.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld active days in a row. Your body gets stronger while it rests: take today off."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld días de actividad seguidos. El cuerpo progresa durante el descanso: hoy, día libre."
           }
         }
       }
@@ -293,6 +523,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld s"
+          }
+        }
+      }
+    },
+    "%lld semaines d'objectif tenues d'affilée. C'est exactement comme ça que ça marche.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld weeks in a row on target. That's exactly how it works."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld semanas seguidas cumpliendo tu objetivo. Así es exactamente como funciona."
           }
         }
       }
@@ -942,6 +1188,60 @@
         }
       }
     },
+    "Au vert %@ vers %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green %@ around %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde el %@ hacia las %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Au vert %1$@ vers %2$@"
+          }
+        }
+      }
+    },
+    "Au vert demain vers %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green tomorrow around %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde mañana hacia las %@"
+          }
+        }
+      }
+    },
+    "Au vert vers %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the green around %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En verde hacia las %@"
+          }
+        }
+      }
+    },
     "Aucun aliment reconnu": {
       "localizations": {
         "en": {
@@ -1006,6 +1306,22 @@
         }
       }
     },
+    "Aucune séance n'est assez récupérée aujourd'hui. Mobilité, marche ou repos complet : c'est aussi de l'entraînement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None of your workouts is recovered enough today. Mobility, a walk or full rest: that's training too."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguna sesión está lo bastante recuperada hoy. Movilidad, caminar o descanso total: también es entrenamiento."
+          }
+        }
+      }
+    },
     "Aucune séance type pour l'instant": {
       "localizations": {
         "en": {
@@ -1018,6 +1334,142 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay plantillas de entreno"
+          }
+        }
+      }
+    },
+    "Aujourd'hui": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld reps (+1 rep)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld reps (+1 rep)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld reps (+1 rep)"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld s (+5 s)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld s (+5 s)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld s (+5 s)"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld × %@ kg (+%@ kg)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld × %@ kg (+%@ kg)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld × %@ kg (+%@ kg)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Aujourd'hui : %1$lld × %2$@ kg (+%3$@ kg)"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld × %@ kg (+1 rep)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld × %@ kg (+1 rep)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld × %@ kg (+1 rep)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Aujourd'hui : %1$lld × %2$@ kg (+1 rep)"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld × %@ kg sur toutes les séries": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld × %@ kg on every set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld × %@ kg en todas las series"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Aujourd'hui : %1$lld × %2$@ kg sur toutes les séries"
+          }
+        }
+      }
+    },
+    "Aujourd'hui : %lld × %@ kg, on consolide": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %lld × %@ kg, lock it in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy: %lld × %@ kg, a consolidar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Aujourd'hui : %1$lld × %2$@ kg, on consolide"
           }
         }
       }
@@ -1278,6 +1730,22 @@
         }
       }
     },
+    "C'est parti": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's go"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Vamos!"
+          }
+        }
+      }
+    },
     "C'est parti 💪": {
       "localizations": {
         "en": {
@@ -1290,6 +1758,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "¡Vamos! 💪"
+          }
+        }
+      }
+    },
+    "C'est une estimation à partir de ce que tu enregistres, pas un avis médical : tes sensations passent en premier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is an estimate based on what you log, not medical advice: how you feel comes first."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es una estimación basada en lo que registras, no un consejo médico: tus sensaciones van primero."
           }
         }
       }
@@ -1374,6 +1858,22 @@
         }
       }
     },
+    "Ce qui pèse encore": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still weighing on you"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que aún pesa"
+          }
+        }
+      }
+    },
     "Ces informations restent sur ton appareil : aucune n'est envoyée nulle part.": {
       "localizations": {
         "en": {
@@ -1402,6 +1902,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta información personaliza tu inicio y tus estadísticas. Se queda 100 % en tu dispositivo."
+          }
+        }
+      }
+    },
+    "Cette semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana"
+          }
+        }
+      }
+    },
+    "Cette séance laisse la zone récupérer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This workout lets that area recover."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta sesión deja que esa zona se recupere."
+          }
+        }
+      }
+    },
+    "Chaque série sollicite les muscles de son exercice, chaque kilomètre sollicite jambes et cardio, davantage quand l'allure est rapide. La fatigue s'estompe avec le temps : 48 à 72 h pour les jambes après une grosse séance.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each set loads the muscles of its exercise, each kilometre loads legs and cardio, more so at a fast pace. Fatigue fades over time: 48 to 72 h for the legs after a big session."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada serie carga los músculos de su ejercicio, cada kilómetro carga piernas y cardio, más aún a ritmo rápido. La fatiga se disipa con el tiempo: de 48 a 72 h para las piernas tras una sesión fuerte."
           }
         }
       }
@@ -1642,6 +2190,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empezar el test"
+          }
+        }
+      }
+    },
+    "Comment c'est calculé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How it's calculated"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo se calcula"
           }
         }
       }
@@ -1950,6 +2514,22 @@
         }
       }
     },
+    "Course de qualité": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quality run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera de calidad"
+          }
+        }
+      }
+    },
     "Course terminée ! 🏃": {
       "localizations": {
         "en": {
@@ -1994,6 +2574,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Carrera · %.2f km"
+          }
+        }
+      }
+    },
+    "Course · %@ km": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run · %@ km"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera · %@ km"
           }
         }
       }
@@ -2756,6 +3352,76 @@
         }
       }
     },
+    "Footing facile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Easy run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rodaje suave"
+          }
+        }
+      }
+    },
+    "Forme %lld %% : %@ sollicite surtout des zones reposées.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Readiness %lld%%: %@ mostly works well-rested areas."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma %lld %%: %@ trabaja sobre todo zonas descansadas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Forme %1$lld %% : %2$@ sollicite surtout des zones reposées."
+          }
+        }
+      }
+    },
+    "Forme du jour": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's readiness"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma del día"
+          }
+        }
+      }
+    },
+    "Forme du jour : %lld sur 100": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's readiness: %lld out of 100"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forma del día: %lld sobre 100"
+          }
+        }
+      }
+    },
     "Fourchette de reps (ex : 8-12)": {
       "localizations": {
         "en": {
@@ -2816,6 +3482,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rodillas flexionadas (principiante) o piernas estiradas (avanzado), sin balanceo."
+          }
+        }
+      }
+    },
+    "Globalement récupéré, une zone encore entamée.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostly recovered, one area still tired."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casi recuperado, una zona aún cansada."
           }
         }
       }
@@ -2980,6 +3662,38 @@
         }
       }
     },
+    "Jambes et cardio au vert : bon jour pour du fractionné ou un tempo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legs and cardio in the green: a good day for intervals or a tempo run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piernas y cardio en verde: buen día para series o un tempo."
+          }
+        }
+      }
+    },
+    "Jambes et cardio au vert : bon jour pour une séance de qualité.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legs and cardio in the green: a good day for a quality session."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piernas y cardio en verde: buen día para una sesión de calidad."
+          }
+        }
+      }
+    },
     "Jour précédent": {
       "localizations": {
         "en": {
@@ -3028,6 +3742,38 @@
         }
       }
     },
+    "Journée de récupération.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recovery day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Día de recuperación."
+          }
+        }
+      }
+    },
+    "Jours actifs": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Días activos"
+          }
+        }
+      }
+    },
     "L'équilibre : tu manges ce que tu dépenses.": {
       "localizations": {
         "en": {
@@ -3072,6 +3818,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "La cámara no está disponible aquí. Puedes introducir el código de barras a mano."
+          }
+        }
+      }
+    },
+    "Lancer : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empezar: %@"
           }
         }
       }
@@ -3460,6 +4222,22 @@
         }
       }
     },
+    "Modifier l'objectif de la semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change your weekly goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambiar el objetivo semanal"
+          }
+        }
+      }
+    },
     "Moins 1,25 kilo": {
       "localizations": {
         "en": {
@@ -3786,6 +4564,22 @@
         }
       }
     },
+    "Objectif de la semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo semanal"
+          }
+        }
+      }
+    },
     "Objectifs": {
       "localizations": {
         "en": {
@@ -3846,6 +4640,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naranja"
+          }
+        }
+      }
+    },
+    "Ou : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O: %@"
           }
         }
       }
@@ -3970,6 +4780,22 @@
           "stringUnit": {
             "state": "new",
             "value": "Paquet : %1$lld %2$@"
+          }
+        }
+      }
+    },
+    "Par zone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "By area"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por zona"
           }
         }
       }
@@ -4790,6 +5616,22 @@
         }
       }
     },
+    "Récupération en cours : choisis bien ta séance.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still recovering: pick your session wisely."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuperación en curso: elige bien tu sesión."
+          }
+        }
+      }
+    },
     "Réessayer": {
       "localizations": {
         "en": {
@@ -4902,6 +5744,22 @@
         }
       }
     },
+    "Semaines d'affilée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weeks in a row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semanas seguidas"
+          }
+        }
+      }
+    },
     "Sexe": {
       "localizations": {
         "en": {
@@ -4914,6 +5772,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sexo"
+          }
+        }
+      }
+    },
+    "Simulation de course hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hybrid race simulation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simulación de carrera híbrida"
           }
         }
       }
@@ -5542,6 +6416,38 @@
         }
       }
     },
+    "Ton corps a besoin de souffler.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your body needs a breather."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu cuerpo necesita un respiro."
+          }
+        }
+      }
+    },
+    "Ton corps encaisse encore les derniers jours (forme %lld %%). Repos ou marche tranquille, et ça repart demain.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your body is still absorbing the last few days (readiness %lld%%). Rest or an easy walk, and you're back at it tomorrow."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu cuerpo aún asimila los últimos días (forma %lld %%). Descanso o un paseo tranquilo, y mañana vuelves."
+          }
+        }
+      }
+    },
     "Ton prénom": {
       "localizations": {
         "en": {
@@ -5602,6 +6508,44 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo"
+          }
+        }
+      }
+    },
+    "Tout est au vert.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything is in the green."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo en verde."
+          }
+        }
+      }
+    },
+    "Tout est récupéré (forme %lld %%). Parfait pour %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fully recovered (readiness %lld%%). Perfect for %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo recuperado (forma %lld %%). Perfecto para %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Tout est récupéré (forme %1$lld %%). Parfait pour %2$@."
           }
         }
       }
@@ -5756,6 +6700,22 @@
         }
       }
     },
+    "Un footing facile de 30 à 40 min entretient le cardio sans freiner la récupération.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An easy 30–40 min run keeps your cardio going without slowing recovery."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un rodaje suave de 30 a 40 min mantiene el cardio sin frenar la recuperación."
+          }
+        }
+      }
+    },
     "Une app DevShield": {
       "localizations": {
         "en": {
@@ -5816,6 +6776,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un entreno esta semana ya es algo real."
+          }
+        }
+      }
+    },
+    "Une séance et une course le même jour comptent pour un seul jour. Les jours de repos ne cassent rien : seule la semaine compte.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A workout and a run on the same day count as one day. Rest days don't break anything: only the week counts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una sesión y una carrera el mismo día cuentan como un solo día. Los días de descanso no rompen nada: solo cuenta la semana."
           }
         }
       }
@@ -5964,6 +6940,22 @@
         }
       }
     },
+    "Voir la récupération": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View recovery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver la recuperación"
+          }
+        }
+      }
+    },
     "Volume soulevé": {
       "localizations": {
         "en": {
@@ -5976,6 +6968,160 @@
           "stringUnit": {
             "state": "translated",
             "value": "Volumen levantado"
+          }
+        }
+      }
+    },
+    "body.region.arms": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arms"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brazos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bras"
+          }
+        }
+      }
+    },
+    "body.region.back": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espalda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos"
+          }
+        }
+      }
+    },
+    "body.region.cardio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cardio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cardio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cardio"
+          }
+        }
+      }
+    },
+    "body.region.chest": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chest"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pecho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pecs"
+          }
+        }
+      }
+    },
+    "body.region.core": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Core"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abdomen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abdos"
+          }
+        }
+      }
+    },
+    "body.region.legs": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jambes"
+          }
+        }
+      }
+    },
+    "body.region.shoulders": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shoulders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hombros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Épaules"
           }
         }
       }
@@ -8604,38 +9750,6 @@
         }
       }
     },
-    "jour de streak": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "day streak"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "día de racha"
-          }
-        }
-      }
-    },
-    "jours de streak": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "day streak"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "días de racha"
-          }
-        }
-      }
-    },
     "kg": {
       "shouldTranslate": false
     },
@@ -9450,6 +10564,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fractions courtes et rapides, avec récupération de durée égale."
+          }
+        }
+      }
+    },
+    "semaine d'objectif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "week on target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semana cumplida"
+          }
+        }
+      }
+    },
+    "semaines d'objectif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "weeks on target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semanas cumplidas"
           }
         }
       }

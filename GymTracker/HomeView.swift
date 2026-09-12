@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import StoreKit
+import WidgetKit
 
 struct HomeView: View {
     @Query(sort: \WorkoutTemplate.order) private var templates: [WorkoutTemplate]
@@ -10,12 +11,21 @@ struct HomeView: View {
     @Query private var allSets: [SetRecord]
     @Query private var food: [FoodEntry]
 
+    /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
+    /// quand elle recommande une course.
+    var tabSelection: Binding<Int> = .constant(0)
+
     @State private var activeTemplate: WorkoutTemplate?
     @State private var showLibrary = false
     @State private var showProfile = false
+    @State private var showRecovery = false
     @AppStorage("profileName") private var profileName = ""
     /// Observé pour que l'accord se mette à jour dès que le genre change au profil.
     @AppStorage("profileSex") private var profileSexRaw = UserSex.unspecified.rawValue
+    /// Partagé avec le widget via l'App Group.
+    @AppStorage(WeeklyStreak.goalKey, store: SharedStore.groupDefaults)
+    private var weeklyGoal = WeeklyStreak.defaultGoal
+    @State private var showGoalSheet = false
     @Environment(\.requestReview) private var requestReview
 
     private var calendar: Calendar { Calendar.current }
@@ -37,19 +47,12 @@ struct HomeView: View {
         runs.filter { calendar.isDate($0.date, equalTo: .now, toGranularity: .month) }
             .reduce(0) { $0 + $1.distanceKm }
     }
-    /// Nombre de jours consécutifs (jusqu'à aujourd'hui) avec au moins une activité
-    private var streak: Int {
-        let days = Set((sessions.map(\.date) + runs.map(\.date)).map { calendar.startOfDay(for: $0) })
-        var count = 0
-        var day = calendar.startOfDay(for: .now)
-        // Tolère l'absence d'activité aujourd'hui : on part d'hier si besoin
-        if !days.contains(day) { day = calendar.date(byAdding: .day, value: -1, to: day)! }
-        while days.contains(day) {
-            count += 1
-            day = calendar.date(byAdding: .day, value: -1, to: day)!
-        }
-        return count
+    /// Régularité à la semaine : les jours de repos ne cassent rien (voir
+    /// `WeeklyStreak` pour le pourquoi).
+    private var weekly: WeeklyStreak.Status {
+        WeeklyStreak.status(activityDates: activityDates, goal: weeklyGoal)
     }
+    private var activityDates: [Date] { sessions.map(\.date) + runs.map(\.date) }
 
     private var greeting: String {
         let h = calendar.component(.hour, from: .now)
@@ -65,6 +68,9 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 14) {
                     header
+                    TodayCard(state: today,
+                              onOpenDetail: { showRecovery = true },
+                              onStart: start)
                     NavigationLink {
                         ProgressionDetailView(progression: progression)
                     } label: {
@@ -111,8 +117,17 @@ struct HomeView: View {
                     .accessibilityLabel("Bibliothèque d'exercices")
                 }
             }
+            .navigationDestination(isPresented: $showRecovery) {
+                RecoveryDetailView(state: today, onStart: start)
+            }
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()
+            }
+            .sheet(isPresented: $showGoalSheet) {
+                WeeklyGoalSheet(goal: $weeklyGoal, activityDates: activityDates)
+            }
+            .onChange(of: weeklyGoal) {
+                WidgetCenter.shared.reloadTimelines(ofKind: "StreakWidget")
             }
             .sheet(isPresented: $showProfile) {
                 ProfileView()
@@ -121,6 +136,25 @@ struct HomeView: View {
                              onDismiss: { ReviewPrompt.askIfEarned(requestReview) }) { template in
                 ActiveWorkoutView(template: template)
             }
+        }
+    }
+
+    // MARK: Aujourd'hui
+
+    /// Recalculé à chaque rendu, comme `progression` et `briefing`.
+    private var today: TodayState {
+        TodayState.make(templates: templates, sessions: sessions, runs: runs)
+    }
+
+    private func start(_ action: TodayPlan.Action) {
+        showRecovery = false
+        switch action {
+        case .workout(let name):
+            activeTemplate = templates.first { $0.name == name }
+        case .hardRun, .easyRun:
+            tabSelection.wrappedValue = 2
+        case .rest:
+            break
         }
     }
 
@@ -161,7 +195,7 @@ struct HomeView: View {
                         .lineLimit(1)
                     // le nombre de jours est déjà mis en avant dans la carte
                     // « streak » : ici on garde un encouragement sans le chiffre
-                    Text(streak > 0
+                    Text(weekly.weeks > 0 || weekly.thisWeek > 0
                          ? String(localized: "Belle régularité, garde le rythme 🔥")
                          : InclusiveText.backAtItToday(UserSex(stored: profileSexRaw)))
                         .font(.subheadline)
@@ -204,7 +238,7 @@ struct HomeView: View {
         // plus utile qu'un encouragement générique.
         if let insight = MascotCoach.insight(briefing) { return insight }
         return MascotCoach.message(totalSessions: sessions.count,
-                            streak: streak,
+                            weeksStreak: weekly.weeks,
                             sessionsThisWeek: sessionsThisWeek,
                             kmThisMonth: kmThisMonth)
     }
@@ -238,11 +272,17 @@ struct HomeView: View {
                                                       : "séance cette semaine",
                           pulse: sessionsThisWeek > 0)
                 .statEntrance(statsAppeared, index: 0)
-            GlassStatCard(icon: "bolt.fill", tint: Color.brand,
-                          value: "\(streak)",
-                          label: streak > 1 ? "jours de streak" : "jour de streak",
-                          pulse: streak > 0)
-                .statEntrance(statsAppeared, index: 1)
+            Button { showGoalSheet = true } label: {
+                GlassStatCard(icon: "bolt.fill", tint: Color.brand,
+                              value: "\(weekly.weeks)",
+                              label: weekly.weeks > 1 ? "semaines d'objectif" : "semaine d'objectif",
+                              pulse: weekly.isThisWeekDone,
+                              progress: weekly.progress,
+                              detail: "\(weekly.thisWeek)/\(weekly.goal)")
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Modifier l'objectif de la semaine")
+            .statEntrance(statsAppeared, index: 1)
             GlassStatCard(icon: "scalemass.fill", tint: .purple,
                           value: volumeText,
                           label: "volume ce mois (kg)")
@@ -356,6 +396,50 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Objectif de la semaine
+
+private struct WeeklyGoalSheet: View {
+    @Binding var goal: Int
+    let activityDates: [Date]
+    @Environment(\.dismiss) private var dismiss
+
+    /// Recalculé avec l'objectif en cours de réglage : on voit tout de suite
+    /// l'effet d'un changement sur la série.
+    private var status: WeeklyStreak.Status {
+        WeeklyStreak.status(activityDates: activityDates, goal: goal)
+    }
+
+    private var goalText: LocalizedStringKey {
+        goal > 1 ? "\(goal) jours actifs par semaine" : "\(goal) jour actif par semaine"
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Stepper(value: $goal, in: WeeklyStreak.goalRange) {
+                        Text(goalText)
+                    }
+                } footer: {
+                    Text("Une séance et une course le même jour comptent pour un seul jour. Les jours de repos ne cassent rien : seule la semaine compte.")
+                }
+                Section("Cette semaine") {
+                    LabeledContent("Jours actifs", value: "\(status.thisWeek) / \(status.goal)")
+                    LabeledContent("Semaines d'affilée", value: "\(status.weeks)")
+                }
+            }
+            .navigationTitle("Objectif de la semaine")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("OK") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
+    }
+}
+
 // MARK: - Carte statistique en verre
 
 private struct GlassStatCard: View {
@@ -366,13 +450,34 @@ private struct GlassStatCard: View {
     /// extraits automatiquement dans le String Catalog.
     let label: LocalizedStringKey
     var pulse: Bool = false
+    /// Avancement (0…1) dessiné en anneau autour de l'icône, avec son détail
+    /// chiffré à droite : aucune ligne en plus, la grille reste alignée.
+    var progress: Double? = nil
+    var detail: String? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(systemName: icon)
-                .font(.title3)
-                .foregroundStyle(tint)
-                .symbolEffect(.pulse, options: .repeating, isActive: pulse)
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(progress == nil ? .title3 : .caption.weight(.bold))
+                    .foregroundStyle(tint)
+                    .symbolEffect(.pulse, options: .repeating, isActive: pulse)
+                    .frame(width: progress == nil ? nil : 26, height: progress == nil ? nil : 26)
+                    .overlay {
+                        if let progress {
+                            Circle().stroke(tint.opacity(0.18), lineWidth: 3)
+                            Circle().trim(from: 0, to: progress)
+                                .stroke(tint, style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                                .rotationEffect(.degrees(-90))
+                        }
+                    }
+                if let detail {
+                    Spacer(minLength: 0)
+                    Text(detail)
+                        .font(.caption.weight(.semibold).monospacedDigit())
+                        .foregroundStyle(.secondary)
+                }
+            }
             Text(value)
                 // taille relative → suit les réglages d'accessibilité (Dynamic Type)
                 .font(.system(.title, design: .rounded).weight(.bold).monospacedDigit())

@@ -4,24 +4,44 @@
     "%lld": {
       "shouldTranslate": false
     },
-    "%lld activité%@ cette semaine": {
+    "%lld semaines d'affilée": {
       "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld activité%2$@ cette semaine"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld session%@ this week"
+            "value": "%lld weeks in a row"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld entreno%@ esta semana"
+            "value": "%lld semanas seguidas"
+          }
+        }
+      }
+    },
+    "%lld/%lld": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "1 semaine d'affilée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 week in a row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 semana seguida"
           }
         }
       }
@@ -90,6 +110,22 @@
         }
       }
     },
+    "Objectif de la semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo semanal"
+          }
+        }
+      }
+    },
     "Raccourci direct vers le mode course GPS.": {
       "localizations": {
         "en": {
@@ -138,6 +174,22 @@
         }
       }
     },
+    "Régularité": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consistency"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Constancia"
+          }
+        }
+      }
+    },
     "Semaine": {
       "localizations": {
         "en": {
@@ -150,22 +202,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semana"
-          }
-        }
-      }
-    },
-    "Streak": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Streak"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Racha"
           }
         }
       }
@@ -186,18 +222,18 @@
         }
       }
     },
-    "Tes jours d'activité consécutifs (muscu + course).": {
+    "Tes jours actifs de la semaine et tes semaines d'objectif tenues (muscu + course).": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your consecutive active days (strength + running)."
+            "value": "Your active days this week and your weeks on target (lifting + running)."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tus días de actividad consecutivos (fuerza + carrera)."
+            "value": "Tus días activos de la semana y tus semanas cumpliendo el objetivo (fuerza + carrera)."
           }
         }
       }
@@ -266,18 +302,34 @@
         }
       }
     },
-    "jour%@ d'affilée": {
+    "jour actif cette semaine": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "day%@ in a row"
+            "value": "active day this week"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "día%@ de racha"
+            "value": "día activo esta semana"
+          }
+        }
+      }
+    },
+    "jours actifs cette semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "active days this week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "días activos esta semana"
           }
         }
       }
@@ -313,22 +365,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "objetivo %lld kcal"
-          }
-        }
-      }
-    },
-    "streak à lancer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "streak to start"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "racha por empezar"
           }
         }
       }

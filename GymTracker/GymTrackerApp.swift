@@ -19,6 +19,9 @@ struct GymTrackerApp: App {
             // Base dans l'App Group : partagée avec la widget extension
             container = try SharedStore.makeContainer()
             SeedData.seedIfNeeded(context: container.mainContext)
+            #if DEBUG
+            DemoData.seedIfRequested(context: container.mainContext)
+            #endif
         } catch {
             fatalError("Impossible d'initialiser SwiftData : \(error)")
         }

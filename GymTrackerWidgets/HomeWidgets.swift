@@ -7,13 +7,12 @@ import Charts
 
 struct StreakEntry: TimelineEntry {
     let date: Date
-    let streak: Int
-    let weekActivities: Int
+    let status: WeeklyStreak.Status
 }
 
 struct StreakProvider: TimelineProvider {
     func placeholder(in context: Context) -> StreakEntry {
-        StreakEntry(date: .now, streak: 3, weekActivities: 2)
+        StreakEntry(date: .now, status: .init(weeks: 4, thisWeek: 2, goal: 3))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (StreakEntry) -> Void) {
@@ -28,27 +27,16 @@ struct StreakProvider: TimelineProvider {
 
     /// Lit la base SwiftData partagée (App Group) — même calcul que HomeView.
     private func loadEntry() -> StreakEntry {
+        let goal = WeeklyStreak.goal
         guard let container = try? SharedStore.makeContainer() else {
-            return StreakEntry(date: .now, streak: 0, weekActivities: 0)
+            return StreakEntry(date: .now, status: .init(weeks: 0, thisWeek: 0, goal: goal))
         }
         let context = ModelContext(container)
         let sessions = (try? context.fetch(FetchDescriptor<WorkoutSession>())) ?? []
         let runs = (try? context.fetch(FetchDescriptor<RunSession>())) ?? []
-        let calendar = Calendar.current
-
-        let days = Set((sessions.map(\.date) + runs.map(\.date)).map { calendar.startOfDay(for: $0) })
-        var streak = 0
-        var day = calendar.startOfDay(for: .now)
-        if !days.contains(day) { day = calendar.date(byAdding: .day, value: -1, to: day)! }
-        while days.contains(day) {
-            streak += 1
-            day = calendar.date(byAdding: .day, value: -1, to: day)!
-        }
-
-        let week = sessions.filter { calendar.isDate($0.date, equalTo: .now, toGranularity: .weekOfYear) }.count
-            + runs.filter { calendar.isDate($0.date, equalTo: .now, toGranularity: .weekOfYear) }.count
-
-        return StreakEntry(date: .now, streak: streak, weekActivities: week)
+        let status = WeeklyStreak.status(activityDates: sessions.map(\.date) + runs.map(\.date),
+                                         goal: goal)
+        return StreakEntry(date: .now, status: status)
     }
 }
 
@@ -56,25 +44,40 @@ struct StreakWidgetView: View {
     let entry: StreakEntry
 
     var body: some View {
+        let status = entry.status
         VStack(spacing: 8) {
-            Gauge(value: min(Double(entry.streak), 7), in: 0...7) {
-                Image(systemName: "flame.fill")
+            Gauge(value: Double(min(status.thisWeek, status.goal)),
+                  in: 0...Double(max(status.goal, 1))) {
+                Image(systemName: "bolt.fill")
             } currentValueLabel: {
-                Text("\(entry.streak)")
-                    .font(.title3.bold())
+                Text("\(status.thisWeek)/\(status.goal)")
+                    .font(.headline.bold())
             }
             .gaugeStyle(.accessoryCircular)
-            .tint(.orange)
+            .tint(status.isThisWeekDone ? .green : .indigo)
 
-            Text(entry.streak > 0 ? "jour\(entry.streak > 1 ? "s" : "") d'affilée" : "streak à lancer")
+            Text(daysText(status.thisWeek))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
 
-            Text("\(entry.weekActivities) activité\(entry.weekActivities > 1 ? "s" : "") cette semaine")
+            Text(weeksText(status.weeks))
                 .font(.caption2.weight(.medium))
                 .multilineTextAlignment(.center)
         }
         .containerBackground(.fill.tertiary, for: .widget)
+    }
+
+    private func daysText(_ days: Int) -> LocalizedStringKey {
+        days > 1 ? "jours actifs cette semaine" : "jour actif cette semaine"
+    }
+
+    private func weeksText(_ weeks: Int) -> LocalizedStringKey {
+        switch weeks {
+        case 0: "Objectif de la semaine"
+        case 1: "1 semaine d'affilée"
+        default: "\(weeks) semaines d'affilée"
+        }
     }
 }
 
@@ -83,8 +86,8 @@ struct StreakWidget: Widget {
         StaticConfiguration(kind: "StreakWidget", provider: StreakProvider()) { entry in
             StreakWidgetView(entry: entry)
         }
-        .configurationDisplayName("Streak")
-        .description("Tes jours d'activité consécutifs (muscu + course).")
+        .configurationDisplayName("Régularité")
+        .description("Tes jours actifs de la semaine et tes semaines d'objectif tenues (muscu + course).")
         .supportedFamilies([.systemSmall])
     }
 }
