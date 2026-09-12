@@ -8,13 +8,34 @@ import SwiftUI
 /// test plutôt que d'afficher un simple tableau de durées.
 struct TrainingPlansView: View {
     @ObservedObject var tracker: RunTracker
+    @ObservedObject private var premium = PremiumStore.shared
 
+    private enum PlanKind { case run, hybrid }
+
+    @State private var planKind: PlanKind
     @State private var goal: TrainingPlans.Goal = .tenK
     @State private var showVMATest = false
+    @State private var showPaywall = false
+    @State private var showHybridRace = false
+
+    init(tracker: RunTracker, startWithHybrid: Bool = false) {
+        _tracker = ObservedObject(wrappedValue: tracker)
+        _planKind = State(initialValue: startWithHybrid ? .hybrid : .run)
+    }
 
     var body: some View {
         List {
-            if let vma = VMAStore.value {
+            Section {
+                Picker("Type de plan", selection: $planKind) {
+                    Text("Course").tag(PlanKind.run)
+                    Text("Hybride").tag(PlanKind.hybrid)
+                }
+                .pickerStyle(.segmented)
+            }
+
+            if planKind == .hybrid {
+                hybridPlanContent
+            } else if let vma = VMAStore.value {
                 Section {
                     Picker("Objectif", selection: $goal) {
                         ForEach(TrainingPlans.Goal.allCases) { g in
@@ -63,6 +84,127 @@ struct TrainingPlansView: View {
         .navigationTitle("Plans d'entraînement")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showVMATest) { VMATestView(tracker: tracker) }
+        .sheet(isPresented: $showPaywall) { PaywallView() }
+        .fullScreenCover(isPresented: $showHybridRace) { HybridRaceView() }
+    }
+
+    // MARK: Plan hybride (Premium)
+
+    @ViewBuilder
+    private var hybridPlanContent: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Préparer une course hybride").font(.headline)
+                Text("8 semaines · 4 séances par semaine : muscu, fractionné, ateliers et enchaînements, dans un ordre qui protège tes jambes.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                if VMAStore.value == nil {
+                    Text("Mesure ta VMA (onglet Course › Demi-fond) pour obtenir les allures du fractionné.")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
+            }
+            .padding(.vertical, 4)
+        }
+
+        let weeks = HybridPlan.weeks()
+        if premium.isPremium {
+            ForEach(weeks) { week in
+                Section {
+                    ForEach(week.sessions) { session in
+                        hybridSessionCell(session)
+                    }
+                } header: {
+                    Text("Semaine \(week.number) · \(week.phase.label)")
+                } footer: {
+                    if week.number == 1 {
+                        Text("Jamais de séance lourde pour les jambes la veille d'un fractionné ou d'un enchaînement.")
+                    }
+                }
+            }
+        } else if let first = weeks.first {
+            // Aperçu gratuit de la première semaine : on juge le plan sur pièce.
+            Section {
+                ForEach(first.sessions) { session in
+                    hybridSessionRow(session)
+                }
+                Button {
+                    showPaywall = true
+                } label: {
+                    Label("Débloquer les 8 semaines (Premium)", systemImage: "lock.open.fill")
+                }
+            } header: {
+                Text("Semaine 1 · aperçu")
+            }
+        }
+    }
+
+    /// Le fractionné mène au lecteur guidé, les enchaînements chronométrés au
+    /// simulateur de course hybride.
+    @ViewBuilder
+    private func hybridSessionCell(_ session: HybridPlan.Session) -> some View {
+        if let run = session.run, run.intervals != nil, let vma = VMAStore.value {
+            NavigationLink {
+                IntervalSessionView(session: run, vma: vma, tracker: tracker)
+            } label: {
+                hybridSessionRow(session)
+            }
+        } else if session.opensRaceSimulator {
+            Button {
+                showHybridRace = true
+            } label: {
+                hybridSessionRow(session)
+            }
+            .buttonStyle(.plain)
+        } else {
+            hybridSessionRow(session)
+        }
+    }
+
+    private func hybridSessionRow(_ session: HybridPlan.Session) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(weekdayName(session.day))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .textCase(.uppercase)
+                Spacer()
+                Text("\(session.minutes) min")
+                    .font(.subheadline.monospacedDigit())
+                    .foregroundStyle(.secondary)
+            }
+            Label(session.title, systemImage: symbol(for: session.kind))
+                .font(.subheadline.weight(.medium))
+            Text(session.detail)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            if let intervals = session.run?.intervals {
+                Text(structure(intervals))
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.green)
+            }
+            if session.opensRaceSimulator {
+                Label("Ouvrir le simulateur", systemImage: "flag.checkered")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.orange)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+
+    /// 1 = lundi … 7 = dimanche (les symboles du calendrier commencent au dimanche).
+    private func weekdayName(_ day: Int) -> String {
+        let symbols = Calendar.current.standaloneWeekdaySymbols
+        return symbols[day % 7]
+    }
+
+    private func symbol(for kind: HybridPlan.Session.Kind) -> String {
+        switch kind {
+        case .upperStrength:   "figure.strengthtraining.traditional"
+        case .runQuality:      "bolt.fill"
+        case .legsAndStations: "figure.strengthtraining.functional"
+        case .hybrid:          "flag.checkered"
+        }
     }
 
     private func isFirstWeekOfPhase(_ week: TrainingPlans.Week,

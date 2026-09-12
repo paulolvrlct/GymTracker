@@ -972,18 +972,18 @@
         }
       }
     },
-    "10 km, semi-marathon, marathon": {
+    "10 km, semi, marathon et course hybride": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "10 km, half marathon, marathon"
+            "value": "10K, half, marathon and hybrid race"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "10 km, media maratón, maratón"
+            "value": "10 km, media, maratón y carrera híbrida"
           }
         }
       }
@@ -1000,6 +1000,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "100"
+          }
+        }
+      }
+    },
+    "8 semaines de muscu, fractionné et ateliers planifiés ensemble, dans un ordre qui protège tes jambes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 weeks of strength, intervals and stations planned together, in an order that protects your legs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 semanas de fuerza, series y estaciones planificadas juntas, en un orden que protege tus piernas."
+          }
+        }
+      }
+    },
+    "8 semaines · 4 séances par semaine : muscu, fractionné, ateliers et enchaînements, dans un ordre qui protège tes jambes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 weeks · 4 sessions a week: strength, intervals, stations and brick sessions, in an order that protects your legs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 semanas · 4 sesiones por semana: fuerza, series, estaciones y encadenamientos, en un orden que protege tus piernas."
           }
         }
       }
@@ -1144,6 +1176,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compra en curso…"
+          }
+        }
+      }
+    },
+    "Achat unique, pas d'abonnement": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-time purchase, no subscription"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compra única, sin suscripción"
           }
         }
       }
@@ -2256,6 +2304,22 @@
         }
       }
     },
+    "Calories et macros selon ton objectif : sèche, maintien ou prise de masse, avec journal alimentaire.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories and macros for your goal: cut, maintain or bulk, with a food diary."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorías y macros según tu objetivo: definición, mantenimiento o volumen, con diario de comidas."
+          }
+        }
+      }
+    },
     "Carré": {
       "localizations": {
         "en": {
@@ -2571,7 +2635,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rutas de carrera"
+            "value": "Circuitos de carrera"
           }
         }
       }
@@ -3462,6 +3526,22 @@
         }
       }
     },
+    "Débloquer les 8 semaines (Premium)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock all 8 weeks (Premium)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquear las 8 semanas (Premium)"
+          }
+        }
+      }
+    },
     "Débloquer · %@": {
       "localizations": {
         "en": {
@@ -4220,6 +4300,22 @@
         }
       }
     },
+    "Hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hybrid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Híbrido"
+          }
+        }
+      }
+    },
     "IMC": {
       "localizations": {
         "en": {
@@ -4312,6 +4408,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tengo un código"
+          }
+        }
+      }
+    },
+    "Jamais de séance lourde pour les jambes la veille d'un fractionné ou d'un enchaînement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Never a heavy leg session the day before intervals or a brick session."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nunca una sesión pesada de piernas la víspera de unas series o de un encadenamiento."
           }
         }
       }
@@ -4424,6 +4536,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Días activos"
+          }
+        }
+      }
+    },
+    "L'offre gratuite est limitée à %lld séances.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The free plan is limited to %lld workouts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El plan gratuito está limitado a %lld sesiones."
           }
         }
       }
@@ -4907,6 +5035,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mide primero tu VAM"
+          }
+        }
+      }
+    },
+    "Mesure ta VMA (onglet Course › Demi-fond) pour obtenir les allures du fractionné.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Measure your MAS (Run tab › Middle distance) to get your interval paces."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mide tu VAM (pestaña Carrera › Medio fondo) para obtener los ritmos de las series."
           }
         }
       }
@@ -5605,6 +5749,22 @@
         }
       }
     },
+    "Ouvrir le simulateur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the simulator"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el simulador"
+          }
+        }
+      }
+    },
     "P %lld · G %lld · L %lld pour 100 g": {
       "localizations": {
         "en": {
@@ -5715,6 +5875,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Por zona"
+          }
+        }
+      }
+    },
+    "Parcours préenregistrés affichés sur la carte pendant ta course.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pre-recorded routes shown on the map during your run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorridos pregrabados en el mapa durante tu carrera."
           }
         }
       }
@@ -5955,6 +6131,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotos de ejercicios"
+          }
+        }
+      }
+    },
+    "Plan course hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hybrid race plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan de carrera híbrida"
           }
         }
       }
@@ -6211,6 +6403,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nombre (mostrado en el inicio)"
+          }
+        }
+      }
+    },
+    "Préparer une course hybride": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prepare a hybrid race"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparar una carrera híbrida"
           }
         }
       }
@@ -6819,6 +7027,22 @@
         }
       }
     },
+    "Semaine 1 · aperçu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week 1 · preview"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana 1 · vista previa"
+          }
+        }
+      }
+    },
     "Semaines d'affilée": {
       "localizations": {
         "en": {
@@ -7231,6 +7455,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entrenos"
+          }
+        }
+      }
+    },
+    "Séances personnalisées illimitées": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited custom workouts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesiones personalizadas ilimitadas"
           }
         }
       }
@@ -7823,6 +8063,22 @@
         }
       }
     },
+    "Tu débloques tout, pour toujours, et tu soutiens le développement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You unlock everything, forever, and support development."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo desbloqueas todo, para siempre, y apoyas el desarrollo."
+          }
+        }
+      }
+    },
     "Tu peux modifier ou révoquer ces autorisations à tout moment dans Réglages › Confidentialité et sécurité › Santé › LiftRun.": {
       "localizations": {
         "en": {
@@ -7851,6 +8107,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turquesa"
+          }
+        }
+      }
+    },
+    "Type de plan": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan type"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipo de plan"
           }
         }
       }
@@ -11077,6 +11349,424 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wall balls"
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.full": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full race at a controlled pace: the dress rehearsal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrera completa a ritmo controlado: el ensayo general."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Course complète à allure contrôlée : la répétition générale."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.half": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Half race (4 × 1 km + 4 stations) at a controlled pace."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media carrera (4 × 1 km + 4 estaciones) a ritmo controlado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demi-course (4 × 1 km + 4 ateliers) à allure contrôlée."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.halfTimed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timed half race: beat your best."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media carrera cronometrada: bate tu récord."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demi-course chronométrée : bats ton record."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.rounds3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 × (1 km easy + 1 station of your choice)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 × (1 km suave + 1 estación a elegir)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 × (1 km facile + 1 atelier au choix)."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.rounds6": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 × (1 km at race pace + 1 station)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 × (1 km a ritmo de carrera + 1 estación)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 × (1 km à allure course + 1 atelier)."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.taper": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "20 min easy run + 2 light stations: race day is next."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rodaje de 20 min + 2 estaciones ligeras: llega el gran día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Footing 20 min + 2 ateliers légers : place au jour J."
+          }
+        }
+      }
+    },
+    "hybridplan.hybrid.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run + stations brick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encadenamiento carrera + estaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enchaînement course + ateliers"
+          }
+        }
+      }
+    },
+    "hybridplan.legs.base": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squats and lunges 3 × 10, then 3 rounds: 250 m row, 15 wall balls, 10 burpees."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadillas y zancadas 3 × 10, luego 3 rondas: 250 m de remo, 15 wall balls, 10 burpees."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat et fentes 3 × 10, puis 3 tours : 250 m rameur, 15 wall balls, 10 burpees."
+          }
+        }
+      }
+    },
+    "hybridplan.legs.development": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squats 4 × 6, Romanian deadlifts 3 × 8, then 3 rounds: 25 m sled, 20 weighted lunges."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadillas 4 × 6, peso muerto rumano 3 × 8, luego 3 rondas: 25 m de trineo, 20 zancadas con peso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat 4 × 6, soulevé de terre roumain 3 × 8, puis 3 tours : 25 m de traîneau, 20 fentes lestées."
+          }
+        }
+      }
+    },
+    "hybridplan.legs.specific": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squats 3 × 5, then 5 × (500 m run + 1 station), with transitions as short as possible."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadillas 3 × 5, luego 5 × (500 m de carrera + 1 estación), con transiciones lo más cortas posible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat 3 × 5, puis 5 × (500 m de course + 1 atelier), transitions les plus courtes possible."
+          }
+        }
+      }
+    },
+    "hybridplan.legs.taper": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squats 2 × 5 at 70%, 2 light station rounds."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadillas 2 × 5 al 70 %, 2 rondas ligeras de estaciones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat 2 × 5 à 70 %, 2 tours d'ateliers légers."
+          }
+        }
+      }
+    },
+    "hybridplan.legs.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leg strength + stations"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza de piernas + estaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force jambes + ateliers"
+          }
+        }
+      }
+    },
+    "hybridplan.run.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paces from your MAS, following the 10K plan progression."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmos calculados con tu VAM, progresión del plan de 10 km."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allures calculées depuis ta VMA, progression du plan 10 km."
+          }
+        }
+      }
+    },
+    "hybridplan.run.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intervals"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Series"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fractionné"
+          }
+        }
+      }
+    },
+    "hybridplan.upper.base": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bench press, rows, overhead press, planks: 3 × 10."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de banca, remo, press militar, plancha: 3 × 10."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé couché, tirage, développé militaire, gainage : 3 × 10."
+          }
+        }
+      }
+    },
+    "hybridplan.upper.development": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bench press, pull-ups, rows, overhead press: 4 × 6–8."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de banca, dominadas, remo, press militar: 4 × 6-8."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé couché, tractions, rowing, développé militaire : 4 × 6 à 8."
+          }
+        }
+      }
+    },
+    "hybridplan.upper.specific": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bench and pull-ups 3 × 5 heavy, then farmers carry and core."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press y dominadas 3 × 5 pesado, luego paseo del granjero y core."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé et tractions 3 × 5 lourd, puis porté de charges et gainage."
+          }
+        }
+      }
+    },
+    "hybridplan.upper.taper": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 × 5 at 70% and core: maintenance, no fatigue."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 × 5 al 70 % y core: mantenimiento, sin fatiga."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 × 5 à 70 % et gainage : entretien, sans fatigue."
+          }
+        }
+      }
+    },
+    "hybridplan.upper.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength — upper body"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuerza — tren superior"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force — haut du corps"
           }
         }
       }

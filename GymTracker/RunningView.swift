@@ -14,6 +14,9 @@ struct RunningView: View {
     @State private var previewedCircuit: RunCircuit?
     @State private var showVMATest = false
     @State private var showHybridRace = false
+    #if DEBUG
+    @State private var showPlansDebug = false
+    #endif
     /// Observé pour que l'accord se mette à jour dès que le genre change au profil.
     @AppStorage("profileSex") private var profileSexRaw = UserSex.unspecified.rawValue
     @State private var celebratedRun: RunSession?
@@ -78,8 +81,15 @@ struct RunningView: View {
                 #if DEBUG
                 // Captures d'écran automatisées : `-debugOpenHybridRace YES`.
                 if UserDefaults.standard.bool(forKey: "debugOpenHybridRace") { showHybridRace = true }
+                // `-debugOpenPlans YES` : plan hybride directement.
+                if UserDefaults.standard.bool(forKey: "debugOpenPlans") { showPlansDebug = true }
                 #endif
             }
+            #if DEBUG
+            .navigationDestination(isPresented: $showPlansDebug) {
+                TrainingPlansView(tracker: tracker, startWithHybrid: true)
+            }
+            #endif
         }
     }
 
@@ -215,7 +225,7 @@ struct RunningView: View {
                                 in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Plans d'entraînement").font(.headline)
-                    Text("10 km, semi-marathon, marathon")
+                    Text("10 km, semi, marathon et course hybride")
                         .font(.subheadline).foregroundStyle(.secondary)
                 }
                 Spacer()

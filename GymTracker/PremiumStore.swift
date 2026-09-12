@@ -116,6 +116,8 @@ struct PaywallView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     feature("infinity", "Séances personnalisées illimitées",
                             "L'offre gratuite est limitée à \(PremiumStore.FreeTier.maxTemplates) séances.")
+                    feature("figure.cross.training", "Plan course hybride",
+                            "8 semaines de muscu, fractionné et ateliers planifiés ensemble, dans un ordre qui protège tes jambes.")
                     feature("map.fill", "Circuits de course",
                             "Parcours préenregistrés affichés sur la carte pendant ta course.")
                     feature("flame.fill", "Coach nutrition",
@@ -181,7 +183,10 @@ struct PaywallView: View {
         }
     }
 
-    private func feature(_ icon: String, _ title: String, _ detail: String) -> some View {
+    /// Clés traduisibles : avec de simples `String`, Xcode n'extrayait pas ces
+    /// textes et l'écran Premium restait en français dans toutes les langues.
+    private func feature(_ icon: String, _ title: LocalizedStringKey,
+                         _ detail: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .font(.title3)
