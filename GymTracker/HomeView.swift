@@ -21,6 +21,13 @@ struct HomeView: View {
     @AppStorage(MorningBriefing.enabledKey) private var morningBriefing = false
     @AppStorage(MorningBriefing.hourKey) private var briefingHour = MorningBriefing.defaultHour
     @AppStorage(MorningBriefing.minuteKey) private var briefingMinute = 0
+    /// Siri, Raccourcis et widget « Forme du jour » : lancer la séance du jour.
+    @ObservedObject private var router = AppRouter.shared
+    /// Ce que la personne pratique : la carte « Aujourd'hui » en dépend.
+    @AppStorage(TrainingFocus.key) private var focusRaw = TrainingFocus.hybrid.rawValue
+    /// Semaine allégée en cours (début) ou reportée (jusqu'à).
+    @AppStorage(DeloadStore.startKey) private var deloadStart: Double = 0
+    @AppStorage(DeloadStore.snoozeKey) private var deloadSnooze: Double = 0
 
     /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
     /// quand elle recommande une course.
@@ -41,6 +48,7 @@ struct HomeView: View {
     #if DEBUG
     @State private var showShareCardsPreview = false
     @State private var showProgressionDebug = false
+    @State private var showDataDebug = false
     #endif
     @Environment(\.requestReview) private var requestReview
 
@@ -99,6 +107,7 @@ struct HomeView: View {
                     TodayCard(state: today,
                               onOpenDetail: { showRecovery = true },
                               onStart: start)
+                    deloadSection
                     NavigationLink {
                         ProgressionDetailView(progression: progression, milestones: milestones)
                     } label: {
@@ -156,8 +165,14 @@ struct HomeView: View {
                 if UserDefaults.standard.bool(forKey: "debugOpenRecap") { showRecap = true }
                 if UserDefaults.standard.bool(forKey: "debugOpenShareCards") { showShareCardsPreview = true }
                 if UserDefaults.standard.bool(forKey: "debugOpenProgression") { showProgressionDebug = true }
+                if UserDefaults.standard.bool(forKey: "debugOpenData") { showDataDebug = true }
+                // `-debugStartWorkout YES` : la séance B, la plus longue de la démo.
+                if UserDefaults.standard.bool(forKey: "debugStartWorkout") {
+                    activeTemplate = templates.dropFirst().first ?? templates.first
+                }
             }
             .sheet(isPresented: $showShareCardsPreview) { ShareCardsPreview() }
+            .sheet(isPresented: $showDataDebug) { NavigationStack { DataToolsView() } }
             .navigationDestination(isPresented: $showProgressionDebug) {
                 ProgressionDetailView(progression: progression, milestones: milestones)
             }
@@ -195,6 +210,13 @@ struct HomeView: View {
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { Task { await refreshHealth() } }
             }
+            // Demande reçue au lancement comme en cours de route : `$pending`
+            // renvoie sa valeur actuelle dès l'abonnement.
+            .onReceive(router.$pending) { request in
+                guard request == .startToday else { return }
+                router.pending = nil
+                startToday()
+            }
             .sheet(isPresented: $showProfile) {
                 ProfileView()
             }
@@ -218,7 +240,7 @@ struct HomeView: View {
         let slot = Calendar.current.component(.hour, from: .now) / 3
         return "\(sessions.count)-\(runs.count)-\(races.count)-\(templates.count)-"
             + "\(importedActivities.count)-\(signals?.adjustment ?? 99)-\(slot)-"
-            + "\(morningBriefing)-\(briefingHour):\(briefingMinute)"
+            + "\(morningBriefing)-\(briefingHour):\(briefingMinute)-\(focusRaw)"
     }
 
     /// Lit Apple Santé si la personne l'a activé : importe les entraînements
@@ -241,6 +263,57 @@ struct HomeView: View {
             tabSelection.wrappedValue = 2
         case .rest:
             break
+        }
+    }
+
+    /// Siri, Raccourcis ou widget : la séance conseillée, ou l'explication
+    /// d'un jour de repos.
+    private func startToday() {
+        let action = today.plan.action
+        if action == .rest {
+            showRecovery = true
+        } else {
+            start(action)
+        }
+    }
+
+    // MARK: Semaine allégée
+
+    private var deloadEnd: Date? {
+        guard deloadStart > 0 else { return nil }
+        let end = Date(timeIntervalSince1970: deloadStart)
+            .addingTimeInterval(Double(Deload.lengthDays) * 86_400)
+        return end > .now ? end : nil
+    }
+
+    /// Sur les soixante dernières séances : assez pour un bloc de cinq
+    /// semaines et pour repérer un plateau.
+    private var deloadAdvice: Deload.Reason? {
+        guard deloadEnd == nil, Date.now.timeIntervalSince1970 >= deloadSnooze else { return nil }
+        let recent = sessions.prefix(60).map { session in
+            Deload.summary(date: session.date,
+                           sets: session.sets.map { (exercise: $0.exerciseName, reps: $0.reps, weight: $0.weight) })
+        }
+        return Deload.advice(sessions: recent,
+                             lastDeload: deloadStart > 0 ? Date(timeIntervalSince1970: deloadStart) : nil,
+                             now: .now)
+    }
+
+    @ViewBuilder
+    private var deloadSection: some View {
+        if let end = deloadEnd {
+            DeloadActiveCard(end: end) {
+                // Arrêtée plus tôt : elle compte quand même comme faite.
+                deloadStart = Date.now
+                    .addingTimeInterval(-Double(Deload.lengthDays) * 86_400).timeIntervalSince1970
+            }
+        } else if let advice = deloadAdvice {
+            DeloadCard(reason: advice,
+                       onStart: { deloadStart = Date.now.timeIntervalSince1970 },
+                       onLater: {
+                           deloadSnooze = Date.now
+                               .addingTimeInterval(Double(Deload.lengthDays) * 86_400).timeIntervalSince1970
+                       })
         }
     }
 

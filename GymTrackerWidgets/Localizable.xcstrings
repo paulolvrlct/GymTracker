@@ -125,6 +125,22 @@
         }
       }
     },
+    "Démarrer la séance du jour": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start today's workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la sesión del día"
+          }
+        }
+      }
+    },
     "Démarrer une course": {
       "localizations": {
         "en": {

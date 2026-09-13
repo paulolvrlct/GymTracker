@@ -491,6 +491,22 @@
         }
       }
     },
+    "%lld déjà présentes, laissées de côté.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld already there, skipped."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ya estaban, se omiten."
+          }
+        }
+      }
+    },
     "%lld exercices": {
       "localizations": {
         "en": {
@@ -503,6 +519,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld ejercicios"
+          }
+        }
+      }
+    },
+    "%lld exercices ne progressent plus depuis trois séances. Une semaine plus légère relance souvent la progression mieux qu'un effort de plus.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld exercises haven't progressed in three sessions. A lighter week often restarts progress better than pushing harder."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ejercicios no progresan desde hace tres sesiones. Una semana más ligera suele reactivar el progreso mejor que un esfuerzo extra."
           }
         }
       }
@@ -663,6 +695,22 @@
         }
       }
     },
+    "%lld semaines d'entraînement d'affilée. Une semaine avec moitié moins de séries et des charges un peu plus légères, et tu repars plus fort : c'est ce que font les coachs.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld weeks of training in a row. One week with half the sets and slightly lighter loads, and you come back stronger: that's what coaches do."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld semanas seguidas de entrenamiento. Una semana con la mitad de series y cargas algo más ligeras, y vuelves más fuerte: es lo que hacen los entrenadores."
+          }
+        }
+      }
+    },
     "%lld semaines d'objectif d'affilée": {
       "localizations": {
         "en": {
@@ -743,6 +791,22 @@
         }
       }
     },
+    "%lld séances ajoutées à ton historique.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld workouts added to your history."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sesiones añadidas a tu historial."
+          }
+        }
+      }
+    },
     "%lld séances cette semaine. Du solide.": {
       "localizations": {
         "en": {
@@ -755,6 +819,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld entrenos esta semana. Sólido."
+          }
+        }
+      }
+    },
+    "%lld séances · %lld séries": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld workouts · %2$lld sets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld sesiones · %2$lld series"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld séances · %2$lld séries"
           }
         }
       }
@@ -1516,6 +1602,22 @@
         }
       }
     },
+    "Appui long pour supprimer la série": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Long press to delete the set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantén pulsado para eliminar la serie"
+          }
+        }
+      }
+    },
     "Arrivée": {
       "localizations": {
         "en": {
@@ -1710,6 +1812,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ningún resultado"
+          }
+        }
+      }
+    },
+    "Aucun équivalent trouvé dans le catalogue pour cet exercice.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No equivalent found in the catalog for this exercise."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ningún equivalente en el catálogo para este ejercicio."
           }
         }
       }
@@ -2400,6 +2518,38 @@
         }
       }
     },
+    "Ce fichier n'est pas un export reconnu. LiftRun lit les exports CSV de Strong, de Hevy et de LiftRun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn't a recognized export. LiftRun reads CSV exports from Strong, Hevy and LiftRun."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este archivo no es una exportación reconocida. LiftRun lee las exportaciones CSV de Strong, Hevy y LiftRun."
+          }
+        }
+      }
+    },
+    "Ce fichier n'est pas une sauvegarde LiftRun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn't a LiftRun backup."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este archivo no es una copia de seguridad de LiftRun."
+          }
+        }
+      }
+    },
     "Ce mois-ci": {
       "localizations": {
         "en": {
@@ -2464,6 +2614,22 @@
         }
       }
     },
+    "Cette sauvegarde vient d'une version plus récente de LiftRun. Mets l'app à jour pour la restaurer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This backup comes from a newer version of LiftRun. Update the app to restore it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta copia procede de una versión más reciente de LiftRun. Actualiza la app para restaurarla."
+          }
+        }
+      }
+    },
     "Cette semaine": {
       "localizations": {
         "en": {
@@ -2492,6 +2658,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta sesión deja que esa zona se recupere."
+          }
+        }
+      }
+    },
+    "Changer d'app sans repartir de zéro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch apps without starting over"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia de app sin empezar de cero"
           }
         }
       }
@@ -3280,6 +3462,22 @@
         }
       }
     },
+    "Créer une sauvegarde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crear una copia de seguridad"
+          }
+        }
+      }
+    },
     "D'où viennent tes points": {
       "localizations": {
         "en": {
@@ -3292,6 +3490,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "De dónde vienen tus puntos"
+          }
+        }
+      }
+    },
+    "Dans Strong ou Hevy, exporte tes données en CSV depuis les réglages, enregistre le fichier dans Fichiers, puis ouvre-le ici. Séances, séries et charges rejoignent ton historique ; les échauffements ne sont pas repris.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Strong or Hevy, export your data as CSV from the settings, save the file to Files, then open it here. Workouts, sets and loads join your history; warm-up sets aren't imported."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Strong o Hevy, exporta tus datos en CSV desde los ajustes, guarda el archivo en Archivos y ábrelo aquí. Sesiones, series y cargas se suman a tu historial; los calentamientos no se importan."
           }
         }
       }
@@ -3362,6 +3576,22 @@
           "stringUnit": {
             "state": "new",
             "value": "Dernière : %1$lld × %2$@ kg"
+          }
+        }
+      }
+    },
+    "Dernière sauvegarde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última copia"
           }
         }
       }
@@ -3490,6 +3720,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dosis (opcional)"
+          }
+        }
+      }
+    },
+    "Du %@ au %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From %1$@ to %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Del %1$@ al %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Du %1$@ au %2$@"
           }
         }
       }
@@ -3650,6 +3902,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empezar carrera"
+          }
+        }
+      }
+    },
+    "Démarrer une course": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start a run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar una carrera"
           }
         }
       }
@@ -3954,6 +4222,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ejercicios"
+          }
+        }
+      }
+    },
+    "Export Hevy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hevy export"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación de Hevy"
+          }
+        }
+      }
+    },
+    "Export LiftRun": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiftRun export"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación de LiftRun"
+          }
+        }
+      }
+    },
+    "Export Strong": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strong export"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación de Strong"
           }
         }
       }
@@ -4402,6 +4718,54 @@
         }
       }
     },
+    "Importer ces séances": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import these workouts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar estas sesiones"
+          }
+        }
+      }
+    },
+    "Importer depuis Strong ou Hevy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import from Strong or Hevy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar desde Strong o Hevy"
+          }
+        }
+      }
+    },
+    "Importer et sauvegarder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import and back up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar y hacer copia"
+          }
+        }
+      }
+    },
     "Importer mon poids depuis Santé": {
       "localizations": {
         "en": {
@@ -4414,6 +4778,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar mi peso desde Salud"
+          }
+        }
+      }
+    },
+    "Impossible de lire ce fichier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can't read this file."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se puede leer este archivo."
           }
         }
       }
@@ -4446,6 +4826,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interpretar la frase"
+          }
+        }
+      }
+    },
+    "J'ai %lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have %lld min"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tengo %lld min"
           }
         }
       }
@@ -4594,6 +4990,22 @@
         }
       }
     },
+    "Jusqu'à %@ : moitié moins de séries, charges allégées.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Until %@: half the sets, lighter loads."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasta el %@: la mitad de series, cargas más ligeras."
+          }
+        }
+      }
+    },
     "L'offre gratuite est limitée à %lld séances.": {
       "localizations": {
         "en": {
@@ -4658,6 +5070,86 @@
         }
       }
     },
+    "La carte « Aujourd'hui » s'en sert tant que ton historique est court, puis s'appuie sur ce que tu fais vraiment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Today” card uses it while your history is short, then relies on what you actually do."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tarjeta «Hoy» lo usa mientras tu historial es corto y luego se basa en lo que realmente haces."
+          }
+        }
+      }
+    },
+    "La course reste proposée en alternative.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running is still offered as an alternative."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La carrera se sigue proponiendo como alternativa."
+          }
+        }
+      }
+    },
+    "La muscu vient en complément de tes courses.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength training complements your runs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La musculación complementa tus carreras."
+          }
+        }
+      }
+    },
+    "La restauration a échoué. Tes données actuelles n'ont pas été modifiées.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore failed. Your current data hasn't been changed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La restauración ha fallado. Tus datos actuales no se han modificado."
+          }
+        }
+      }
+    },
+    "La sauvegarde n'a pas pu être créée. Vérifie l'espace de stockage puis réessaie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The backup couldn't be created. Check your storage space and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo crear la copia. Comprueba el espacio de almacenamiento e inténtalo de nuevo."
+          }
+        }
+      }
+    },
     "Lancer : %@": {
       "localizations": {
         "en": {
@@ -4686,6 +5178,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empezar la sesión"
+          }
+        }
+      }
+    },
+    "Lancer la séance du jour": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start today's workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la sesión del día"
           }
         }
       }
@@ -4734,6 +5242,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Resumen matinal"
+          }
+        }
+      }
+    },
+    "Les deux": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
           }
         }
       }
@@ -4881,6 +5405,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Leídos de Apple Salud: ajustan la nota global, no las zonas."
+          }
+        }
+      }
+    },
+    "Ma pratique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My training"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi práctica"
           }
         }
       }
@@ -5089,6 +5629,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mis carreras"
+          }
+        }
+      }
+    },
+    "Mes données": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My data"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos"
           }
         }
       }
@@ -5349,6 +5905,38 @@
         }
       }
     },
+    "Muscu et course planifiées ensemble.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength and running planned together."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Musculación y carrera planificadas juntas."
+          }
+        }
+      }
+    },
+    "Muscu, course ou les deux ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strength, running or both?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Musculación, carrera o ambos?"
+          }
+        }
+      }
+    },
     "Musculation": {
       "localizations": {
         "en": {
@@ -5377,6 +5965,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Métrica"
+          }
+        }
+      }
+    },
+    "Mêmes muscles travaillés, en commençant par un autre matériel : il a plus de chances d'être libre.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Same muscles worked, starting with different equipment: it's more likely to be free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mismos músculos trabajados, empezando por otro material: es más probable que esté libre."
           }
         }
       }
@@ -5815,6 +6419,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Herramientas Premium"
+          }
+        }
+      }
+    },
+    "Ouvre LiftRun et démarre la séance conseillée par ta forme du jour.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens LiftRun and starts the workout suggested by today's readiness."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre LiftRun e inicia la sesión recomendada por tu forma del día."
+          }
+        }
+      }
+    },
+    "Ouvre LiftRun sur l'onglet Course.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens LiftRun on the Run tab."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre LiftRun en la pestaña Carrera."
           }
         }
       }
@@ -6265,6 +6901,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cuanto más baja la curva, más rápido corres."
+          }
+        }
+      }
+    },
+    "Plus tard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más tarde"
           }
         }
       }
@@ -6723,6 +7375,38 @@
         }
       }
     },
+    "Remplacer aussi dans « %@ »": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also replace in “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reemplazar también en «%@»"
+          }
+        }
+      }
+    },
+    "Remplacer l'exercice": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replace exercise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reemplazar ejercicio"
+          }
+        }
+      }
+    },
     "Repas": {
       "localizations": {
         "en": {
@@ -6819,6 +7503,130 @@
         }
       }
     },
+    "Reprends ton historique Strong ou Hevy, ou garde une copie de tout dans iCloud Drive.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring over your Strong or Hevy history, or keep a copy of everything in iCloud Drive."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recupera tu historial de Strong o Hevy, o guarda una copia de todo en iCloud Drive."
+          }
+        }
+      }
+    },
+    "Reprise : %lld reps": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comeback: %lld reps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuelta: %lld reps"
+          }
+        }
+      }
+    },
+    "Reprise : %lld s": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comeback: %lld s"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuelta: %lld s"
+          }
+        }
+      }
+    },
+    "Reprise : %lld × %@ kg": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comeback: %1$lld × %2$@ kg"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuelta: %1$lld × %2$@ kg"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Reprise : %1$lld × %2$@ kg"
+          }
+        }
+      }
+    },
+    "Reprise après %lld jours : charges à %lld %% aujourd'hui. La force revient vite, les tendons ont besoin d'une semaine.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back after %1$lld days: loads at %2$lld%% today. Strength comes back fast; tendons need a week."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuelta tras %1$lld días: cargas al %2$lld %% hoy. La fuerza vuelve rápido; los tendones necesitan una semana."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Reprise après %1$lld jours : charges à %2$lld %% aujourd'hui. La force revient vite, les tendons ont besoin d'une semaine."
+          }
+        }
+      }
+    },
+    "Restaurer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar"
+          }
+        }
+      }
+    },
+    "Restaurer cette sauvegarde ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore this backup?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Restaurar esta copia?"
+          }
+        }
+      }
+    },
     "Restaurer mes achats": {
       "localizations": {
         "en": {
@@ -6831,6 +7639,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurar compras"
+          }
+        }
+      }
+    },
+    "Restaurer une sauvegarde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore a backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar una copia"
           }
         }
       }
@@ -6879,6 +7703,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar de mi rutina"
+          }
+        }
+      }
+    },
+    "Retirés aujourd'hui : %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skipped today: %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omitidos hoy: %@."
+          }
+        }
+      }
+    },
+    "Revenir à la séance complète": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to the full workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volver a la sesión completa"
           }
         }
       }
@@ -7007,6 +7863,44 @@
           "stringUnit": {
             "state": "translated",
             "value": "Repeticiones"
+          }
+        }
+      }
+    },
+    "Sauvegarde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia de seguridad"
+          }
+        }
+      }
+    },
+    "Sauvegarde restaurée : %lld séances et %lld courses.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup restored: %1$lld workouts and %2$lld runs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia restaurada: %1$lld sesiones y %2$lld carreras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Sauvegarde restaurée : %1$lld séances et %2$lld courses."
           }
         }
       }
@@ -7145,6 +8039,108 @@
         }
       }
     },
+    "Semaine allégée : %lld reps": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week: %lld reps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga: %lld reps"
+          }
+        }
+      }
+    },
+    "Semaine allégée : %lld s": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week: %lld s"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga: %lld s"
+          }
+        }
+      }
+    },
+    "Semaine allégée : %lld × %@ kg": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week: %1$lld × %2$@ kg"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga: %1$lld × %2$@ kg"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Semaine allégée : %1$lld × %2$@ kg"
+          }
+        }
+      }
+    },
+    "Semaine allégée : moitié moins de séries, charges à %lld %%. Tu récupères, la progression repart la semaine prochaine.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week: half the sets, loads at %lld%%. You recover, and progress resumes next week."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga: la mitad de series, cargas al %lld %%. Te recuperas y el progreso sigue la semana que viene."
+          }
+        }
+      }
+    },
+    "Semaine allégée conseillée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week suggested"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga recomendada"
+          }
+        }
+      }
+    },
+    "Semaine allégée en cours": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deload week in progress"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de descarga en curso"
+          }
+        }
+      }
+    },
     "Semaines d'affilée": {
       "localizations": {
         "en": {
@@ -7189,6 +8185,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Simulación de carrera híbrida"
+          }
+        }
+      }
+    },
+    "Sinon, le changement ne vaut que pour aujourd'hui.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otherwise, the change only applies today."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si no, el cambio solo vale para hoy."
           }
         }
       }
@@ -7401,6 +8413,22 @@
         }
       }
     },
+    "Supprimer la série": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar serie"
+          }
+        }
+      }
+    },
     "Surplus d'environ 12 % pour construire du muscle.": {
       "localizations": {
         "en": {
@@ -7493,6 +8521,70 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entreno C"
+          }
+        }
+      }
+    },
+    "Séance complète": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión completa"
+          }
+        }
+      }
+    },
+    "Séance du jour": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión del día"
+          }
+        }
+      }
+    },
+    "Séance express : environ %lld min, repos courts et séries resserrées.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Express workout: about %lld min, short rests and fewer sets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión exprés: unos %lld min, descansos cortos y menos series."
+          }
+        }
+      }
+    },
+    "Séance importée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imported workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión importada"
           }
         }
       }
@@ -7621,6 +8713,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Racha en curso"
+          }
+        }
+      }
+    },
+    "Série supprimée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set deleted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie eliminada"
+          }
+        }
+      }
+    },
+    "Série validée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set logged"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie registrada"
           }
         }
       }
@@ -7765,6 +8889,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tempo controlado (2 s de bajada), busca la congestión."
+          }
+        }
+      }
+    },
+    "Temps disponible": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time available"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo disponible"
           }
         }
       }
@@ -8127,6 +9267,28 @@
         }
       }
     },
+    "Toutes les données actuelles seront remplacées par celles du %@ : %lld séances et %lld courses.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All current data will be replaced by the backup from %1$@: %2$lld workouts and %3$lld runs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los datos actuales se sustituirán por los del %1$@: %2$lld sesiones y %3$lld carreras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Toutes les données actuelles seront remplacées par celles du %1$@ : %2$lld séances et %3$lld courses."
+          }
+        }
+      }
+    },
     "Tracés générés à partir des données © les contributeurs OpenStreetMap, disponibles sous licence ODbL.": {
       "localizations": {
         "en": {
@@ -8341,6 +9503,22 @@
         }
       }
     },
+    "Un seul fichier avec tout : séances, courses, nutrition et réglages. Enregistre-le dans Fichiers › iCloud Drive pour le retrouver sur un autre iPhone. La sauvegarde iCloud de ton iPhone inclut aussi les données de LiftRun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One file with everything: workouts, runs, nutrition and settings. Save it to Files › iCloud Drive to find it on another iPhone. Your iPhone's iCloud backup also includes LiftRun's data."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un solo archivo con todo: sesiones, carreras, nutrición y ajustes. Guárdalo en Archivos › iCloud Drive para recuperarlo en otro iPhone. La copia de iCloud de tu iPhone también incluye los datos de LiftRun."
+          }
+        }
+      }
+    },
     "Une app DevShield": {
       "localizations": {
         "en": {
@@ -8417,6 +9595,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Una sesión y una carrera el mismo día cuentan como un solo día. Los días de descanso no rompen nada: solo cuenta la semana."
+          }
+        }
+      }
+    },
+    "Unité des charges": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weight unit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unidad de peso"
           }
         }
       }
@@ -12571,6 +13765,22 @@
         }
       }
     },
+    "lb": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        }
+      }
+    },
     "milestone.first10k": {
       "localizations": {
         "en": {
@@ -14099,6 +15309,22 @@
         }
       }
     },
+    "À la place de %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instead of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En lugar de %@"
+          }
+        }
+      }
+    },
     "À propos": {
       "localizations": {
         "en": {
@@ -14191,6 +15417,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calienta antes de salir. Toca «Siguiente» al final de cada kilómetro y de cada estación: el crono sigue solo. Esfuerzo muy intenso: adapta las cargas a tu nivel."
+          }
+        }
+      }
+    },
+    "Échauffement : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm-up: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calentamiento: %@"
           }
         }
       }

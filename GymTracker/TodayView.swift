@@ -61,7 +61,8 @@ struct TodayState {
                      races: [HybridRaceResult] = [],
                      imported: [ImportedActivity] = [],
                      signals: RecoverySignals? = nil,
-                     now: Date = .now) -> TodayState {
+                     now: Date = .now,
+                     focus: TrainingFocus = .current) -> TodayState {
         let resolver = ExerciseRegionResolver(templates: templates)
         let since = now.addingTimeInterval(-Double(lookbackDays) * 86_400)
         let vma = VMAStore.value
@@ -104,7 +105,7 @@ struct TodayState {
 
         let plan = TodayPlan.make(readiness: readiness, templates: infos,
                                   lastRun: runs.first?.date,
-                                  lastWorkout: sessions.first?.date, now: now)
+                                  lastWorkout: sessions.first?.date, now: now, focus: focus)
         return TodayState(readiness: readiness, plan: plan)
     }
 }
@@ -130,7 +131,8 @@ extension TodayState {
             let state = make(templates: templates, sessions: sessions, runs: runs,
                              races: races, imported: imported, signals: daySignals, now: date)
             return ReadinessForecastPoint(date: date, score: state.readiness.score,
-                                          title: state.plan.action.title)
+                                          title: state.plan.action.title,
+                                          isRest: state.plan.action == .rest)
         }
     }
 

@@ -3,6 +3,7 @@ import SwiftUI
 struct RootTabView: View {
     @Environment(\.modelContext) private var context
     @ObservedObject private var premium = PremiumStore.shared
+    @ObservedObject private var router = AppRouter.shared
     @State private var selection = 0
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @AppStorage("accentTheme") private var accentRaw = AccentTheme.indigo.rawValue
@@ -58,10 +59,21 @@ struct RootTabView: View {
             }
             #endif
         }
-        // Lien profond depuis le widget raccourci (gymtracker://run)
+        // Liens des widgets (gymtracker://run, gymtracker://today)
         .onOpenURL { url in
-            if url.scheme == "gymtracker", url.host == "run" {
+            router.handle(url)
+        }
+        // Siri, Raccourcis et widgets : l'onglet Course s'ouvre ici, la séance
+        // du jour est lancée par l'accueil, qui a l'historique.
+        .onReceive(router.$pending) { request in
+            switch request {
+            case .openRun:
                 selection = 2
+                router.pending = nil
+            case .startToday:
+                selection = 0
+            case nil:
+                break
             }
         }
     }

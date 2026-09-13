@@ -51,6 +51,10 @@ enum ProgressiveOverload {
         case addRep
         /// En dessous de la fourchette la dernière fois : on consolide.
         case consolidate
+        /// Première séance après une pause : charge réduite (voir `Comeback`).
+        case comeback
+        /// Semaine allégée : charge réduite, moitié des séries (voir `Deload`).
+        case deload
     }
 
     struct Target: Equatable {
@@ -99,6 +103,23 @@ enum ProgressiveOverload {
             return make(range.min, topWeight, .consolidate)
         }
         return make(Swift.min(range.max, weakest + 1), topWeight, .addRep)
+    }
+
+    /// Objectif allégé : reprise après une pause ou semaine allégée. La charge
+    /// de la dernière séance, réduite et arrondie vers le bas au cran du
+    /// matériel ; au poids du corps ou au temps, moins de répétitions.
+    static func lighter(lastSession: [PastSet], range: RepRange?, increment: Double,
+                        factor: Double, kind: Kind) -> Target? {
+        guard let topWeight = lastSession.map(\.weight).max() else { return nil }
+        let best = lastSession.filter { $0.weight == topWeight }.map(\.reps).max() ?? 0
+        if range?.isTimed == true || topWeight == 0 || increment == 0 {
+            let reps = Swift.max(1, Int((Double(best) * factor).rounded(.down)))
+            return Target(reps: reps, weight: topWeight, kind: kind,
+                          previousWeight: topWeight, previousReps: best)
+        }
+        let reduced = Swift.max(increment, (topWeight * factor / increment).rounded(.down) * increment)
+        return Target(reps: range?.min ?? best, weight: roundToPlate(reduced), kind: kind,
+                      previousWeight: topWeight, previousReps: best)
     }
 
     /// Cran de charge selon le matériel : 2 kg pour les haltères (paires

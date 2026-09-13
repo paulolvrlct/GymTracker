@@ -184,4 +184,19 @@ final class ReadinessTests: XCTestCase {
         let easyRun = TrainingLoad.run(date: now, km: 10, paceSecPerKm: 360, vma: nil, effort: 3)
         XCTAssertEqual(easyRun.loads[.cardio] ?? 0, 8.4, accuracy: 0.001)
     }
+
+    // MARK: Muscu, course ou les deux
+
+    /// Sans historique, la pratique choisie au premier lancement décide.
+    func testFocusDecidesForNewcomers() {
+        let fresh = HybridReadiness(loads: [], now: now)
+        let lifter = TodayPlan.make(readiness: fresh, templates: templates(), lastRun: nil,
+                                    lastWorkout: nil, now: now, focus: .lift)
+        guard case .workout = lifter.action else { return XCTFail("muscu attendue : \(lifter.action)") }
+
+        let runner = TodayPlan.make(readiness: fresh, templates: templates(), lastRun: nil,
+                                    lastWorkout: nil, now: now, focus: .run)
+        XCTAssertEqual(runner.action, .hardRun)
+        XCTAssertNotNil(runner.alternative, "la muscu reste proposée")
+    }
 }

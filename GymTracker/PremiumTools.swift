@@ -300,8 +300,8 @@ struct WorkoutToolsView: View {
     }
 }
 
-// Petit wrapper pour partager un fichier
-private struct ShareSheet: UIViewControllerRepresentable {
+// Petit wrapper pour partager un fichier (exports CSV, sauvegarde)
+struct ShareSheet: UIViewControllerRepresentable {
     let url: URL
     func makeUIViewController(context: Context) -> UIActivityViewController {
         UIActivityViewController(activityItems: [url], applicationActivities: nil)

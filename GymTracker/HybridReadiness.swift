@@ -456,6 +456,47 @@ struct HybridReadiness {
     }
 }
 
+// MARK: - Pratique principale
+
+/// Ce que la personne pratique, choisi au premier lancement. Sans historique,
+/// c'est ce qui dit à la carte « Aujourd'hui » quoi proposer ; ensuite,
+/// l'historique complète.
+enum TrainingFocus: String, CaseIterable, Identifiable {
+    case lift, run, hybrid
+
+    static let key = "trainingFocus"
+
+    var id: String { rawValue }
+
+    static var current: TrainingFocus {
+        UserDefaults.standard.string(forKey: key).flatMap(TrainingFocus.init) ?? .hybrid
+    }
+
+    var label: String {
+        switch self {
+        case .lift: String(localized: "Muscu")
+        case .run: String(localized: "Course")
+        case .hybrid: String(localized: "Les deux")
+        }
+    }
+
+    var detail: String {
+        switch self {
+        case .lift: String(localized: "La course reste proposée en alternative.")
+        case .run: String(localized: "La muscu vient en complément de tes courses.")
+        case .hybrid: String(localized: "Muscu et course planifiées ensemble.")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .lift: "dumbbell.fill"
+        case .run: "figure.run"
+        case .hybrid: "figure.cross.training"
+        }
+    }
+}
+
 // MARK: - Que faire aujourd'hui ?
 
 /// La recommandation du jour : une action principale, une alternative, et la
@@ -488,7 +529,8 @@ struct TodayPlan: Equatable {
                      templates: [TemplateInfo],
                      lastRun: Date?,
                      lastWorkout: Date?,
-                     now: Date = .now) -> TodayPlan {
+                     now: Date = .now,
+                     focus: TrainingFocus = .hybrid) -> TodayPlan {
 
         // 1. Six jours d'affilée : le repos passe avant tout.
         if r.consecutiveActiveDays >= 6 {
@@ -537,7 +579,10 @@ struct TodayPlan: Equatable {
         let hasHistory = lastRun != nil || lastWorkout != nil
 
         var preferRun = false
-        if let run, runsLately {
+        if focus == .run {
+            // Coureur d'abord : la course dès que jambes et cardio le permettent.
+            preferRun = run != nil
+        } else if focus == .hybrid, let run, runsLately {
             if !liftsLately && hasHistory {
                 preferRun = true
             } else if bestTemplate == nil {

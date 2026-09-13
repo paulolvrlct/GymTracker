@@ -407,6 +407,7 @@ struct ReadinessWidgetView: View {
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
+        .widgetURL(URL(string: "gymtracker://today"))
     }
 
     private var circular: some View {
@@ -446,6 +447,13 @@ struct ReadinessWidgetView: View {
                 }
                 .frame(width: 50, height: 50)
                 Spacer(minLength: 0)
+                // Toucher le widget lance la séance conseillée (gymtracker://today).
+                if let point = entry.point, point.isRest != true {
+                    Image(systemName: "play.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(tint)
+                        .accessibilityLabel(Text("Démarrer la séance du jour"))
+                }
             }
             Spacer(minLength: 0)
             Text("Aujourd'hui")

@@ -78,6 +78,7 @@ struct CreditsView: View {
 
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage(TrainingFocus.key) private var focusRaw = TrainingFocus.hybrid.rawValue
     @AppStorage("profileName") private var name = ""
     @AppStorage("profileAge") private var age = 25
     @AppStorage("profileHeightCm") private var heightCm = 175
@@ -108,6 +109,12 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
                     .listRowBackground(Color.clear)
+                }
+
+                // Sans historique, c'est ce qui dit à la carte « Aujourd'hui »
+                // quoi proposer dès la première minute.
+                Section("Muscu, course ou les deux ?") {
+                    TrainingFocusPicker(selection: $focusRaw)
                 }
 
                 Section("Ton prénom") {
@@ -157,6 +164,7 @@ struct ProfileView: View {
     @AppStorage("profileHeightCm") private var heightCm = 175
     @AppStorage("profileWeightKg") private var weightKg = 70.0
     @AppStorage("profileSex") private var sexRaw = UserSex.unspecified.rawValue
+    @AppStorage(TrainingFocus.key) private var focusRaw = TrainingFocus.hybrid.rawValue
 
     // Rappels de séance
     @AppStorage("remindersEnabled") private var remindersEnabled = false
@@ -250,6 +258,14 @@ struct ProfileView: View {
                             Text(sex.localizedName).tag(sex.rawValue)
                         }
                     }
+                }
+
+                Section {
+                    TrainingFocusPicker(selection: $focusRaw)
+                } header: {
+                    Text("Ma pratique")
+                } footer: {
+                    Text("La carte « Aujourd'hui » s'en sert tant que ton historique est court, puis s'appuie sur ce que tu fais vraiment.")
                 }
 
                 Section("Mensurations") {
@@ -450,6 +466,18 @@ struct ProfileView: View {
                             Label("Couleur d'accent (Premium)", systemImage: "paintpalette")
                         }
                     }
+                }
+
+                Section {
+                    NavigationLink {
+                        DataToolsView()
+                    } label: {
+                        Label("Importer et sauvegarder", systemImage: "externaldrive.fill")
+                    }
+                } header: {
+                    Text("Mes données")
+                } footer: {
+                    Text("Reprends ton historique Strong ou Hevy, ou garde une copie de tout dans iCloud Drive.")
                 }
 
                 Section {

@@ -418,6 +418,9 @@ struct ReadinessForecastPoint: Codable, Hashable {
     let date: Date
     let score: Int
     let title: String
+    /// Jour de repos conseillé : le widget n'affiche alors pas « Démarrer ».
+    /// Optionnel pour relire les prévisions enregistrées avant son ajout.
+    var isRest: Bool? = nil
 }
 
 /// Prévision de forme publiée par l'app pour le widget.

@@ -1,0 +1,73 @@
+{
+  "sourceLanguage": "fr",
+  "strings": {
+    "Démarre une course avec ${applicationName}": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Start a run with ${applicationName}",
+              "Start a run in ${applicationName}"
+            ]
+          }
+        },
+        "es": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Empieza una carrera con ${applicationName}",
+              "Inicia una carrera en ${applicationName}"
+            ]
+          }
+        },
+        "fr": {
+          "stringSet": {
+            "state": "new",
+            "values": [
+              "Démarre une course avec ${applicationName}",
+              "Lance une course dans ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "Lance ma séance du jour dans ${applicationName}": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Start today's workout in ${applicationName}",
+              "Today's workout with ${applicationName}",
+              "Start my ${applicationName} workout"
+            ]
+          }
+        },
+        "es": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Inicia mi sesión del día en ${applicationName}",
+              "Sesión del día con ${applicationName}",
+              "Empieza mi sesión de ${applicationName}"
+            ]
+          }
+        },
+        "fr": {
+          "stringSet": {
+            "state": "new",
+            "values": [
+              "Lance ma séance du jour dans ${applicationName}",
+              "Séance du jour avec ${applicationName}",
+              "Démarre ma séance ${applicationName}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
