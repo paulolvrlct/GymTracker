@@ -53,7 +53,7 @@ struct ExerciseLibraryView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Nom ou muscle ciblé (EN)")
+            .searchable(text: $searchText, prompt: "Nom ou muscle ciblé")
             .navigationTitle(onSelect == nil ? "Bibliothèque" : "Choisir un exercice")
             .toolbar {
                 if onSelect != nil {
@@ -69,7 +69,7 @@ struct ExerciseLibraryView: View {
         VStack(spacing: 8) {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    filterChip("Toutes zones", isOn: selectedCategory == nil) { selectedCategory = nil }
+                    filterChip(String(localized: "Toutes zones"), isOn: selectedCategory == nil) { selectedCategory = nil }
                     ForEach(ExerciseCatalog.categories, id: \.self) { cat in
                         filterChip(ExerciseTaxonomy.category(cat),
                                    isOn: selectedCategory == cat) {
@@ -81,7 +81,7 @@ struct ExerciseLibraryView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    filterChip("Tout matériel", isOn: selectedEquipment == nil) { selectedEquipment = nil }
+                    filterChip(String(localized: "Tout matériel"), isOn: selectedEquipment == nil) { selectedEquipment = nil }
                     ForEach(ExerciseCatalog.equipments, id: \.self) { eq in
                         filterChip(ExerciseTaxonomy.equipment(eq),
                                    isOn: selectedEquipment == eq) {

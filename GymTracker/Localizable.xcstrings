@@ -6017,24 +6017,18 @@
         }
       }
     },
-    "Nom ou muscle ciblé (EN)": {
+    "Nom ou muscle ciblé": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Name or target muscle (EN)"
+            "value": "Name or target muscle"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nombre o músculo objetivo (EN)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom ou muscle ciblé"
+            "value": "Nombre o músculo objetivo"
           }
         }
       }
@@ -9273,6 +9267,22 @@
         }
       }
     },
+    "Tout matériel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All equipment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo el material"
+          }
+        }
+      }
+    },
     "Toutes les données actuelles seront remplacées par celles du %@ : %lld séances et %lld courses.": {
       "localizations": {
         "en": {
@@ -9291,6 +9301,22 @@
           "stringUnit": {
             "state": "new",
             "value": "Toutes les données actuelles seront remplacées par celles du %1$@ : %2$lld séances et %3$lld courses."
+          }
+        }
+      }
+    },
+    "Toutes zones": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All areas"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las zonas"
           }
         }
       }
