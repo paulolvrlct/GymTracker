@@ -199,6 +199,8 @@ struct RunCelebrationView: View {
 struct WorkoutCelebrationView: View {
     let setCount: Int
     let volume: Double
+    /// Répétitions sans charge : elles comptent dans la dépense, pas dans le volume.
+    var bodyweightReps: Int = 0
     let durationSeconds: Int
     var records: [PRResult] = []
     var templateName: String = ""
@@ -212,7 +214,9 @@ struct WorkoutCelebrationView: View {
     private var burnedKcal: Int {
         let stored = UserDefaults.standard.double(forKey: "profileWeightKg")
         return CalorieEstimator.workoutKcal(durationSeconds: durationSeconds,
-                                            weightKg: stored > 0 ? stored : 70)
+                                            weightKg: stored > 0 ? stored : 70,
+                                            volumeKg: volume,
+                                            bodyweightReps: bodyweightReps)
     }
 
     var body: some View {

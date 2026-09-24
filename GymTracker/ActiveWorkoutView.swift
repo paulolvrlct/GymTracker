@@ -36,6 +36,18 @@ struct PlannedExercise: Identifiable {
         restSeconds = exercise.restSeconds
         notes = exercise.notes
     }
+
+    /// Reprise d'une séance interrompue : le créneau vient de la séance type,
+    /// le contenu de ce qui était affiché au moment de la fermeture.
+    init(_ exercise: ExerciseTemplate, restoring item: WorkoutDraft.Exercise) {
+        source = exercise
+        name = item.name
+        catalogID = item.catalogID
+        sets = item.sets
+        repRange = item.repRange
+        restSeconds = item.restSeconds
+        notes = item.notes
+    }
 }
 
 private struct ComebackInfo {
@@ -76,10 +88,27 @@ struct ActiveWorkoutView: View {
     @State private var undo: UndoAction?
     /// Semaine allégée en cours, lue à l'ouverture de la séance.
     @State private var isDeload = DeloadStore.isActive()
+    /// Séance rouverte après une fermeture de l'app.
+    @State private var resumed = false
 
-    init(template: WorkoutTemplate) {
+    init(template: WorkoutTemplate, draft: WorkoutDraft? = nil) {
         self.template = template
-        _exercises = State(initialValue: template.sortedExercises.map(PlannedExercise.init))
+        let planned = template.sortedExercises
+        if let draft, let first = planned.first {
+            // Séance reprise : les exercices tels qu'ils étaient, remplacements
+            // et séance express compris.
+            _exercises = State(initialValue: draft.exercises.enumerated().map { index, item in
+                PlannedExercise(planned.indices.contains(index) ? planned[index] : first, restoring: item)
+            })
+            _loggedSets = State(initialValue: draft.sets.map {
+                DraftSet(exerciseName: $0.exerciseName, reps: $0.reps, weight: $0.weight, record: nil)
+            })
+            _startDate = State(initialValue: draft.startDate)
+            _timeBudget = State(initialValue: draft.timeBudget)
+            _resumed = State(initialValue: true)
+        } else {
+            _exercises = State(initialValue: planned.map(PlannedExercise.init))
+        }
         #if DEBUG
         // Captures d'écran automatisées : `-debugTimeBudget 30`.
         let minutes = UserDefaults.standard.integer(forKey: "debugTimeBudget")
@@ -185,6 +214,10 @@ struct ActiveWorkoutView: View {
 
     @ViewBuilder
     private func banners(_ plan: (items: [PlannedExercise], dropped: [String])) -> some View {
+        if resumed {
+            CoachBanner(icon: "arrow.clockwise.circle.fill", tint: .blue,
+                        text: String(localized: "Séance reprise là où tu l'avais laissée."))
+        }
         if let comeback {
             CoachBanner(icon: "arrow.uturn.backward.circle.fill", tint: .orange,
                         text: String(localized: "Reprise après \(comeback.days) jours : charges à \(Int((comeback.factor * 100).rounded())) % aujourd'hui. La force revient vite, les tendons ont besoin d'une semaine."))
@@ -282,12 +315,14 @@ struct ActiveWorkoutView: View {
                 .padding(.bottom, 8)
             }
             .animation(.spring(duration: 0.35), value: restTimer.isRunning)
+            .onChange(of: timeBudget) { persist() }
             // Célébration de fin de séance (confettis + stats)
             .overlay {
                 if showCelebration {
                     WorkoutCelebrationView(
                         setCount: loggedSets.count,
                         volume: loggedSets.reduce(0) { $0 + Double($1.reps) * $1.weight },
+                        bodyweightReps: loggedSets.filter { $0.weight == 0 }.reduce(0) { $0 + $1.reps },
                         durationSeconds: Int(Date.now.timeIntervalSince(startDate)),
                         records: sessionPRs,
                         templateName: template.name,
@@ -324,6 +359,7 @@ struct ActiveWorkoutView: View {
                 Button("Continuer la séance", role: .cancel) {}
                 Button("Abandonner", role: .destructive) {
                     restTimer.stop()   // coupe chrono, Live Activity et notification
+                    WorkoutDraftStore.clear()
                     dismiss()
                 }
             } message: {
@@ -367,6 +403,7 @@ struct ActiveWorkoutView: View {
             remove(draft)
             restTimer.stop()
         }
+        persist()
     }
 
     private func remove(_ draft: DraftSet) {
@@ -374,6 +411,7 @@ struct ActiveWorkoutView: View {
         if let record = draft.record {
             sessionPRs.removeAll { $0.id == record.id }
         }
+        persist()
     }
 
     private func deleteSet(_ draft: DraftSet) {
@@ -382,6 +420,7 @@ struct ActiveWorkoutView: View {
         offerUndo(String(localized: "Série supprimée")) {
             loggedSets.insert(draft, at: min(index, loggedSets.count))
             if let record = draft.record { sessionPRs.append(record) }
+            persist()
         }
     }
 
@@ -412,6 +451,21 @@ struct ActiveWorkoutView: View {
             item.source.notes = ""
             context.saveLogging()
         }
+        persist()
+    }
+
+    /// Sauvegarde la séance en cours. Si l'app est fermée — appel entrant,
+    /// mémoire reprise par iOS, fausse manipulation — elle rouvre au même point.
+    private func persist() {
+        WorkoutDraftStore.save(WorkoutDraft(
+            templateName: template.name,
+            startDate: startDate,
+            exercises: exercises.map {
+                .init(name: $0.name, catalogID: $0.catalogID, sets: $0.sets,
+                      repRange: $0.repRange, restSeconds: $0.restSeconds, notes: $0.notes)
+            },
+            sets: loggedSets.map { .init(exerciseName: $0.exerciseName, reps: $0.reps, weight: $0.weight) },
+            timeBudget: timeBudget))
     }
 
     private func finishWorkout() {
@@ -440,12 +494,15 @@ struct ActiveWorkoutView: View {
         restTimer.stop()   // coupe chrono de repos, Live Activity et notification
         undo = nil
         savedSession = session
+        WorkoutDraftStore.clear()   // enregistrée : il n'y a plus rien à reprendre
 
         // Enregistre l'entraînement dans Apple Santé
         let duration = session.durationSeconds
         let weight = UserDefaults.standard.double(forKey: "profileWeightKg")
         let kcal = CalorieEstimator.workoutKcal(durationSeconds: duration,
-                                                weightKg: weight > 0 ? weight : 70)
+                                                weightKg: weight > 0 ? weight : 70,
+                                                volumeKg: session.totalVolume,
+                                                bodyweightReps: session.bodyweightReps)
         Task {
             await HealthKitManager.shared.saveStrengthWorkout(
                 start: startDate, durationSeconds: duration, kcal: kcal)

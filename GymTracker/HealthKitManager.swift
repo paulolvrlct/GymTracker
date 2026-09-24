@@ -335,7 +335,9 @@ final class HealthKitManager {
                 start: session.date,
                 durationSeconds: session.durationSeconds,
                 kcal: CalorieEstimator.workoutKcal(durationSeconds: session.durationSeconds,
-                                                   weightKg: kg))
+                                                   weightKg: kg,
+                                                   volumeKg: session.totalVolume,
+                                                   bodyweightReps: session.bodyweightReps))
         }
         let runs = (try? context.fetch(FetchDescriptor<RunSession>())) ?? []
         // Une course importée de Santé y est déjà : ne pas la réécrire.

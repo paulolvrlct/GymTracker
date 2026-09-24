@@ -39,7 +39,10 @@ struct NutritionView: View {
     private var burnedKcal: Int {
         let workout = sessions
             .filter { calendar.isDate($0.date, inSameDayAs: day) }
-            .reduce(0) { $0 + CalorieEstimator.workoutKcal(durationSeconds: $1.durationSeconds, weightKg: weightKg) }
+            .reduce(0) { $0 + CalorieEstimator.workoutKcal(durationSeconds: $1.durationSeconds,
+                                                           weightKg: weightKg,
+                                                           volumeKg: $1.totalVolume,
+                                                           bodyweightReps: $1.bodyweightReps) }
         let running = runs
             .filter { calendar.isDate($0.date, inSameDayAs: day) }
             .reduce(0) { $0 + CalorieEstimator.runKcal(distanceKm: $1.distanceKm, weightKg: weightKg) }

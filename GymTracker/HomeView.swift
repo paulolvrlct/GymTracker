@@ -45,6 +45,8 @@ struct HomeView: View {
     private var weeklyGoal = WeeklyStreak.defaultGoal
     @State private var showGoalSheet = false
     @State private var showRecap = false
+    /// Séance interrompue à rouvrir au lancement.
+    @State private var resumeDraft: WorkoutDraft?
     #if DEBUG
     @State private var showShareCardsPreview = false
     @State private var showProgressionDebug = false
@@ -177,6 +179,7 @@ struct HomeView: View {
                 ProgressionDetailView(progression: progression, milestones: milestones)
             }
             #endif
+            .onAppear(perform: resumeWorkoutIfNeeded)
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()
             }
@@ -221,8 +224,11 @@ struct HomeView: View {
                 ProfileView()
             }
             .fullScreenCover(item: $activeTemplate,
-                             onDismiss: { ReviewPrompt.askIfEarned(requestReview) }) { template in
-                ActiveWorkoutView(template: template)
+                             onDismiss: {
+                                 resumeDraft = nil
+                                 ReviewPrompt.askIfEarned(requestReview)
+                             }) { template in
+                ActiveWorkoutView(template: template, draft: resumeDraft)
             }
         }
     }
@@ -256,6 +262,7 @@ struct HomeView: View {
 
     private func start(_ action: TodayPlan.Action) {
         showRecovery = false
+        resumeDraft = nil   // un nouveau départ n'est pas une reprise
         switch action {
         case .workout(let name):
             activeTemplate = templates.first { $0.name == name }
@@ -264,6 +271,16 @@ struct HomeView: View {
         case .rest:
             break
         }
+    }
+
+    /// Séance interrompue (app fermée par iOS, appel entrant, fausse
+    /// manipulation) : on la rouvre telle quelle, sans rien redemander.
+    private func resumeWorkoutIfNeeded() {
+        guard activeTemplate == nil, let draft = WorkoutDraftStore.load(),
+              let template = templates.first(where: { $0.name == draft.templateName })
+        else { return }
+        resumeDraft = draft
+        activeTemplate = template
     }
 
     /// Siri, Raccourcis ou widget : la séance conseillée, ou l'explication

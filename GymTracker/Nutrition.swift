@@ -133,10 +133,30 @@ extension NutritionPlanner {
 // MARK: - Calories brûlées (estimation MET)
 
 enum CalorieEstimator {
-    /// Musculation : MET ≈ 5.0 (effort modéré à soutenu avec repos)
-    static func workoutKcal(durationSeconds: Int, weightKg: Double) -> Int {
+    /// Dépense de fond d'une séance de musculation, repos compris (MET ≈ 3.5).
+    static let workoutMET = 3.5
+
+    /// Coût d'un kilo soulevé une fois : la charge monte d'environ 50 cm, la
+    /// phase excentrique ajoute ~30 %, et le muscle ne rend que ~25 % de
+    /// l'énergie dépensée en travail mécanique. Soit ≈ 0,0061 kcal par kg.
+    static let kcalPerKgLifted = 0.5 * 9.81 / 0.25 / 4184 * 1.3
+
+    /// Musculation : le temps passé en salle **et** ce qui a été soulevé.
+    ///
+    /// Le fond domine, c'est physiologique : une heure de salle coûte déjà
+    /// beaucoup, repos compris. Mais deux séances d'une heure ne se valent plus
+    /// — 18 tonnes soulevées comptent davantage que 4.
+    ///
+    /// - Parameters:
+    ///   - volumeKg: somme des charges × répétitions (le « volume » de la séance).
+    ///   - bodyweightReps: répétitions sans charge (tractions, dips, pompes) ;
+    ///     on compte alors environ deux tiers du corps déplacé.
+    static func workoutKcal(durationSeconds: Int, weightKg: Double,
+                            volumeKg: Double = 0, bodyweightReps: Int = 0) -> Int {
         guard weightKg > 0, durationSeconds > 0 else { return 0 }
-        return Int(5.0 * weightKg * Double(durationSeconds) / 3600)
+        let base = workoutMET * weightKg * Double(durationSeconds) / 3600
+        let moved = max(0, volumeKg) + Double(max(0, bodyweightReps)) * weightKg * 0.65
+        return Int((base + moved * kcalPerKgLifted).rounded())
     }
 
     /// Course : ≈ 1 kcal par kg et par km (bonne approximation indépendante de l'allure)

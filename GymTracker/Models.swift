@@ -91,6 +91,12 @@ final class WorkoutSession {
     var totalVolume: Double {
         sets.reduce(0) { $0 + Double($1.reps) * $1.weight }
     }
+
+    /// Répétitions faites sans charge (tractions, dips, gainage) : elles ne
+    /// pèsent pas dans le volume, mais coûtent de l'énergie.
+    var bodyweightReps: Int {
+        sets.filter { $0.weight == 0 }.reduce(0) { $0 + $1.reps }
+    }
 }
 
 // MARK: - Course enregistrée (mode running)

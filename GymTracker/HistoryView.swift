@@ -342,7 +342,9 @@ struct SessionDetailView: View {
     private var burnedKcal: Int {
         let stored = UserDefaults.standard.double(forKey: "profileWeightKg")
         return CalorieEstimator.workoutKcal(durationSeconds: session.durationSeconds,
-                                            weightKg: stored > 0 ? stored : 70)
+                                            weightKg: stored > 0 ? stored : 70,
+                                            volumeKg: session.totalVolume,
+                                            bodyweightReps: session.bodyweightReps)
     }
 
     var body: some View {
