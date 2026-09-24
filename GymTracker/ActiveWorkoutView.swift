@@ -385,12 +385,13 @@ struct ActiveWorkoutView: View {
         }
     }
 
-    /// « Série supprimée · Annuler » pendant quatre secondes.
+    /// « Série supprimée · Annuler » pendant six secondes : le temps de reposer
+    /// la barre et de relever les yeux.
     private func offerUndo(_ message: String, restore: @escaping () -> Void) {
         let action = UndoAction(message: message, restore: restore)
         withAnimation(.spring(duration: 0.3)) { undo = action }
         Task {
-            try? await Task.sleep(for: .seconds(4))
+            try? await Task.sleep(for: .seconds(6))
             if undo?.id == action.id {
                 withAnimation(.easeOut(duration: 0.3)) { undo = nil }
             }
