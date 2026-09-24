@@ -283,8 +283,8 @@ enum ExerciseSwap {
                 // La machine est prise : un autre matériel a plus de chances d'être libre.
                 if candidate.equipment != exercise.equipment { score += 1 }
             }
-            // Nom traduit à la main : un exercice courant.
-            if ExerciseNames.localized(id: candidate.id) != nil { score += 2 }
+            // Dans la liste curée des noms traduits : un exercice courant.
+            if ExerciseNames.curated(id: candidate.id) != nil { score += 2 }
             // Variantes très spécifiques (« sur ballon, jambe levée… »).
             if candidate.name.split(separator: " ").count > 5 { score -= 2 }
             return score

@@ -67,6 +67,12 @@ enum ExerciseCatalog {
         return items.sorted { $0.name < $1.name }
     }()
 
+    /// Même catalogue, dans l'ordre alphabétique du nom affiché : `all` suit le
+    /// nom source anglais, qui paraît en désordre une fois les noms traduits.
+    static let sortedForDisplay: [CatalogExercise] = all.sorted {
+        $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending
+    }
+
     static var categories: [String] {
         Array(Set(all.map(\.category))).sorted()
     }

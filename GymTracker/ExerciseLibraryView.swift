@@ -12,7 +12,7 @@ struct ExerciseLibraryView: View {
     @State private var selectedEquipment: String? = nil
 
     private var filtered: [CatalogExercise] {
-        ExerciseCatalog.all.filter { ex in
+        ExerciseCatalog.sortedForDisplay.filter { ex in
             (selectedCategory == nil || ex.category == selectedCategory)
             && (selectedEquipment == nil || ex.equipment == selectedEquipment)
             && (searchText.isEmpty

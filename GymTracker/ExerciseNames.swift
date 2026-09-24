@@ -1,19 +1,26 @@
 import Foundation
 
-// MARK: - Noms d'exercices traduits, à la carte
+// MARK: - Noms d'exercices traduits
 
-/// Le dataset source est en anglais, et son jargon (« bench press », « curl »,
-/// « squat », « shrug ») est précisément celui employé en salle en français comme
-/// en espagnol : le traduire systématiquement nuirait à la reconnaissance du
-/// mouvement. On ne localise donc que les exercices où la version traduite est
-/// réellement plus claire — en commençant par ceux du programme pré-chargé.
+/// Deux niveaux de traduction pour les noms du dataset, qui est en anglais :
+/// - une liste curée d'exercices courants, soignée en français, anglais et
+///   espagnol dans le String Catalog ;
+/// - en interface française, la traduction de tout le catalogue
+///   (`ExerciseTranslationsFR`), qui prend le relais hors liste curée.
+/// En anglais et en espagnol, un exercice hors liste garde son nom source.
 ///
-/// La liste s'étoffe à chaque version : il suffit d'ajouter un `case` ici et les
-/// trois traductions dans le String Catalog.
+/// La liste curée s'étoffe à chaque version : il suffit d'ajouter un `case` ici
+/// et les trois traductions dans le String Catalog.
 enum ExerciseNames {
 
-    /// Nom traduit, ou nil si l'exercice n'est pas (encore) localisé.
+    /// Nom traduit, ou nil si l'exercice n'est pas localisé dans la langue courante.
     static func localized(id: String) -> String? {
+        curated(id: id) ?? ExerciseTranslationsFR.name(for: id)
+    }
+
+    /// Nom de la liste curée, ou nil. Figurer dans cette liste signale aussi un
+    /// exercice courant, ce que le remplacement d'exercice prend en compte.
+    static func curated(id: String) -> String? {
         switch id {
         case "0003": String(localized: "exercise.name.0003")   // air bike
         case "0017": String(localized: "exercise.name.0017")   // assisted pull-up

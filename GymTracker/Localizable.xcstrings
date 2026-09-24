@@ -6030,6 +6030,12 @@
             "state": "translated",
             "value": "Nombre o músculo objetivo (EN)"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom ou muscle ciblé"
+          }
         }
       }
     },
