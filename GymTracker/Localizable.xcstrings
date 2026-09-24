@@ -12084,6 +12084,259 @@
         }
       }
     },
+    "exercise.name.0003": {
+      "comment": "Nom d'exercice (dataset id 0003 : \"air bike\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bicycle crunch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch de bicicleta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch vélo"
+          }
+        }
+      }
+    },
+    "exercise.name.0017": {
+      "comment": "Nom d'exercice (dataset id 0017 : \"assisted pull-up\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assisted pull-up (machine)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dominadas asistidas en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tractions assistées (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0025": {
+      "comment": "Nom d'exercice (dataset id 0025 : \"barbell bench press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell bench press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de banca con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé couché barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0027": {
+      "comment": "Nom d'exercice (dataset id 0027 : \"barbell bent over row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell bent-over row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo inclinado con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing barre buste penché"
+          }
+        }
+      }
+    },
+    "exercise.name.0030": {
+      "comment": "Nom d'exercice (dataset id 0030 : \"barbell close-grip bench press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close-grip bench press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de banca con agarre cerrado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé couché prise serrée"
+          }
+        }
+      }
+    },
+    "exercise.name.0031": {
+      "comment": "Nom d'exercice (dataset id 0031 : \"barbell curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0032": {
+      "comment": "Nom d'exercice (dataset id 0032 : \"barbell deadlift\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadlift"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso muerto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soulevé de terre"
+          }
+        }
+      }
+    },
+    "exercise.name.0033": {
+      "comment": "Nom d'exercice (dataset id 0033 : \"barbell decline bench press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell decline bench press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press declinado con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé décliné barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0042": {
+      "comment": "Nom d'exercice (dataset id 0042 : \"barbell front squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Front squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla frontal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat avant (front squat)"
+          }
+        }
+      }
+    },
+    "exercise.name.0043": {
+      "comment": "Nom d'exercice (dataset id 0043 : \"barbell full squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell back squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0044": {
+      "comment": "Nom d'exercice (dataset id 0044 : \"barbell good morning\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell good morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buenos días con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good morning barre"
+          }
+        }
+      }
+    },
     "exercise.name.0047": {
       "comment": "Nom d'exercice (dataset id 0047 : \"barbell incline bench press\")",
       "localizations": {
@@ -12103,6 +12356,190 @@
           "stringUnit": {
             "state": "translated",
             "value": "Développé incliné barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0054": {
+      "comment": "Nom d'exercice (dataset id 0054 : \"barbell lunge\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell lunge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zancadas con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fentes barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0060": {
+      "comment": "Nom d'exercice (dataset id 0060 : \"barbell lying triceps extension skull crusher\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skull crusher"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press francés con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barre au front"
+          }
+        }
+      }
+    },
+    "exercise.name.0085": {
+      "comment": "Nom d'exercice (dataset id 0085 : \"barbell romanian deadlift\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell Romanian deadlift"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso muerto rumano con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soulevé de terre roumain barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0091": {
+      "comment": "Nom d'exercice (dataset id 0091 : \"barbell seated overhead press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seated barbell overhead press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press militar sentado con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé militaire assis barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0095": {
+      "comment": "Nom d'exercice (dataset id 0095 : \"barbell shrug\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell shrug"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encogimientos con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shrugs barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0117": {
+      "comment": "Nom d'exercice (dataset id 0117 : \"barbell sumo deadlift\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumo deadlift"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso muerto sumo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soulevé de terre sumo"
+          }
+        }
+      }
+    },
+    "exercise.name.0120": {
+      "comment": "Nom d'exercice (dataset id 0120 : \"barbell upright row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell upright row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo al mentón con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing menton barre"
+          }
+        }
+      }
+    },
+    "exercise.name.0150": {
+      "comment": "Nom d'exercice (dataset id 0150 : \"cable bar lateral pulldown\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Straight-bar lat pulldown"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalón al pecho con barra recta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirage vertical barre droite"
           }
         }
       }
@@ -12130,6 +12567,144 @@
         }
       }
     },
+    "exercise.name.0194": {
+      "comment": "Nom d'exercice (dataset id 0194 : \"cable overhead triceps extension (rope attachment)\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overhead cable triceps extension (rope)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensión de tríceps sobre la cabeza en polea (cuerda)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions triceps nuque à la poulie (corde)"
+          }
+        }
+      }
+    },
+    "exercise.name.0198": {
+      "comment": "Nom d'exercice (dataset id 0198 : \"cable pulldown\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lat pulldown"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalón al pecho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirage vertical poulie"
+          }
+        }
+      }
+    },
+    "exercise.name.0200": {
+      "comment": "Nom d'exercice (dataset id 0200 : \"cable pushdown (with rope attachment)\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rope triceps pushdown"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensión de tríceps en polea con cuerda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions triceps poulie (corde)"
+          }
+        }
+      }
+    },
+    "exercise.name.0201": {
+      "comment": "Nom d'exercice (dataset id 0201 : \"cable pushdown\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cable triceps pushdown (straight bar)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensión de tríceps en polea (barra recta)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions triceps poulie (barre droite)"
+          }
+        }
+      }
+    },
+    "exercise.name.0212": {
+      "comment": "Nom d'exercice (dataset id 0212 : \"cable seated crunch\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seated cable crunch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch sentado en polea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch assis à la poulie"
+          }
+        }
+      }
+    },
+    "exercise.name.0227": {
+      "comment": "Nom d'exercice (dataset id 0227 : \"cable standing fly\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standing cable fly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperturas de pie en polea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écarté debout à la poulie"
+          }
+        }
+      }
+    },
     "exercise.name.0241": {
       "comment": "Nom d'exercice (dataset id 0241 : \"cable triceps pushdown (v-bar)\")",
       "localizations": {
@@ -12153,6 +12728,236 @@
         }
       }
     },
+    "exercise.name.0251": {
+      "comment": "Nom d'exercice (dataset id 0251 : \"chest dip\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chest dip"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondos de pecho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dips pectoraux"
+          }
+        }
+      }
+    },
+    "exercise.name.0274": {
+      "comment": "Nom d'exercice (dataset id 0274 : \"crunch floor\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Floor crunch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch en el suelo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch au sol"
+          }
+        }
+      }
+    },
+    "exercise.name.0289": {
+      "comment": "Nom d'exercice (dataset id 0289 : \"dumbbell bench press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell bench press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de banca con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé couché haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0292": {
+      "comment": "Nom d'exercice (dataset id 0292 : \"dumbbell one arm bent-over row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-arm dumbbell row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo con mancuerna a una mano"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing haltère à un bras"
+          }
+        }
+      }
+    },
+    "exercise.name.0293": {
+      "comment": "Nom d'exercice (dataset id 0293 : \"dumbbell bent over row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell bent-over row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo inclinado con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing haltères buste penché"
+          }
+        }
+      }
+    },
+    "exercise.name.0294": {
+      "comment": "Nom d'exercice (dataset id 0294 : \"dumbbell biceps curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell biceps curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl de bíceps con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0297": {
+      "comment": "Nom d'exercice (dataset id 0297 : \"dumbbell concentration curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concentration curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl concentrado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl concentré"
+          }
+        }
+      }
+    },
+    "exercise.name.0308": {
+      "comment": "Nom d'exercice (dataset id 0308 : \"dumbbell fly\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell fly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperturas con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écarté couché haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0310": {
+      "comment": "Nom d'exercice (dataset id 0310 : \"dumbbell front raise\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell front raise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elevaciones frontales con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Élévations frontales haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0313": {
+      "comment": "Nom d'exercice (dataset id 0313 : \"dumbbell hammer curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell hammer curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl martillo con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl marteau haltères"
+          }
+        }
+      }
+    },
     "exercise.name.0314": {
       "comment": "Nom d'exercice (dataset id 0314 : \"dumbbell incline bench press\")",
       "localizations": {
@@ -12172,6 +12977,259 @@
           "stringUnit": {
             "state": "translated",
             "value": "Développé incliné haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0318": {
+      "comment": "Nom d'exercice (dataset id 0318 : \"dumbbell incline curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incline dumbbell curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl inclinado con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl incliné haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0319": {
+      "comment": "Nom d'exercice (dataset id 0319 : \"dumbbell incline fly\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incline dumbbell fly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperturas inclinadas con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écarté incliné haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0333": {
+      "comment": "Nom d'exercice (dataset id 0333 : \"dumbbell kickback\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell triceps kickback"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patada de tríceps con mancuerna"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kickback triceps haltère"
+          }
+        }
+      }
+    },
+    "exercise.name.0334": {
+      "comment": "Nom d'exercice (dataset id 0334 : \"dumbbell lateral raise\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell lateral raise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elevaciones laterales con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Élévations latérales haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0336": {
+      "comment": "Nom d'exercice (dataset id 0336 : \"dumbbell lunge\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell lunge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zancadas con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fentes haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0372": {
+      "comment": "Nom d'exercice (dataset id 0372 : \"dumbbell preacher curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell preacher curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl predicador con mancuerna"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl pupitre haltère"
+          }
+        }
+      }
+    },
+    "exercise.name.0375": {
+      "comment": "Nom d'exercice (dataset id 0375 : \"dumbbell pullover\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell pullover"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pullover con mancuerna"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pull-over haltère"
+          }
+        }
+      }
+    },
+    "exercise.name.0405": {
+      "comment": "Nom d'exercice (dataset id 0405 : \"dumbbell seated shoulder press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seated dumbbell shoulder press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de hombros sentado con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé épaules haltères (assis)"
+          }
+        }
+      }
+    },
+    "exercise.name.0406": {
+      "comment": "Nom d'exercice (dataset id 0406 : \"dumbbell shrug\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell shrug"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encogimientos con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shrugs haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0431": {
+      "comment": "Nom d'exercice (dataset id 0431 : \"dumbbell step-up\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell step-up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subidas al banco con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montées sur banc haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.0432": {
+      "comment": "Nom d'exercice (dataset id 0432 : \"dumbbell stiff leg deadlift\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell stiff-leg deadlift"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso muerto con piernas rígidas y mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soulevé de terre jambes tendues haltères"
           }
         }
       }
@@ -12222,6 +13280,121 @@
         }
       }
     },
+    "exercise.name.0489": {
+      "comment": "Nom d'exercice (dataset id 0489 : \"hyperextension\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back extension"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiperextensiones lumbares"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions lombaires"
+          }
+        }
+      }
+    },
+    "exercise.name.0499": {
+      "comment": "Nom d'exercice (dataset id 0499 : \"inverted row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inverted row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo invertido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing inversé"
+          }
+        }
+      }
+    },
+    "exercise.name.0514": {
+      "comment": "Nom d'exercice (dataset id 0514 : \"jump squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jump squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadillas con salto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squats sautés"
+          }
+        }
+      }
+    },
+    "exercise.name.0534": {
+      "comment": "Nom d'exercice (dataset id 0534 : \"kettlebell goblet squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kettlebell goblet squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla goblet con kettlebell"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goblet squat kettlebell"
+          }
+        }
+      }
+    },
+    "exercise.name.0549": {
+      "comment": "Nom d'exercice (dataset id 0549 : \"kettlebell swing\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kettlebell swing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swing con kettlebell"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swing kettlebell"
+          }
+        }
+      }
+    },
     "exercise.name.0577": {
       "comment": "Nom d'exercice (dataset id 0577 : \"lever chest press\")",
       "localizations": {
@@ -12241,6 +13414,52 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chest press (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0585": {
+      "comment": "Nom d'exercice (dataset id 0585 : \"lever leg extension\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine leg extension"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensión de cuádriceps en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leg extension (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0586": {
+      "comment": "Nom d'exercice (dataset id 0586 : \"lever lying leg curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lying leg curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl femoral tumbado en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leg curl allongé (machine)"
           }
         }
       }
@@ -12268,6 +13487,213 @@
         }
       }
     },
+    "exercise.name.0597": {
+      "comment": "Nom d'exercice (dataset id 0597 : \"lever seated hip abduction\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hip abduction machine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abducción de cadera en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abducteurs (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0598": {
+      "comment": "Nom d'exercice (dataset id 0598 : \"lever seated hip adduction\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hip adduction machine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aducción de cadera en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adducteurs (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0599": {
+      "comment": "Nom d'exercice (dataset id 0599 : \"lever seated leg curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seated leg curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl femoral sentado en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leg curl assis (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0603": {
+      "comment": "Nom d'exercice (dataset id 0603 : \"lever shoulder press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine shoulder press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press de hombros en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé épaules (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0605": {
+      "comment": "Nom d'exercice (dataset id 0605 : \"lever standing calf raise\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standing calf raise machine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elevación de talones de pie en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mollets debout (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0606": {
+      "comment": "Nom d'exercice (dataset id 0606 : \"lever t bar row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-bar row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo en barra T"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing T-bar"
+          }
+        }
+      }
+    },
+    "exercise.name.0630": {
+      "comment": "Nom d'exercice (dataset id 0630 : \"mountain climber\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mountain climber"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escaladores"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mountain climbers"
+          }
+        }
+      }
+    },
+    "exercise.name.0652": {
+      "comment": "Nom d'exercice (dataset id 0652 : \"pull-up\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pull-up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dominadas pronas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tractions pronation"
+          }
+        }
+      }
+    },
+    "exercise.name.0662": {
+      "comment": "Nom d'exercice (dataset id 0662 : \"push-up\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Push-up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flexiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pompes"
+          }
+        }
+      }
+    },
     "exercise.name.0687": {
       "comment": "Nom d'exercice (dataset id 0687 : \"russian twist\")",
       "localizations": {
@@ -12287,6 +13713,75 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rotations russes"
+          }
+        }
+      }
+    },
+    "exercise.name.0739": {
+      "comment": "Nom d'exercice (dataset id 0739 : \"sled 45в° leg press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "45° leg press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prensa de piernas a 45°"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presse à cuisses 45°"
+          }
+        }
+      }
+    },
+    "exercise.name.0743": {
+      "comment": "Nom d'exercice (dataset id 0743 : \"sled hack squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine hack squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hack squat en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hack squat (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.0770": {
+      "comment": "Nom d'exercice (dataset id 0770 : \"smith squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smith machine squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla en máquina Smith"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Squat à la Smith machine"
           }
         }
       }
@@ -12314,6 +13809,98 @@
         }
       }
     },
+    "exercise.name.0861": {
+      "comment": "Nom d'exercice (dataset id 0861 : \"cable seated row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seated cable row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo sentado en polea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirage horizontal poulie"
+          }
+        }
+      }
+    },
+    "exercise.name.0868": {
+      "comment": "Nom d'exercice (dataset id 0868 : \"cable curl\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cable curl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl en polea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curl poulie"
+          }
+        }
+      }
+    },
+    "exercise.name.0872": {
+      "comment": "Nom d'exercice (dataset id 0872 : \"reverse crunch\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reverse crunch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch inverso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crunch inversé"
+          }
+        }
+      }
+    },
+    "exercise.name.1160": {
+      "comment": "Nom d'exercice (dataset id 1160 : \"burpee\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpee"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpees"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burpees"
+          }
+        }
+      }
+    },
     "exercise.name.1326": {
       "comment": "Nom d'exercice (dataset id 1326 : \"chin-up\")",
       "localizations": {
@@ -12333,6 +13920,121 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tractions supination"
+          }
+        }
+      }
+    },
+    "exercise.name.1350": {
+      "comment": "Nom d'exercice (dataset id 1350 : \"lever seated row\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine seated row"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remo sentado en máquina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowing assis (machine)"
+          }
+        }
+      }
+    },
+    "exercise.name.1372": {
+      "comment": "Nom d'exercice (dataset id 1372 : \"barbell standing calf raise\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell standing calf raise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elevación de talones de pie con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mollets debout barre"
+          }
+        }
+      }
+    },
+    "exercise.name.1409": {
+      "comment": "Nom d'exercice (dataset id 1409 : \"barbell glute bridge\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barbell glute bridge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puente de glúteos con barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pont fessier barre"
+          }
+        }
+      }
+    },
+    "exercise.name.1429": {
+      "comment": "Nom d'exercice (dataset id 1429 : \"wide grip pull-up\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide-grip pull-up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dominadas con agarre ancho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tractions prise large"
+          }
+        }
+      }
+    },
+    "exercise.name.1459": {
+      "comment": "Nom d'exercice (dataset id 1459 : \"dumbbell romanian deadlift\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell Romanian deadlift"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso muerto rumano con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soulevé de terre roumain haltères"
           }
         }
       }
@@ -12360,6 +14062,52 @@
         }
       }
     },
+    "exercise.name.1760": {
+      "comment": "Nom d'exercice (dataset id 1760 : \"dumbbell goblet squat\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell goblet squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla goblet con mancuerna"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goblet squat haltère"
+          }
+        }
+      }
+    },
+    "exercise.name.2133": {
+      "comment": "Nom d'exercice (dataset id 2133 : \"farmers walk\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farmer's walk"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paseo del granjero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marche du fermier"
+          }
+        }
+      }
+    },
     "exercise.name.2135": {
       "comment": "Nom d'exercice (dataset id 2135 : \"weighted front plank\")",
       "localizations": {
@@ -12379,6 +14127,98 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gainage planche (lesté)"
+          }
+        }
+      }
+    },
+    "exercise.name.2137": {
+      "comment": "Nom d'exercice (dataset id 2137 : \"dumbbell arnold press\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arnold press"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press Arnold"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Développé Arnold"
+          }
+        }
+      }
+    },
+    "exercise.name.2292": {
+      "comment": "Nom d'exercice (dataset id 2292 : \"dumbbell rear delt raise\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dumbbell rear delt raise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pájaros con mancuernas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oiseau haltères"
+          }
+        }
+      }
+    },
+    "exercise.name.2368": {
+      "comment": "Nom d'exercice (dataset id 2368 : \"split squats\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Split squat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentadilla dividida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fentes statiques (split squat)"
+          }
+        }
+      }
+    },
+    "exercise.name.2612": {
+      "comment": "Nom d'exercice (dataset id 2612 : \"jump rope\")",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jump rope"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saltar a la comba"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corde à sauter"
           }
         }
       }
