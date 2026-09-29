@@ -78,7 +78,7 @@ struct HistoryView: View {
             summaryTile(icon: "dumbbell.fill", tint: Color.brand, value: "\(monthSessions)",
                         label: monthSessions > 1 ? "séances" : "séance")
             summaryTile(icon: "figure.run", tint: .green,
-                        value: monthKm >= 10 ? String(format: "%.0f", monthKm) : monthKm.clean,
+                        value: monthKm >= 10 ? String(format: "%.0f", monthKm) : monthKm.localizedClean,
                         label: "km courus")
         }
     }
@@ -376,7 +376,7 @@ struct SessionDetailView: View {
                                     .foregroundStyle(.secondary)
                                 Spacer()
                                 Text(set.weight > 0
-                                     ? "\(set.reps) × \(set.weight.clean) kg"
+                                     ? "\(set.reps) × \(set.weight.localizedClean) kg"
                                      : "\(set.reps) reps")
                                     .font(.footnote.monospacedDigit().weight(.medium))
                             }

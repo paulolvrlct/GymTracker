@@ -16,14 +16,15 @@ struct ExerciseLibraryView: View {
             (selectedCategory == nil || ex.category == selectedCategory)
             && (selectedEquipment == nil || ex.equipment == selectedEquipment)
             && (searchText.isEmpty
-                // nom traduit ET nom source : le jargon anglais reste la
+                // accents facultatifs (« developpe couche » trouve le développé
+                // couché). Nom traduit ET nom source : le jargon anglais reste la
                 // référence en salle, on doit pouvoir chercher dans les deux
-                || ex.displayName.localizedCaseInsensitiveContains(searchText)
-                || ex.name.localizedCaseInsensitiveContains(searchText)
+                || ex.displayName.localizedStandardContains(searchText)
+                || ex.name.localizedStandardContains(searchText)
                 // muscles traduits ET sources : « pectoraux » comme « pectorals »
-                || ex.targetLabel.localizedCaseInsensitiveContains(searchText)
-                || ex.target.localizedCaseInsensitiveContains(searchText)
-                || ex.secondaryLabel.localizedCaseInsensitiveContains(searchText))
+                || ex.targetLabel.localizedStandardContains(searchText)
+                || ex.target.localizedStandardContains(searchText)
+                || ex.secondaryLabel.localizedStandardContains(searchText))
         }
     }
 

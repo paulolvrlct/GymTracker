@@ -93,7 +93,7 @@ struct ProgressChartsView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Label("Max théorique (1RM estimé)", systemImage: "bolt.heart.fill")
                     .font(.headline)
-                Text("\(e1rm.clean) kg")
+                Text("\(e1rm.localizedClean) kg")
                     .font(.system(size: 34, weight: .bold, design: .rounded).monospacedDigit())
                     .foregroundStyle(Color.brand)
                 Text("Estimé par la formule d'Epley à partir de ta meilleure série. Indicatif : ne tente pas un 1RM réel sans échauffement ni pareur.")
@@ -186,10 +186,10 @@ struct ProgressChartsView: View {
     private var statsCard: some View {
         HStack(spacing: 12) {
             statTile(title: "Record",
-                     value: dataPoints.map(\.maxWeight).max().map { "\($0.clean) kg" } ?? "-",
+                     value: dataPoints.map(\.maxWeight).max().map { "\($0.localizedClean) kg" } ?? "-",
                      icon: "trophy.fill", color: .orange)
             statTile(title: "Dernière",
-                     value: dataPoints.last.map { "\($0.maxWeight.clean) kg" } ?? "-",
+                     value: dataPoints.last.map { "\($0.maxWeight.localizedClean) kg" } ?? "-",
                      icon: "clock.fill", color: Color.brand)
             statTile(title: "Évolution",
                      value: progression.map { String(format: "%+.0f %%", $0) } ?? "-",

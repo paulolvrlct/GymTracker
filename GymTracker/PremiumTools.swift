@@ -168,7 +168,7 @@ struct PlateCalculatorView: View {
                 } else {
                     HStack(spacing: 8) {
                         ForEach(Array(perSide.enumerated()), id: \.offset) { _, plate in
-                            Text(plate.clean)
+                            Text(plate.localizedClean)
                                 .font(.headline.monospacedDigit())
                                 .frame(width: 52, height: 52)
                                 .background(Color.brand.opacity(0.15), in: Circle())
