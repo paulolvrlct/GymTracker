@@ -29,4 +29,14 @@ final class PinkOctoberTests: XCTestCase {
         XCTAssertNotEqual(PinkOctober.dismissedKey(on: date(2026, 10, 5), calendar: calendar),
                           PinkOctober.dismissedKey(on: date(2027, 10, 5), calendar: calendar))
     }
+
+    /// L'icône principale se demande à iOS avec nil ; l'autre, par le nom de son
+    /// jeu d'icônes, qui doit être listé en icône alternative dans le projet.
+    func testOnlyTheNonPrimaryIconIsRequestedByName() {
+        XCTAssertNil(AppIconChoice.primary.iconName)
+        let others = AppIconChoice.allCases.filter { $0 != AppIconChoice.primary }
+        XCTAssertEqual(others.count, 1)
+        XCTAssertEqual(others.first?.iconName, others.first?.assetName)
+        XCTAssertNotEqual(others.first?.assetName, AppIconChoice.primary.assetName)
+    }
 }

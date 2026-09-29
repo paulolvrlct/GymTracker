@@ -5,7 +5,8 @@ import UIKit
 
 /// Octobre Rose : pendant tout le mois d'octobre, l'accueil sensibilise au
 /// dépistage du cancer du sein et le thème rose est offert à tout le monde.
-/// L'icône au ruban rose, elle, reste au choix dans le profil toute l'année.
+/// L'icône au ruban rose est l'icône principale de la version d'octobre ;
+/// l'icône classique reste au choix dans le profil (voir `AppIconChoice`).
 enum PinkOctober {
     /// Vrai du 1er au 31 octobre, en heure locale.
     static func isActive(on date: Date = .now, calendar: Calendar = .current) -> Bool {
@@ -37,8 +38,16 @@ enum AppIconChoice: String, CaseIterable, Identifiable {
     case classic, pinkRibbon
     var id: String { rawValue }
 
-    /// Jeu d'icônes de Assets.xcassets ; nil : l'icône principale.
-    var iconName: String? { self == .classic ? nil : "AppIconRose" }
+    /// Icône principale de cette version, celle que tout le monde a par défaut.
+    /// Octobre 2026 : l'icône Octobre Rose. À remettre sur `.classic` dans la
+    /// version de novembre, en même temps que ASSETCATALOG_COMPILER_APPICON_NAME.
+    static let primary: AppIconChoice = .pinkRibbon
+
+    /// Jeu d'icônes de Assets.xcassets.
+    var assetName: String { self == .classic ? "AppIcon" : "AppIconRose" }
+
+    /// Nom à passer à iOS ; nil : l'icône principale.
+    var iconName: String? { self == Self.primary ? nil : assetName }
 
     /// Une icône d'app ne se charge pas comme une image : on garde un aperçu à part.
     var previewImage: String { self == .classic ? "AppIconPreview" : "AppIconRosePreview" }
@@ -51,7 +60,8 @@ enum AppIconChoice: String, CaseIterable, Identifiable {
     }
 
     @MainActor static var current: AppIconChoice {
-        UIApplication.shared.alternateIconName == nil ? .classic : .pinkRibbon
+        let name = UIApplication.shared.alternateIconName
+        return allCases.first { $0 != primary && $0.assetName == name } ?? primary
     }
 
     /// iOS confirme lui-même le changement par une alerte système.
