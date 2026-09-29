@@ -35,7 +35,7 @@ struct HomeView: View {
     /// quand elle recommande une course.
     var tabSelection: Binding<Int> = .constant(0)
 
-    @State private var activeTemplate: WorkoutTemplate?
+    @State private var activeWorkout: WorkoutLaunch?
     @State private var showLibrary = false
     @State private var showProfile = false
     @State private var showRecovery = false
@@ -47,8 +47,6 @@ struct HomeView: View {
     private var weeklyGoal = WeeklyStreak.defaultGoal
     @State private var showGoalSheet = false
     @State private var showRecap = false
-    /// Séance interrompue à rouvrir au lancement.
-    @State private var resumeDraft: WorkoutDraft?
     #if DEBUG
     @State private var showShareCardsPreview = false
     @State private var showProgressionDebug = false
@@ -175,7 +173,7 @@ struct HomeView: View {
                 if UserDefaults.standard.bool(forKey: "debugOpenData") { showDataDebug = true }
                 // `-debugStartWorkout YES` : la séance B, la plus longue de la démo.
                 if UserDefaults.standard.bool(forKey: "debugStartWorkout") {
-                    activeTemplate = templates.dropFirst().first ?? templates.first
+                    activeWorkout = (templates.dropFirst().first ?? templates.first).map { WorkoutLaunch(template: $0) }
                 }
             }
             .sheet(isPresented: $showShareCardsPreview) { ShareCardsPreview() }
@@ -184,7 +182,7 @@ struct HomeView: View {
                 ProgressionDetailView(progression: progression, milestones: milestones)
             }
             #endif
-            .onAppear(perform: resumeWorkoutIfNeeded)
+            .onAppear { resumeWorkoutIfNeeded() }
             .sheet(isPresented: $showLibrary) {
                 ExerciseLibraryView()
             }
@@ -228,12 +226,9 @@ struct HomeView: View {
             .sheet(isPresented: $showProfile) {
                 ProfileView()
             }
-            .fullScreenCover(item: $activeTemplate,
-                             onDismiss: {
-                                 resumeDraft = nil
-                                 ReviewPrompt.askIfEarned(requestReview)
-                             }) { template in
-                ActiveWorkoutView(template: template, draft: resumeDraft)
+            .fullScreenCover(item: $activeWorkout,
+                             onDismiss: { ReviewPrompt.askIfEarned(requestReview) }) { launch in
+                ActiveWorkoutView(template: launch.template, draft: launch.draft)
             }
         }
     }
@@ -267,10 +262,9 @@ struct HomeView: View {
 
     private func start(_ action: TodayPlan.Action) {
         showRecovery = false
-        resumeDraft = nil   // un nouveau départ n'est pas une reprise
         switch action {
         case .workout(let name):
-            activeTemplate = templates.first { $0.name == name }
+            activeWorkout = templates.first { $0.name == name }.map { WorkoutLaunch(template: $0) }
         case .hardRun, .easyRun:
             tabSelection.wrappedValue = 2
         case .rest:
@@ -280,17 +274,20 @@ struct HomeView: View {
 
     /// Séance interrompue (app fermée par iOS, appel entrant, fausse
     /// manipulation) : on la rouvre telle quelle, sans rien redemander.
-    private func resumeWorkoutIfNeeded() {
-        guard activeTemplate == nil, let draft = WorkoutDraftStore.load(),
+    @discardableResult
+    private func resumeWorkoutIfNeeded() -> Bool {
+        guard activeWorkout == nil, let draft = WorkoutDraftStore.load(),
               let template = templates.first(where: { $0.name == draft.templateName })
-        else { return }
-        resumeDraft = draft
-        activeTemplate = template
+        else { return false }
+        activeWorkout = WorkoutLaunch(template: template, draft: draft)
+        return true
     }
 
     /// Siri, Raccourcis ou widget : la séance conseillée, ou l'explication
-    /// d'un jour de repos.
+    /// d'un jour de repos. Une séance déjà ouverte ou interrompue passe avant :
+    /// le widget touché pour revenir dans l'app ne doit pas en ouvrir une vide.
     private func startToday() {
+        guard activeWorkout == nil, !resumeWorkoutIfNeeded() else { return }
         let action = today.plan.action
         if action == .rest {
             showRecovery = true
@@ -548,7 +545,7 @@ struct HomeView: View {
 
             ForEach(templates) { template in
                 Button {
-                    activeTemplate = template
+                    activeWorkout = WorkoutLaunch(template: template)
                 } label: {
                     HStack(spacing: 14) {
                         Image(systemName: template.icon)

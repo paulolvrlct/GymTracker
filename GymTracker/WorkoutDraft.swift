@@ -68,3 +68,13 @@ enum WorkoutDraftStore {
         (defaults ?? shared).removeObject(forKey: key)
     }
 }
+
+/// Une séance à afficher, avec la séance interrompue à reprendre s'il y en a une.
+///
+/// Les deux voyagent ensemble jusqu'à l'écran de séance : passée à part, la
+/// sauvegarde n'arrivait pas à temps et la séance rouvrait vide après une fermeture.
+struct WorkoutLaunch: Identifiable {
+    let id = UUID()
+    let template: WorkoutTemplate
+    var draft: WorkoutDraft?
+}
