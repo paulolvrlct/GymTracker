@@ -460,11 +460,22 @@ struct ProfileView: View {
                         }
                         .padding(.vertical, 4)
                     } else {
+                        if PinkOctober.isActive() {
+                            Toggle(isOn: Binding(
+                                get: { accentRaw == AccentTheme.pink.rawValue },
+                                set: { accentRaw = $0 ? AccentTheme.pink.rawValue : AccentTheme.indigo.rawValue })) {
+                                Label("Thème Octobre Rose (offert en octobre)", systemImage: "heart.fill")
+                            }
+                            .tint(PinkOctober.ribbonPink)
+                        }
                         Button {
                             showPaywall = true
                         } label: {
                             Label("Couleur d'accent (Premium)", systemImage: "paintpalette")
                         }
+                    }
+                    if UIApplication.shared.supportsAlternateIcons {
+                        AppIconPicker()
                     }
                 }
 

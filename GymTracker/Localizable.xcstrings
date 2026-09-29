@@ -2566,6 +2566,22 @@
         }
       }
     },
+    "Ce mois-ci, LiftRun se met au rose pour la lutte contre le cancer du sein. Le dépistage sauve des vies : parles-en autour de toi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This month, LiftRun goes pink to support the fight against breast cancer. Screening saves lives: talk about it with the people around you."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este mes, LiftRun se viste de rosa en la lucha contra el cáncer de mama. La detección precoz salva vidas: háblalo con los tuyos."
+          }
+        }
+      }
+    },
     "Ce qui pèse encore": {
       "localizations": {
         "en": {
@@ -2850,6 +2866,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Circuitos de carrera"
+          }
+        }
+      }
+    },
+    "Classique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clásico"
           }
         }
       }
@@ -4702,6 +4734,22 @@
         }
       }
     },
+    "Icône de l'app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icono de la app"
+          }
+        }
+      }
+    },
     "Identité": {
       "localizations": {
         "en": {
@@ -5521,6 +5569,22 @@
         }
       }
     },
+    "Masquer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar"
+          }
+        }
+      }
+    },
     "Max": {
       "localizations": {
         "en": {
@@ -6307,6 +6371,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Objetivos"
+          }
+        }
+      }
+    },
+    "Octobre Rose": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pink October"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Octubre Rosa"
           }
         }
       }
@@ -7867,6 +7947,22 @@
         }
       }
     },
+    "S'informer sur le dépistage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn about screening"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informarse sobre la detección"
+          }
+        }
+      }
+    },
     "Sauvegarde": {
       "localizations": {
         "en": {
@@ -9097,6 +9193,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Test terminado"
+          }
+        }
+      }
+    },
+    "Thème Octobre Rose (offert en octobre)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pink October theme (free in October)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema Octubre Rosa (gratis en octubre)"
           }
         }
       }

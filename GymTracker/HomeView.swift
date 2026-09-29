@@ -28,6 +28,8 @@ struct HomeView: View {
     /// Semaine allégée en cours (début) ou reportée (jusqu'à).
     @AppStorage(DeloadStore.startKey) private var deloadStart: Double = 0
     @AppStorage(DeloadStore.snoozeKey) private var deloadSnooze: Double = 0
+    /// Octobre Rose : bandeau masqué pour l'année.
+    @AppStorage(PinkOctober.dismissedKey()) private var pinkOctoberDismissed = false
 
     /// Onglet affiché par `RootTabView` : la carte « Aujourd'hui » y bascule
     /// quand elle recommande une course.
@@ -106,6 +108,9 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 14) {
                     header
+                    if PinkOctober.isActive() && !pinkOctoberDismissed {
+                        PinkOctoberCard(onDismiss: { withAnimation { pinkOctoberDismissed = true } })
+                    }
                     TodayCard(state: today,
                               onOpenDetail: { showRecovery = true },
                               onStart: start)

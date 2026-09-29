@@ -344,16 +344,21 @@ enum AccentTheme: String, CaseIterable, Identifiable {
         case .red: String(localized: "Rouge")
         }
     }
+
+    /// Les couleurs sont Premium, sauf le rose, offert à tous en octobre (Octobre Rose).
+    func isUnlocked(isPremium: Bool, on date: Date = .now) -> Bool {
+        isPremium || (self == .pink && PinkOctober.isActive(on: date))
+    }
 }
 
 extension Color {
     /// Couleur d'accent de toute l'app : le thème choisi par l'utilisateur
-    /// (Premium), sinon indigo. Remplace les usages « de marque » codés en dur
-    /// pour que le choix d'accent repeigne l'ensemble de l'interface.
+    /// (Premium, ou le rose en octobre), sinon indigo. Remplace les usages
+    /// « de marque » codés en dur pour que le choix d'accent repeigne l'interface.
     @MainActor static var brand: Color {
-        guard PremiumStore.shared.isPremium,
-              let raw = UserDefaults.standard.string(forKey: "accentTheme"),
-              let theme = AccentTheme(rawValue: raw) else { return .indigo }
+        guard let raw = UserDefaults.standard.string(forKey: "accentTheme"),
+              let theme = AccentTheme(rawValue: raw),
+              theme.isUnlocked(isPremium: PremiumStore.shared.isPremium) else { return .indigo }
         return theme.color
     }
 }

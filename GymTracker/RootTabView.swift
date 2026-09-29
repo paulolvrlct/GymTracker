@@ -9,8 +9,8 @@ struct RootTabView: View {
     @AppStorage("accentTheme") private var accentRaw = AccentTheme.indigo.rawValue
 
     private var accent: Color {
-        // le thème n'est appliqué qu'aux abonnés Premium
-        guard premium.isPremium, let t = AccentTheme(rawValue: accentRaw) else { return .indigo }
+        // le thème n'est appliqué qu'aux abonnés Premium (le rose est offert à tous en octobre)
+        guard let t = AccentTheme(rawValue: accentRaw), t.isUnlocked(isPremium: premium.isPremium) else { return .indigo }
         return t.color
     }
 
